@@ -53,6 +53,8 @@ jobs:
     name: Android debug APK
     needs: quality
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # create the debug pre-release
     timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
@@ -67,7 +69,26 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter build apk --debug
-      - uses: actions/upload-artifact@v4
+      - name: Rename APK
+        run: cp build/app/outputs/flutter-apk/app-debug.apk solitaire-nova-debug-${{ github.run_number }}.apk
+      - name: Upload artifact
+        # Account artifact storage can be full; the release below is the
+        # reliable download location.
+        continue-on-error: true
+        uses: actions/upload-artifact@v4
         with:
           name: solitaire-nova-debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          path: solitaire-nova-debug-${{ github.run_number }}.apk
+      - name: Publish debug APK as a pre-release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: debug-build-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: Solitaire Nova debug build ${{ github.run_number }}
+          body: |
+            Debug APK built from ${{ github.ref_name }} @ ${{ github.sha }}.
+            For testing only: Google test ads, debug signing, not for Google Play.
+          prerelease: true
+          make_latest: false
+          files: solitaire-nova-debug-${{ github.run_number }}.apk
