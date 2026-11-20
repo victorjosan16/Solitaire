@@ -22,53 +22,53 @@ Risks
 | Ads / Firebase credentials | Abstract services, Google's public **test** IDs by default, production IDs via `--dart-define`; Firebase behind interfaces with offline no-op implementations. |
 | Translation quality | Hand-written translations for all 10 locales; native-speaker review listed in release checklist. |
 
-## Milestone 1 — Pure Dart engine
+## Milestone 1 — Pure Dart engine ✅
 - [x] Cards, piles, config, immutable `GameState`, JSON codecs
 - [x] Deterministic Mulberry32 PRNG + Fisher–Yates; frozen regression vector
 - [x] Rules validation with typed `MoveError`
 - [x] Draw 1 / Draw 3, recycling, recycle limits, waste fan metadata
 - [x] Command-style `MoveRecord` undo for every move type (incl. auto flip)
-- [x] Scoring v1 (documented in GAME_RULES.md), clamped at 0, reversible
+- [x] Scoring v1 (GAME_RULES.md), clamped at 0, reversible
 - [x] Tap-to-move priority, hint engine (no pointless stock cycling), stuck detection
-- [x] Auto-finish planner (greedy foundation plan that must reach a win)
-- [x] DFS solver + verified winning seed generator
-- [x] Unit + randomized invariant tests (deal, rules, undo, JSON, solver replay)
+- [x] Auto-finish planner
+- [x] DFS solver + verified winning seeds (400 Draw 1, 200 Draw 3, replay-verified)
+- [x] 59 engine tests incl. randomized invariants
 
-## Milestone 2 — Persistence
-- [x] `JsonDocumentStore`: atomic write (tmp + rename), `.bak` fallback, corruption recovery, serialized write queue
-- [x] Versioned envelopes + migration registry
-- [x] `GameSnapshot` (schemaVersion, seed, mode, deck order, state, undo log, timer, assists, timestamps)
-- [x] Profile document (coins, ledger, stats, achievements, daily, cosmetics) — single document so economy updates are atomic
-- [x] SharedPreferences settings
-- [x] Tests: round trip, kill/restart, corrupted file, interrupted write, migration
+## Milestone 2 — Persistence ✅
+- [x] `JsonDocumentStore` (atomic tmp+rename, .bak recovery, migrations, serialized writes) — Drift deliberately not used, rationale in ARCHITECTURE.md
+- [x] `GameSnapshot` schema v1, profile document (economy + ledger), SharedPreferences settings
+- [x] Kill/restart, corruption, interrupted-write and migration tests
 
-## Milestone 3 — Flame board
-- [x] Vector-drawn cards (original suit paths), cached pictures
-- [x] Responsive layout (phone portrait, tablet landscape, left-hand mirror)
-- [x] Tap, drag & drop with legal-target highlight and snap-back
-- [x] Move/flip/deal animations, hint pulse, reduced motion
-- [x] Auto finish animation with skip/cancel
+## Milestone 3 — Flame board ✅ (device performance not measured)
+- [x] Original vector card art (6 packs), cached pictures, 6 table styles
+- [x] Pure `BoardLayout` tested from 320 dp to tablet landscape; left-hand mirror
+- [x] Tap + drag with legal-target highlight and snap-back; hint pulse; shake on illegal
+- [x] Move/flip/deal animations; reduced motion
+- [x] Auto finish with Skip/Cancel
+- [ ] 60 fps verification on a physical mid-range device
 
-## Milestone 4 — Ten screens + design system
-- [x] Tokens (colors, spacing, radii, shadows, typography), premium buttons, panels
+## Milestone 4 — Ten screens + design system ✅
+- [x] Tokens, gold/panel buttons, tabs, panels, coin badge, logo, painted scenes, confetti
 - [x] Splash, Home, Game, Victory, Daily, Themes, Stats, Achievements, Shop, Settings
-- [x] Dialogs: pause, restart, new game, insufficient coins, offline, ad unavailable, consent, restore result, cloud conflict, error, delete data
+- [x] All dialogs listed in the brief (cloud conflict dialog is implemented; triggered once a sync adapter exists)
 
-## Milestone 5 — Content
-- [x] 10 locales (en, ro, ru, uk, de, fr, es, it, pt, pl) via gen-l10n
-- [x] Stats (total / draw 1 / draw 3), 35 achievements, daily calendar, cosmetics catalog
-- [x] Semantics labels for cards and controls
+## Milestone 5 — Content ✅
+- [x] 10 hand-written locales with plurals; validated by `tool/l10n/build_arbs.py` and CI
+- [x] Stats (Total / Draw 1 / Draw 3), 36 achievements, daily calendar, 18 cosmetics
+- [x] Semantics overlay for the board; large text tested
+- [ ] Native-speaker review
 
-## Milestone 6 — Services
-- [x] `AdService` abstraction, AdMob implementation with test IDs, mock/no-op
-- [x] Interstitial frequency policy, idempotent rewarded grants
-- [x] Consent (UMP) wrapper, analytics opt-out
-- [~] Firebase: interfaces + offline implementations + `firestore.rules`; SDK wiring is an explicit integration checklist (needs project credentials)
+## Milestone 6 — Services ✅ / partial
+- [x] `AdService` + AdMob (test ids in debug, disabled in release without ids), fake, disabled
+- [x] Interstitial policy, idempotent rewarded grants, UMP consent wrapper, analytics opt-in
+- [~] Firebase: interfaces + offline implementations + `firebase/firestore.rules` + checklist; SDK not added (needs project credentials)
+- [ ] Real-money IAP (intentionally out of scope: coins only; Restore purchases explains this)
 
-## Milestone 7 — Release readiness
-- [x] Widget, golden and integration-style tests
-- [x] GitHub Actions: format, analyze, test, Android debug APK
-- [x] README, ARCHITECTURE, GAME_RULES, TEST_PLAN, manual QA checklist
-- [ ] On-device performance profiling (requires physical device)
-- [ ] Native-speaker translation review
-- [ ] Production app id, signing keys, AdMob/Firebase production credentials (owner decision)
+## Milestone 7 — Release readiness ✅ / partial
+- [x] 174 automated tests (unit, widget, integration-style, golden)
+- [x] GitHub Actions: l10n sync, format, analyze, tests, goldens (non-blocking), Android debug APK
+- [x] README, ARCHITECTURE, GAME_RULES, TEST_PLAN + manual QA checklist
+- [x] Original launcher icon, navy native launch background (Android)
+- [ ] Android/iOS builds verified locally (blocked: no SDKs in container; Android via CI)
+- [ ] Production app id, signing, AdMob/Firebase credentials (owner decisions)
+- [ ] iOS launch storyboard colour, on-device QA
