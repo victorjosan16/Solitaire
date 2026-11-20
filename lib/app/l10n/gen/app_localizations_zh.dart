@@ -224,6 +224,28 @@ class AppLocalizationsZh extends AppLocalizations {
   String get hintsDisabled => '提示已在设置中关闭。';
 
   @override
+  String get actionShuffle => '洗牌';
+
+  @override
+  String get shuffleTitle => '重新洗牌？';
+
+  @override
+  String shuffleBody(int left) {
+    return '除收牌区外的所有牌将被打乱并重新发牌。此操作无法撤销。本局剩余洗牌次数：$left。';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return '支付 $price 金币';
+  }
+
+  @override
+  String get shuffleWatchAd => '看广告';
+
+  @override
+  String get shuffleLimit => '本局已没有洗牌次数。';
+
+  @override
   String get autoFinishing => '正在完成…';
 
   @override

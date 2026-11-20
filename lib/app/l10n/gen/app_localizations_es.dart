@@ -235,6 +235,28 @@ class AppLocalizationsEs extends AppLocalizations {
   String get hintsDisabled => 'Las pistas están desactivadas en Ajustes.';
 
   @override
+  String get actionShuffle => 'Barajar';
+
+  @override
+  String get shuffleTitle => '¿Barajar las cartas?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Todas las cartas, salvo las de las fundaciones, se barajarán y se repartirán de nuevo. No se puede deshacer. Barajadas restantes en esta partida: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Pagar $price monedas';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Ver anuncio';
+
+  @override
+  String get shuffleLimit => 'No te quedan barajadas en esta partida.';
+
+  @override
   String get autoFinishing => 'Terminando…';
 
   @override

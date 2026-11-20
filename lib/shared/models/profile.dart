@@ -57,6 +57,7 @@ class ProfileData {
   static const int hintPackSize = 3;
   static const int hintPackPrice = 60;
   static const int rewardedHintCount = 3;
+  static const int shufflePrice = 50;
 
   /// Non-redeemable virtual currency. Never negative.
   final int coins;
@@ -140,7 +141,7 @@ class ProfileData {
   /// Coin reward for a win (documented in GAME_RULES.md#economy).
   static int winCoins(GameResult r) {
     var c = r.drawCount == 3 ? 75 : 50;
-    if (r.hintsUsed == 0 && r.undosUsed == 0) c += 25;
+    if (r.hintsUsed == 0 && r.undosUsed == 0 && r.shufflesUsed == 0) c += 25;
     return c;
   }
 
@@ -291,6 +292,25 @@ class ProfileData {
       hintTokens: hintTokens + hintPackSize,
       ledger: {...ledger, key},
     );
+  }
+
+  /// Pays for one shuffle; [key] is unique per game and shuffle number, so
+  /// a retried tap never charges twice.
+  ProfileData payShuffle(String key) {
+    final k = 'shuffle:$key';
+    if (ledger.contains(k)) return this;
+    if (coins < shufflePrice) {
+      throw InsufficientCoinsError(shufflePrice, coins);
+    }
+    return copyWith(coins: coins - shufflePrice, ledger: {...ledger, k});
+  }
+
+  /// Records a completed rewarded ad that unlocks one shuffle. Returns
+  /// `this` unchanged when the same reward event is replayed.
+  ProfileData redeemAdShuffle(String rewardEventId) {
+    final k = 'adshuffle:$rewardEventId';
+    if (ledger.contains(k)) return this;
+    return copyWith(ledger: {...ledger, k});
   }
 
   /// Rewarded-ad hint grant; [rewardEventId] is unique per completed ad.

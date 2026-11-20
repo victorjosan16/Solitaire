@@ -239,6 +239,28 @@ class AppLocalizationsPl extends AppLocalizations {
   String get hintsDisabled => 'Podpowiedzi są wyłączone w ustawieniach.';
 
   @override
+  String get actionShuffle => 'Tasuj';
+
+  @override
+  String get shuffleTitle => 'Potasować karty?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Wszystkie karty poza tymi na stosach bazowych zostaną potasowane i rozdane od nowa. Tej operacji nie można cofnąć. Pozostałe tasowania w tej grze: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Zapłać $price monet';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Obejrzyj reklamę';
+
+  @override
+  String get shuffleLimit => 'W tej grze nie zostały już tasowania.';
+
+  @override
   String get autoFinishing => 'Kończenie…';
 
   @override

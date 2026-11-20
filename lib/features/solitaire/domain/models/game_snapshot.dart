@@ -26,6 +26,7 @@ class GameSnapshot {
     this.usedAutoFinish = false,
     this.finished = false,
     this.restarts = 0,
+    this.shufflesUsed = 0,
   });
 
   static const int schemaVersion = 1;
@@ -55,6 +56,9 @@ class GameSnapshot {
   /// Times this deal was restarted (speed bonus only on the first attempt).
   final int restarts;
 
+  /// Paid shuffles used in this game (max [GameController.maxShuffles]).
+  final int shufflesUsed;
+
   List<PlayingCard> get deck => [
     for (final i in deckOrder) PlayingCard.fromId(i),
   ];
@@ -73,6 +77,7 @@ class GameSnapshot {
     bool? usedAutoFinish,
     bool? finished,
     int? restarts,
+    int? shufflesUsed,
   }) => GameSnapshot(
     gameId: gameId,
     seed: seed,
@@ -92,6 +97,7 @@ class GameSnapshot {
     usedAutoFinish: usedAutoFinish ?? this.usedAutoFinish,
     finished: finished ?? this.finished,
     restarts: restarts ?? this.restarts,
+    shufflesUsed: shufflesUsed ?? this.shufflesUsed,
   );
 
   Map<String, Object?> toJson() => {
@@ -113,6 +119,7 @@ class GameSnapshot {
     'usedAutoFinish': usedAutoFinish,
     'finished': finished,
     'restarts': restarts,
+    'shufflesUsed': shufflesUsed,
   };
 
   /// Throws [FormatException] on any structural problem so the store can
@@ -145,6 +152,7 @@ class GameSnapshot {
         usedAutoFinish: json['usedAutoFinish'] as bool? ?? false,
         finished: json['finished'] as bool? ?? false,
         restarts: json['restarts'] as int? ?? 0,
+        shufflesUsed: json['shufflesUsed'] as int? ?? 0,
       );
       snap.validate();
       return snap;

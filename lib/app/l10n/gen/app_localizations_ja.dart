@@ -225,6 +225,28 @@ class AppLocalizationsJa extends AppLocalizations {
   String get hintsDisabled => 'ヒントは設定でオフになっています。';
 
   @override
+  String get actionShuffle => 'シャッフル';
+
+  @override
+  String get shuffleTitle => 'カードをシャッフルしますか？';
+
+  @override
+  String shuffleBody(int left) {
+    return '組札にあるカード以外のすべてのカードをシャッフルして配り直します。元に戻すことはできません。このゲームで残っているシャッフル回数：$left';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return '$price コインで実行';
+  }
+
+  @override
+  String get shuffleWatchAd => '広告を見る';
+
+  @override
+  String get shuffleLimit => 'このゲームではもうシャッフルできません。';
+
+  @override
   String get autoFinishing => '仕上げ中…';
 
   @override

@@ -239,6 +239,28 @@ class AppLocalizationsUk extends AppLocalizations {
   String get hintsDisabled => 'Підказки вимкнено в налаштуваннях.';
 
   @override
+  String get actionShuffle => 'Перемішати';
+
+  @override
+  String get shuffleTitle => 'Перемішати карти?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Усі карти, крім тих, що лежать в основах, буде перемішано й розкладено заново. Цю дію не можна скасувати. Залишилося перемішувань у цій грі: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Заплатити $price монет';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Переглянути рекламу';
+
+  @override
+  String get shuffleLimit => 'У цій грі перемішувань більше немає.';
+
+  @override
   String get autoFinishing => 'Завершуємо…';
 
   @override

@@ -227,6 +227,28 @@ class AppLocalizationsTr extends AppLocalizations {
   String get hintsDisabled => 'İpuçları Ayarlar\'da kapalı.';
 
   @override
+  String get actionShuffle => 'Karıştır';
+
+  @override
+  String get shuffleTitle => 'Kartlar karıştırılsın mı?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Temellerdekiler dışındaki tüm kartlar karıştırılıp yeniden dağıtılacak. Bu işlem geri alınamaz. Bu oyunda kalan karıştırma hakkı: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return '$price jeton öde';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Reklam izle';
+
+  @override
+  String get shuffleLimit => 'Bu oyunda karıştırma hakkın kalmadı.';
+
+  @override
   String get autoFinishing => 'Bitiriliyor…';
 
   @override

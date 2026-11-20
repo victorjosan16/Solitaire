@@ -235,6 +235,28 @@ class AppLocalizationsIt extends AppLocalizations {
       'I suggerimenti sono disattivati nelle Impostazioni.';
 
   @override
+  String get actionShuffle => 'Mescola';
+
+  @override
+  String get shuffleTitle => 'Mescolare le carte?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Tutte le carte, tranne quelle sulle basi, verranno mescolate e ridistribuite. L\'operazione non può essere annullata. Mescolate rimaste in questa partita: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Paga $price monete';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Guarda un annuncio';
+
+  @override
+  String get shuffleLimit => 'Non hai più mescolate in questa partita.';
+
+  @override
   String get autoFinishing => 'Completamento…';
 
   @override

@@ -45,6 +45,17 @@ class ProfileController extends Notifier<ProfileData> {
   Future<void> buyHintPack(String purchaseId) =>
       _commit(state.buyHintPack(purchaseId));
 
+  /// Throws [InsufficientCoinsError].
+  Future<void> payShuffle(String key) => _commit(state.payShuffle(key));
+
+  /// True when [eventId] had not been redeemed before.
+  Future<bool> redeemAdShuffle(String eventId) async {
+    final next = state.redeemAdShuffle(eventId);
+    if (identical(next, state)) return false;
+    await _commit(next);
+    return true;
+  }
+
   Future<void> consumeHint() => _commit(state.consumeHint());
 
   Future<void> grantRewardedHints(String eventId) =>

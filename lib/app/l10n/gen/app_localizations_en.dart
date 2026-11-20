@@ -228,6 +228,28 @@ class AppLocalizationsEn extends AppLocalizations {
   String get hintsDisabled => 'Hints are turned off in Settings.';
 
   @override
+  String get actionShuffle => 'Shuffle';
+
+  @override
+  String get shuffleTitle => 'Shuffle the cards?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'All cards except those on the foundations will be shuffled and dealt again. This can\'t be undone. Shuffles left in this game: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Pay $price coins';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Watch ad';
+
+  @override
+  String get shuffleLimit => 'No shuffles left in this game.';
+
+  @override
   String get autoFinishing => 'Finishing…';
 
   @override

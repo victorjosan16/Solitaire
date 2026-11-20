@@ -239,6 +239,28 @@ class AppLocalizationsRu extends AppLocalizations {
   String get hintsDisabled => 'Подсказки отключены в настройках.';
 
   @override
+  String get actionShuffle => 'Перемешать';
+
+  @override
+  String get shuffleTitle => 'Перемешать карты?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Все карты, кроме лежащих в основаниях, будут перемешаны и разложены заново. Это действие нельзя отменить. Осталось перемешиваний в этой игре: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Заплатить $price монет';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Смотреть рекламу';
+
+  @override
+  String get shuffleLimit => 'В этой игре перемешиваний больше нет.';
+
+  @override
   String get autoFinishing => 'Завершаем…';
 
   @override

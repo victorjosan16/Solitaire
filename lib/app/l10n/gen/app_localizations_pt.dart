@@ -234,6 +234,28 @@ class AppLocalizationsPt extends AppLocalizations {
   String get hintsDisabled => 'As dicas estão desativadas nos Ajustes.';
 
   @override
+  String get actionShuffle => 'Embaralhar';
+
+  @override
+  String get shuffleTitle => 'Embaralhar as cartas?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Todas as cartas, exceto as das fundações, serão embaralhadas e distribuídas de novo. Não é possível desfazer. Embaralhadas restantes neste jogo: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Pagar $price moedas';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Ver anúncio';
+
+  @override
+  String get shuffleLimit => 'Não há mais embaralhadas neste jogo.';
+
+  @override
   String get autoFinishing => 'Finalizando…';
 
   @override

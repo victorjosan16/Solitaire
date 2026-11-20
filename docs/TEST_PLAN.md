@@ -1,6 +1,6 @@
 # Test plan
 
-Automated suite: **186 tests** (2026-11-20, Flutter 3.50.1, Linux), all passing.
+Automated suite: **204 tests** (2026-11-20, Flutter 3.50.1, Linux), all passing.
 
 | Folder | Tests | What it covers |
 |---|---|---|

@@ -226,6 +226,28 @@ class AppLocalizationsKo extends AppLocalizations {
   String get hintsDisabled => '설정에서 힌트가 꺼져 있습니다.';
 
   @override
+  String get actionShuffle => '섞기';
+
+  @override
+  String get shuffleTitle => '카드를 섞을까요?';
+
+  @override
+  String shuffleBody(int left) {
+    return '파운데이션에 있는 카드를 제외한 모든 카드를 섞어 다시 배분합니다. 되돌릴 수 없습니다. 이번 게임에서 남은 섞기 횟수: $left';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return '$price 코인 지불';
+  }
+
+  @override
+  String get shuffleWatchAd => '광고 보기';
+
+  @override
+  String get shuffleLimit => '이번 게임에서는 더 이상 섞을 수 없습니다.';
+
+  @override
   String get autoFinishing => '마무리 중…';
 
   @override

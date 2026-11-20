@@ -35,6 +35,12 @@ EN = {
  "buyHints": "Buy {count} for {price}",
  "watchAdHints": "Watch ad for {count}",
  "hintsDisabled": "Hints are turned off in Settings.",
+ "actionShuffle": "Shuffle",
+ "shuffleTitle": "Shuffle the cards?",
+ "shuffleBody": "All cards except those on the foundations will be shuffled and dealt again. This can't be undone. Shuffles left in this game: {left}.",
+ "shufflePay": "Pay {price} coins",
+ "shuffleWatchAd": "Watch ad",
+ "shuffleLimit": "No shuffles left in this game.",
  "autoFinishing": "Finishing…", "skip": "Skip",
  "pauseTitle": "Paused", "resume": "Resume", "restartDeal": "Restart deal", "newGame": "New game", "home": "Home",
  "restartTitle": "Restart this deal?",
@@ -175,4 +181,4 @@ EN = {
  "achDescStylist": "Apply a new theme",
  "achDescLevel": "Reach level {level}",
 }
-PLACEHOLDER_TYPES = {"percent":"int","level":"int","coins":"int","moves":"int","count":"int","price":"int","after":"int","missing":"int","done":"int","total":"int","days":"int","hours":"int","minutes":"int","score":"int","column":"int"}
+PLACEHOLDER_TYPES = {"percent":"int","level":"int","coins":"int","moves":"int","count":"int","price":"int","after":"int","missing":"int","done":"int","total":"int","days":"int","hours":"int","minutes":"int","score":"int","column":"int","left":"int"}

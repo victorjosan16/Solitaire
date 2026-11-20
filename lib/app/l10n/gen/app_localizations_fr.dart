@@ -236,6 +236,28 @@ class AppLocalizationsFr extends AppLocalizations {
   String get hintsDisabled => 'Les indices sont désactivés dans les réglages.';
 
   @override
+  String get actionShuffle => 'Mélanger';
+
+  @override
+  String get shuffleTitle => 'Mélanger les cartes ?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Toutes les cartes, sauf celles des fondations, seront mélangées et redistribuées. Cette action est irréversible. Mélanges restants dans cette partie : $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Payer $price pièces';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Regarder une pub';
+
+  @override
+  String get shuffleLimit => 'Plus aucun mélange disponible dans cette partie.';
+
+  @override
   String get autoFinishing => 'Fin en cours…';
 
   @override

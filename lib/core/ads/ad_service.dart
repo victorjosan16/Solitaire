@@ -53,7 +53,7 @@ class BannerPolicy {
   }
 }
 
-enum RewardPlacement { doubleVictoryCoins, hintPack }
+enum RewardPlacement { doubleVictoryCoins, hintPack, shuffle }
 
 /// Ads abstraction. The game never depends on ads to function.
 abstract class AdService {

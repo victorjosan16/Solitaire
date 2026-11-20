@@ -15,7 +15,11 @@ class GameResult {
     this.dailyDate,
     this.seed,
     this.firstAttempt = true,
+    this.shufflesUsed = 0,
   });
+
+  /// Paid shuffles used (an assist, like hints).
+  final int shufflesUsed;
 
   final String gameId;
 
@@ -153,7 +157,8 @@ class PlayerStats {
 
   PlayerStats record(GameResult r) {
     final streak = r.won ? overallStreak + 1 : 0;
-    final pure = r.won && r.hintsUsed == 0 && r.undosUsed == 0;
+    final pure =
+        r.won && r.hintsUsed == 0 && r.undosUsed == 0 && r.shufflesUsed == 0;
     return PlayerStats(
       draw1: r.drawCount == 1 ? draw1.record(r) : draw1,
       draw3: r.drawCount == 3 ? draw3.record(r) : draw3,

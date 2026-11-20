@@ -247,6 +247,51 @@ class KlondikeEngine {
     }
   }
 
+  /// Paid "shuffle" assist: every card that is NOT on a foundation (tableau,
+  /// stock, waste) is shuffled with [seed] and dealt again in the opening
+  /// shape — row by row into columns 1..7, only each column's top card face
+  /// up — and whatever does not fit becomes the stock. Foundations, score and
+  /// the stock-pass counter are kept. Deterministic for a given input + seed.
+  static GameState reshuffle(GameState s, int seed) {
+    final cards = <PlayingCard>[
+      for (final col in s.tableau)
+        for (final t in col) t.card,
+      ...s.stock,
+      ...s.waste,
+    ]..sort((a, b) => a.id.compareTo(b.id));
+    final rng = SeededRandom(seed);
+    for (var i = cards.length - 1; i > 0; i--) {
+      final j = rng.nextInt(i + 1);
+      final tmp = cards[i];
+      cards[i] = cards[j];
+      cards[j] = tmp;
+    }
+    final cols = List.generate(7, (_) => <PlayingCard>[]);
+    var k = 0;
+    for (var row = 0; row < 7 && k < cards.length; row++) {
+      for (var col = row; col < 7 && k < cards.length; col++) {
+        cols[col].add(cards[k++]);
+      }
+    }
+    final tableau = [
+      for (final col in cols)
+        [
+          for (var i = 0; i < col.length; i++)
+            TableauCard(col[i], faceUp: i == col.length - 1),
+        ],
+    ];
+    return s.copyWith(
+      tableau: tableau,
+      stock: cards.sublist(k).reversed.toList(),
+      waste: const [],
+      wasteFanStart: 0,
+      moves: s.moves + 1,
+    );
+  }
+
+  /// Cards a [reshuffle] would move (anything not on a foundation).
+  static int shufflableCount(GameState s) => 52 - s.foundationCount;
+
   /// All legal moves in [s] (unordered, unfiltered). Used by the hint
   /// system, the solver and tests.
   static List<Move> legalMoves(GameState s) {

@@ -154,6 +154,26 @@
     }
   },
   "hintsDisabled": "Hints are turned off in Settings.",
+  "actionShuffle": "Shuffle",
+  "shuffleTitle": "Shuffle the cards?",
+  "shuffleBody": "All cards except those on the foundations will be shuffled and dealt again. This can't be undone. Shuffles left in this game: {left}.",
+  "@shuffleBody": {
+    "placeholders": {
+      "left": {
+        "type": "int"
+      }
+    }
+  },
+  "shufflePay": "Pay {price} coins",
+  "@shufflePay": {
+    "placeholders": {
+      "price": {
+        "type": "int"
+      }
+    }
+  },
+  "shuffleWatchAd": "Watch ad",
+  "shuffleLimit": "No shuffles left in this game.",
   "autoFinishing": "Finishing…",
   "skip": "Skip",
   "pauseTitle": "Paused",

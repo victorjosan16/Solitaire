@@ -35,6 +35,19 @@ Offered only when every tableau card is face up and a greedy foundation-only pla
 draws/recycles within the pass limit) provably reaches 52 foundation cards. Each step is a
 validated move; Skip applies the rest instantly, Cancel stops with a consistent board.
 
+## Shuffle (paid assist)
+* Every card that is **not on a foundation** (tableau incl. face-down cards, stock, waste) is
+  shuffled and dealt again in the opening shape: row by row into columns 1…7, only each column's
+  top card face up; cards beyond 28 form the stock (waste empty). Foundations, score and the
+  stock-pass counter are unchanged; counts as one move.
+* Cost **50 coins**, or an opt-in rewarded ad (shuffle happens only on the earned-reward callback,
+  once per reward event). Maximum **3 per game**. Confirmation is required.
+* Cannot be undone; the undo history restarts from the shuffled position ("Restart deal" still
+  returns to the original deal).
+* Deterministic: seed = FNV-1a(`<deal seed>:<game id>:<shuffle #>`), so a future server can replay
+  it for leaderboard validation. Shuffled wins are **assisted**: no +25 clean bonus, not "pure",
+  and excluded from any main leaderboard.
+
 ## Winning
 Win = all 52 cards on foundations (13 per suit).
 
@@ -78,7 +91,7 @@ recycles and undo reset them. Cosmetic only.
 | Source | Coins |
 |---|---|
 | Win (Draw 1 / Draw 3) | 50 / 75 |
-| Win with no hints and no undo | +25 |
+| Win with no hints, no undo, no shuffle | +25 |
 | Speed bonus (active time): < 3 min / < 5 / < 7 / < 10 | +40 / +25 / +15 / +5 |
 | Daily challenge (on its date) | 150 |
 | Achievements | 50 – 1 000 each |
@@ -89,6 +102,6 @@ background time are not counted). The bonus is paid only on the **first attempt*
 after "Restart deal") and **once per deal** (ledger key `speed:<draw>:<seed>`), so replaying a
 known daily or winning deal cannot farm it.
 
-Spending: cosmetics 300 – 1 000, hint pack 3 hints for 60. New players start with 250 coins and
+Spending: cosmetics 300 – 1 000, hint pack 3 hints for 60, shuffle 50. New players start with 250 coins and
 5 hints. Opt-in rewarded ad: +3 hints. XP: 100 + score/100 per win, 10 per loss; level *L*
 requires 75·(L−1)·L XP.

@@ -235,6 +235,28 @@ class AppLocalizationsDe extends AppLocalizations {
   String get hintsDisabled => 'Tipps sind in den Einstellungen deaktiviert.';
 
   @override
+  String get actionShuffle => 'Mischen';
+
+  @override
+  String get shuffleTitle => 'Karten mischen?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Alle Karten außer denen auf den Ablagen werden gemischt und neu ausgeteilt. Das kann nicht rückgängig gemacht werden. Verbleibendes Mischen in diesem Spiel: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return '$price Münzen zahlen';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Werbung ansehen';
+
+  @override
+  String get shuffleLimit => 'In diesem Spiel kannst du nicht mehr mischen.';
+
+  @override
   String get autoFinishing => 'Wird beendet…';
 
   @override

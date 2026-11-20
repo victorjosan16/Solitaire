@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/ads/ad_service.dart';
+import '../../../shared/models/profile.dart';
 import '../../../core/logging/app_logger.dart';
 import '../../../core/providers.dart';
 import '../../../core/services/audio_service.dart';
@@ -79,6 +80,8 @@ class VictoryReport {
 }
 
 enum HintResult { shown, noMoves, noTokens, disabled }
+
+enum ShuffleResult { done, insufficientCoins, limitReached, unavailable }
 
 class GameViewState {
   const GameViewState({
@@ -535,6 +538,78 @@ class GameController extends Notifier<GameViewState> {
   void skipAutoFinish() => _skipAuto = true;
   void cancelAutoFinish() => _cancelAuto = true;
 
+  // ------------------------------------------------------------- shuffle
+
+  static const int maxShuffles = 3;
+
+  int get shufflesLeft =>
+      maxShuffles - (state.snapshot?.shufflesUsed ?? maxShuffles);
+
+  bool get canShuffle =>
+      !_locked &&
+      shufflesLeft > 0 &&
+      KlondikeEngine.shufflableCount(state.snapshot!.state) >= 2;
+
+  /// Pays [ProfileData.shufflePrice] coins and shuffles.
+  Future<ShuffleResult> shuffleWithCoins() async {
+    if (_locked) return ShuffleResult.unavailable;
+    if (shufflesLeft <= 0) return ShuffleResult.limitReached;
+    if (!canShuffle) return ShuffleResult.unavailable;
+    final s = state.snapshot!;
+    if (ref.read(profileProvider).coins < ProfileData.shufflePrice) {
+      return ShuffleResult.insufficientCoins;
+    }
+    await ref
+        .read(profileProvider.notifier)
+        .payShuffle('${s.gameId}:${s.shufflesUsed}');
+    await _applyShuffle();
+    return ShuffleResult.done;
+  }
+
+  /// Opt-in rewarded ad instead of coins; shuffles only after the SDK's
+  /// earned-reward callback, once per reward event.
+  Future<RewardOutcome> shuffleWithAd() async {
+    if (!canShuffle) {
+      return const RewardUnavailable(AdUnavailableReason.disabled);
+    }
+    _clock.pause();
+    final outcome = await ref
+        .read(adServiceProvider)
+        .showRewarded(RewardPlacement.shuffle);
+    if (outcome is RewardEarned) {
+      final fresh = await ref
+          .read(profileProvider.notifier)
+          .redeemAdShuffle(outcome.rewardEventId);
+      if (fresh && canShuffle) await _applyShuffle();
+    }
+    return outcome;
+  }
+
+  Future<void> _applyShuffle() async {
+    final s = state.snapshot!;
+    final seed = Deck.fnv1a('${s.seed}:${s.gameId}:${s.shufflesUsed}');
+    final next = KlondikeEngine.reshuffle(s.state, seed);
+    _clock.start();
+    state = state.copyWith(
+      snapshot: s.copyWith(
+        state: next,
+        // A shuffle is a new starting point: earlier moves can't be undone.
+        history: const [],
+        shufflesUsed: s.shufflesUsed + 1,
+        combo: 0,
+        elapsedMs: _clock.elapsedMs,
+        updatedAt: _now,
+      ),
+      canAutoFinish: MoveAdvisor.canAutoFinish(next),
+    );
+    _audio.play(Sfx.draw);
+    _audio.haptic(HapticKind.success);
+    ref.read(analyticsProvider).logEvent('shuffle_used', {
+      'n': s.shufflesUsed + 1,
+    });
+    await _save();
+  }
+
   // ------------------------------------------------------------- victory
 
   Future<void> _onWin() async {
@@ -572,6 +647,7 @@ class GameController extends Notifier<GameViewState> {
             dailyDate: s.dailyDate,
             seed: s.seed,
             firstAttempt: s.restarts == 0,
+            shufflesUsed: s.shufflesUsed,
           ),
         );
     ref.read(adServiceProvider).onGameFinished();

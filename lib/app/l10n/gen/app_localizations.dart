@@ -498,6 +498,42 @@ abstract class AppLocalizations {
   /// **'Hints are turned off in Settings.'**
   String get hintsDisabled;
 
+  /// No description provided for @actionShuffle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffle'**
+  String get actionShuffle;
+
+  /// No description provided for @shuffleTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffle the cards?'**
+  String get shuffleTitle;
+
+  /// No description provided for @shuffleBody.
+  ///
+  /// In en, this message translates to:
+  /// **'All cards except those on the foundations will be shuffled and dealt again. This can\'t be undone. Shuffles left in this game: {left}.'**
+  String shuffleBody(int left);
+
+  /// No description provided for @shufflePay.
+  ///
+  /// In en, this message translates to:
+  /// **'Pay {price} coins'**
+  String shufflePay(int price);
+
+  /// No description provided for @shuffleWatchAd.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch ad'**
+  String get shuffleWatchAd;
+
+  /// No description provided for @shuffleLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'No shuffles left in this game.'**
+  String get shuffleLimit;
+
   /// No description provided for @autoFinishing.
   ///
   /// In en, this message translates to:

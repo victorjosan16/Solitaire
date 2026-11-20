@@ -227,6 +227,28 @@ class AppLocalizationsVi extends AppLocalizations {
   String get hintsDisabled => 'Gợi ý đang tắt trong Cài đặt.';
 
   @override
+  String get actionShuffle => 'Xáo bài';
+
+  @override
+  String get shuffleTitle => 'Xáo lại các lá bài?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Mọi lá bài, trừ các lá trên chồng đích, sẽ được xáo và chia lại. Không thể hoàn tác. Số lần xáo còn lại trong ván này: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Trả $price xu';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Xem quảng cáo';
+
+  @override
+  String get shuffleLimit => 'Ván này đã hết lượt xáo bài.';
+
+  @override
   String get autoFinishing => 'Đang hoàn thành…';
 
   @override

@@ -230,6 +230,28 @@ class AppLocalizationsRo extends AppLocalizations {
   String get hintsDisabled => 'Indiciile sunt dezactivate în Setări.';
 
   @override
+  String get actionShuffle => 'Amestecă';
+
+  @override
+  String get shuffleTitle => 'Amesteci cărțile?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Toate cărțile, în afară de cele de pe fundații, vor fi amestecate și împărțite din nou. Acțiunea nu poate fi anulată. Amestecări rămase în acest joc: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Plătește $price monede';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Vezi o reclamă';
+
+  @override
+  String get shuffleLimit => 'Nu mai ai amestecări în acest joc.';
+
+  @override
   String get autoFinishing => 'Se finalizează…';
 
   @override

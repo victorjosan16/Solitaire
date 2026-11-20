@@ -228,6 +228,28 @@ class AppLocalizationsId extends AppLocalizations {
   String get hintsDisabled => 'Petunjuk dinonaktifkan di Setelan.';
 
   @override
+  String get actionShuffle => 'Kocok';
+
+  @override
+  String get shuffleTitle => 'Kocok kartu?';
+
+  @override
+  String shuffleBody(int left) {
+    return 'Semua kartu kecuali yang ada di fondasi akan dikocok dan dibagikan ulang. Tindakan ini tidak dapat diurungkan. Sisa kocokan di permainan ini: $left.';
+  }
+
+  @override
+  String shufflePay(int price) {
+    return 'Bayar $price koin';
+  }
+
+  @override
+  String get shuffleWatchAd => 'Tonton iklan';
+
+  @override
+  String get shuffleLimit => 'Tidak ada kocokan tersisa di permainan ini.';
+
+  @override
   String get autoFinishing => 'Menyelesaikan…';
 
   @override

@@ -278,6 +278,79 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     }
   }
 
+  /// Shuffle assist: confirm, then pay coins or (opt-in) watch an ad.
+  Future<void> _shuffle() async {
+    final l = context.l10n;
+    if (_ctrl.shufflesLeft <= 0) {
+      showNovaSnack(context, l.shuffleLimit, icon: Icons.shuffle_rounded);
+      return;
+    }
+    final ads = ref.read(adServiceProvider);
+    final coins = ref.read(profileProvider).coins;
+    final canPay = coins >= ProfileData.shufflePrice;
+    final choice = await _withPausedClock(
+      () => showDialog<String>(
+        context: context,
+        builder: (c) => AlertDialog(
+          icon: const Icon(
+            Icons.shuffle_rounded,
+            color: NovaColors.goldLight,
+            size: 36,
+          ),
+          title: Text(l.shuffleTitle),
+          content: Text(l.shuffleBody(_ctrl.shufflesLeft)),
+          actionsOverflowDirection: VerticalDirection.down,
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(c),
+              child: Text(l.cancel),
+            ),
+            if (ads.rewardedAvailable)
+              TextButton(
+                onPressed: () => Navigator.pop(c, 'ad'),
+                child: Text(l.shuffleWatchAd),
+              ),
+            TextButton(
+              onPressed: () => Navigator.pop(c, 'pay'),
+              child: Text(l.shufflePay(ProfileData.shufflePrice)),
+            ),
+          ],
+        ),
+      ),
+    );
+    if (!mounted || choice == null) return;
+    if (choice == 'pay') {
+      if (!canPay) {
+        await showInsufficientCoinsDialog(
+          context,
+          ProfileData.shufflePrice - coins,
+        );
+        return;
+      }
+      final r = await _ctrl.shuffleWithCoins();
+      if (!mounted) return;
+      if (r == ShuffleResult.insufficientCoins) {
+        await showInsufficientCoinsDialog(
+          context,
+          ProfileData.shufflePrice - ref.read(profileProvider).coins,
+        );
+      }
+    } else {
+      final r = await _ctrl.shuffleWithAd();
+      if (!mounted) return;
+      switch (r) {
+        case RewardEarned():
+          break;
+        case RewardSkipped():
+          showNovaSnack(context, l.adNotCompleted);
+        case RewardUnavailable(:final reason):
+          reason == AdUnavailableReason.offline
+              ? await showOfflineDialog(context)
+              : await showAdUnavailableDialog(context);
+      }
+    }
+  }
+
   Future<void> _noMovesDialog() async {
     final l = context.l10n;
     final choice = await _withPausedClock(
@@ -293,6 +366,11 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           content: Text(l.noMovesBody),
           actionsOverflowDirection: VerticalDirection.down,
           actions: [
+            if (_ctrl.canShuffle)
+              TextButton(
+                onPressed: () => Navigator.pop(c, 'shuffle'),
+                child: Text(l.actionShuffle),
+              ),
             TextButton(
               onPressed: () => Navigator.pop(c, 'undo'),
               child: Text(l.actionUndo),
@@ -311,6 +389,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       ),
     );
     switch (choice) {
+      case 'shuffle':
+        await _shuffle();
       case 'undo':
         await _ctrl.undo();
       case 'restart':
@@ -540,6 +620,9 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                 onHint: _hint,
                 onAuto: () => _ctrl.autoFinish(),
                 onNew: _confirmNewGame,
+                onShuffle: _shuffle,
+                shufflesLeft: _ctrl.shufflesLeft,
+                canShuffle: _ctrl.canShuffle,
               ),
             ],
           ),
@@ -644,7 +727,14 @@ class _ActionBar extends StatelessWidget {
     required this.onHint,
     required this.onAuto,
     required this.onNew,
+    required this.onShuffle,
+    required this.shufflesLeft,
+    required this.canShuffle,
   });
+
+  final VoidCallback onShuffle;
+  final int shufflesLeft;
+  final bool canShuffle;
 
   final bool canUndo, canAuto, hintsEnabled;
   final int hintTokens;
@@ -741,6 +831,27 @@ class _ActionBar extends StatelessWidget {
                     ),
                   )
                 : null,
+          ),
+          action(
+            Icons.shuffle_rounded,
+            l.actionShuffle,
+            canShuffle ? onShuffle : null,
+            semantics: '${l.actionShuffle}, ${l.shuffleBody(shufflesLeft)}',
+            badge: const Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CoinIcon(size: 14),
+                SizedBox(width: 2),
+                Text(
+                  '${ProfileData.shufflePrice}',
+                  style: TextStyle(
+                    fontSize: 11,
+                    fontWeight: FontWeight.w800,
+                    color: NovaColors.goldLight,
+                  ),
+                ),
+              ],
+            ),
           ),
           action(
             Icons.auto_fix_high_rounded,
