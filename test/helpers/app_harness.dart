@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -96,6 +97,7 @@ Future<Harness> pumpApp(
       adServiceProvider.overrideWithValue(fakeAds),
       audioServiceProvider.overrideWithValue(audio),
       if (clock != null) clockProvider.overrideWithValue(clock),
+      randomProvider.overrideWithValue(Random(42)),
       ...extra,
     ],
   );

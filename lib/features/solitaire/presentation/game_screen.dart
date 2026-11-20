@@ -106,7 +106,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   void dispose() {
     _lifecycle.dispose();
     _comboTimer?.cancel();
-    _ctrl.pauseAndSave();
+    // Never mutate providers while the tree is being torn down: stop the
+    // clock now, persist on the next microtask.
+    final ctrl = _ctrl..pauseClock();
+    Future.microtask(ctrl.pauseAndSave);
     super.dispose();
   }
 

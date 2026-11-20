@@ -15,7 +15,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        // PROVISIONAL application id: replace before the first store upload.
         applicationId = "com.solitairenova.solitaire_nova"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
@@ -27,12 +27,19 @@ android {
         // flag during build.
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        // Google's documented SAMPLE AdMob app id unless a real one is passed:
+        //   ./gradlew -PADMOB_APP_ID_ANDROID=ca-app-pub-xxx~yyy  (or gradle.properties, not committed)
+        manifestPlaceholders["admobAppId"] =
+            (project.findProperty("ADMOB_APP_ID_ANDROID") as String?)
+                ?: "ca-app-pub-3940256099942544~3347511713"
     }
 
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
+            // Release signing: provide android/key.properties (gitignored) and
+            // wire a signingConfig here before publishing. Until then release
+            // builds are signed with the debug key so `flutter run --release`
+            // works locally; such builds must never be uploaded to a store.
             signingConfig = signingConfigs.getByName("debug")
         }
     }

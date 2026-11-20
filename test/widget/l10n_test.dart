@@ -21,27 +21,40 @@ void main() {
     expect(resolveLocale('xx', const [Locale('de')]), const Locale('de'));
   });
 
-  test('all achievements and cosmetics have localized names in every locale', () async {
-    for (final code in supportedLanguageCodes) {
-      final l = await AppLocalizations.delegate.load(Locale(code));
-      for (final a in achievementCatalog) {
-        expect(achievementTitle(l, a.id), isNot(a.id), reason: '$code ${a.id}');
-        expect(achievementDescription(l, a), isNotEmpty, reason: '$code ${a.id}');
+  test(
+    'all achievements and cosmetics have localized names in every locale',
+    () async {
+      for (final code in supportedLanguageCodes) {
+        final l = await AppLocalizations.delegate.load(Locale(code));
+        for (final a in achievementCatalog) {
+          expect(
+            achievementTitle(l, a.id),
+            isNot(a.id),
+            reason: '$code ${a.id}',
+          );
+          expect(
+            achievementDescription(l, a),
+            isNotEmpty,
+            reason: '$code ${a.id}',
+          );
+        }
+        for (final c in cosmeticCatalog) {
+          expect(cosmeticName(l, c.id), isNot(c.id), reason: '$code ${c.id}');
+        }
+        // Plurals resolve for typical counts.
+        for (final n in [0, 1, 2, 5, 21, 22, 25, 100]) {
+          expect(l.hintsLeft(n), isNotEmpty);
+          expect(l.dailyStreak(n), isNotEmpty);
+        }
       }
-      for (final c in cosmeticCatalog) {
-        expect(cosmeticName(l, c.id), isNot(c.id), reason: '$code ${c.id}');
-      }
-      // Plurals resolve for typical counts.
-      for (final n in [0, 1, 2, 5, 21, 22, 25, 100]) {
-        expect(l.hintsLeft(n), isNotEmpty);
-        expect(l.dailyStreak(n), isNotEmpty);
-      }
-    }
-  });
+    },
+  );
 
   for (final code in supportedLanguageCodes) {
     for (final scale in [1.0, 1.3]) {
-      testWidgets('$code @${scale}x: key screens fit on a 320dp phone', (tester) async {
+      testWidgets('$code @${scale}x: key screens fit on a 320dp phone', (
+        tester,
+      ) async {
         tester.platformDispatcher.textScaleFactorTestValue = scale;
         addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
         final h = await pumpApp(
@@ -50,7 +63,15 @@ void main() {
           prefs: {'settings.consentAnswered': true, 'settings.locale': code},
           route: Routes.home,
         );
-        for (final r in [Routes.daily, Routes.shop, Routes.achievements, Routes.stats, Routes.themes, Routes.settings, Routes.home]) {
+        for (final r in [
+          Routes.daily,
+          Routes.shop,
+          Routes.achievements,
+          Routes.stats,
+          Routes.themes,
+          Routes.settings,
+          Routes.home,
+        ]) {
           h.router.go(r);
           await settle(tester, const Duration(milliseconds: 600));
           final e = tester.takeException();

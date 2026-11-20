@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Only needed for optional ads / future cloud features; gameplay is offline. -->
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
-        android:label="solitaire_nova"
+        android:label="Solitaire Nova"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -27,6 +29,11 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
+        <!-- AdMob app id comes from the Gradle property ADMOB_APP_ID_ANDROID
+             (defaults to Google's public SAMPLE id, see android/app/build.gradle.kts). -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="${admobAppId}"/>
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />

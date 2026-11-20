@@ -8,6 +8,32 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
 	<string>Solitaire Nova</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>en</string>
+		<string>ro</string>
+		<string>ru</string>
+		<string>uk</string>
+		<string>de</string>
+		<string>fr</string>
+		<string>es</string>
+		<string>it</string>
+		<string>pt</string>
+		<string>pl</string>
+	</array>
+	<!-- AdMob: Google's public SAMPLE app id. Override via the GAD_APP_ID
+	     build setting (ios/Flutter/Release.xcconfig, not committed). -->
+	<key>GADApplicationIdentifier</key>
+	<string>$(GAD_APP_ID)</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Your choice is only used to decide whether ads may be personalized. The game works the same either way.</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

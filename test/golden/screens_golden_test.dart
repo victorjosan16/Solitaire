@@ -133,7 +133,9 @@ void main() {
     final c = h.container.read(gameControllerProvider.notifier);
     await c.startNewGame(mode: GameMode.winning, drawCount: 1);
     final snap = h.container.read(gameControllerProvider).snapshot!;
-    final sol = KlondikeSolver(maxNodes: 60000).solveSeed(snap.seed, snap.config).solution!;
+    final sol = KlondikeSolver(maxNodes: 60000)
+        .solveSeed(snap.seed, snap.config)
+        .solution!;
     for (final m in sol) {
       switch (m) {
         case DrawMove():
@@ -145,13 +147,25 @@ void main() {
     }
   }
 
-  for (final (name, size) in [('phone', const Size(390, 844)), ('small', const Size(320, 640))]) {
+  for (final (name, size) in [
+    ('phone', const Size(390, 844)),
+    ('small', const Size(320, 640)),
+  ]) {
     testWidgets('$name screen victory', (tester) async {
-      final h = await pumpApp(tester, size: size, route: Routes.home, profile: sampleProfile(now), clock: clock);
+      final h = await pumpApp(
+        tester,
+        size: size,
+        route: Routes.home,
+        profile: sampleProfile(now),
+        clock: clock,
+      );
       await winGame(h);
       h.router.go(Routes.victory);
       await settle(tester, const Duration(seconds: 2));
-      await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/${name}_victory.png'));
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/${name}_victory.png'),
+      );
     });
   }
 
@@ -165,14 +179,23 @@ void main() {
         profile: sampleProfile(now),
         clock: clock,
       );
-      await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/${code}_home.png'));
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/${code}_home.png'),
+      );
       h.router.go(Routes.achievements);
       await settle(tester);
-      await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/${code}_achievements.png'));
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/${code}_achievements.png'),
+      );
       await winGame(h);
       h.router.go(Routes.victory);
       await settle(tester, const Duration(seconds: 2));
-      await expectLater(find.byType(MaterialApp), matchesGoldenFile('goldens/${code}_victory.png'));
+      await expectLater(
+        find.byType(MaterialApp),
+        matchesGoldenFile('goldens/${code}_victory.png'),
+      );
     });
   }
 }

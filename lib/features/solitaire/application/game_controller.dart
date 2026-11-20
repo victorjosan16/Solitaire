@@ -127,10 +127,11 @@ class GameController extends Notifier<GameViewState> {
   late PlayClock _clock;
   int _serial = 0;
   bool _cancelAuto = false;
-  final _rng = Random.secure();
+  late Random _rng;
 
   @override
   GameViewState build() {
+    _rng = ref.read(randomProvider);
     final initial = ref.read(initialGameProvider);
     _clock = PlayClock(
       now: ref.read(clockProvider),
@@ -163,6 +164,9 @@ class GameController extends Notifier<GameViewState> {
     final s = state.snapshot;
     if (s != null && !s.finished && !state.autoFinishing) _clock.start();
   }
+
+  /// Stops the clock without touching provider state (safe in dispose).
+  void pauseClock() => _clock.pause();
 
   /// Pauses timing and persists immediately (app background, menus).
   Future<void> pauseAndSave() async {

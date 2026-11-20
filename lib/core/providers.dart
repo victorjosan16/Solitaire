@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -51,3 +53,6 @@ final remoteConfigProvider = Provider<RemoteConfigService>(
 
 /// Injectable wall clock (tests freeze time).
 final clockProvider = Provider<DateTime Function()>((ref) => DateTime.now);
+
+/// Randomness for deal selection and ids (tests inject a seeded Random).
+final randomProvider = Provider<Random>((ref) => Random.secure());
