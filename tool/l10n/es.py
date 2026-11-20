@@ -89,6 +89,7 @@ ES = {
  "earnedOn": "Conseguido el {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Tienda", "shopCardPacks": "Barajas", "shopBackgrounds": "Fondos", "shopTables": "Mesas", "shopHints": "Pistas",
+ "watchAdCoins": "Ver anuncio: +{coins} monedas",
  "buy": "Comprar", "owned": "Adquirido", "equip": "Usar", "equipped": "En uso",
  "purchaseTitle": "¿Comprar {item}?",
  "purchaseBody": "Cuesta {price} monedas. Saldo tras la compra: {after}.",

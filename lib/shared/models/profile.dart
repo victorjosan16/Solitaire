@@ -59,6 +59,9 @@ class ProfileData {
   static const int rewardedHintCount = 3;
   static const int shufflePrice = 50;
 
+  /// Coins for one opt-in rewarded ad (no daily cap by product decision).
+  static const int rewardedAdCoins = 25;
+
   /// Non-redeemable virtual currency. Never negative.
   final int coins;
   final int xp;
@@ -312,6 +315,10 @@ class ProfileData {
     if (ledger.contains(k)) return this;
     return copyWith(ledger: {...ledger, k});
   }
+
+  /// Rewarded-ad coin grant, once per completed ad (reward event id).
+  ProfileData grantAdCoins(String rewardEventId) =>
+      grantCoins('adcoins:$rewardEventId', rewardedAdCoins);
 
   /// Rewarded-ad hint grant; [rewardEventId] is unique per completed ad.
   ProfileData grantRewardedHints(String rewardEventId) {

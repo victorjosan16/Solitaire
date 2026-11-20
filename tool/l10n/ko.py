@@ -89,6 +89,7 @@ KO = {
  "earnedOn": "{date} 달성",
  "rewardCoins": "+{coins}",
  "shopTitle": "상점", "shopCardPacks": "카드 세트", "shopBackgrounds": "배경", "shopTables": "테이블", "shopHints": "힌트",
+ "watchAdCoins": "광고 보기: +{coins} 코인",
  "buy": "구매", "owned": "보유 중", "equip": "사용", "equipped": "사용 중",
  "purchaseTitle": "{item}을(를) 구매할까요?",
  "purchaseBody": "가격은 {price} 코인입니다. 구매 후 잔액: {after}",

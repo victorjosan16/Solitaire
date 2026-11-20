@@ -1080,6 +1080,12 @@ abstract class AppLocalizations {
   /// **'Hints'**
   String get shopHints;
 
+  /// No description provided for @watchAdCoins.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch ad: +{coins} coins'**
+  String watchAdCoins(int coins);
+
   /// No description provided for @buy.
   ///
   /// In en, this message translates to:

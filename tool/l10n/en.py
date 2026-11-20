@@ -90,6 +90,7 @@ EN = {
  "earnedOn": "Earned {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Shop", "shopCardPacks": "Card packs", "shopBackgrounds": "Backgrounds", "shopTables": "Tables", "shopHints": "Hints",
+ "watchAdCoins": "Watch ad: +{coins} coins",
  "buy": "Buy", "owned": "Owned", "equip": "Equip", "equipped": "Equipped",
  "purchaseTitle": "Buy {item}?",
  "purchaseBody": "This costs {price} coins. Balance after purchase: {after}.",

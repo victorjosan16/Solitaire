@@ -89,6 +89,7 @@ UK = {
  "earnedOn": "Отримано {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Крамниця", "shopCardPacks": "Колоди", "shopBackgrounds": "Фони", "shopTables": "Столи", "shopHints": "Підказки",
+ "watchAdCoins": "Реклама: +{coins} монет",
  "buy": "Купити", "owned": "Придбано", "equip": "Обрати", "equipped": "Обрано",
  "purchaseTitle": "Купити «{item}»?",
  "purchaseBody": "Ціна: {price} монет. Баланс після покупки: {after}.",

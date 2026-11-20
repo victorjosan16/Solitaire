@@ -547,6 +547,11 @@ class AppLocalizationsKo extends AppLocalizations {
   String get shopHints => '힌트';
 
   @override
+  String watchAdCoins(int coins) {
+    return '광고 보기: +$coins 코인';
+  }
+
+  @override
   String get buy => '구매';
 
   @override

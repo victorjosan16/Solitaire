@@ -89,6 +89,7 @@ VI = {
  "earnedOn": "Đạt được ngày {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Cửa hàng", "shopCardPacks": "Bộ bài", "shopBackgrounds": "Hình nền", "shopTables": "Mặt bàn", "shopHints": "Gợi ý",
+ "watchAdCoins": "Xem quảng cáo: +{coins} xu",
  "buy": "Mua", "owned": "Đã sở hữu", "equip": "Dùng", "equipped": "Đang dùng",
  "purchaseTitle": "Mua {item}?",
  "purchaseBody": "Giá {price} xu. Số dư sau khi mua: {after}.",

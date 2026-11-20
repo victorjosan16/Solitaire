@@ -555,6 +555,11 @@ class AppLocalizationsId extends AppLocalizations {
   String get shopHints => 'Petunjuk';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Tonton iklan: +$coins koin';
+  }
+
+  @override
   String get buy => 'Beli';
 
   @override

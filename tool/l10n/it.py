@@ -89,6 +89,7 @@ IT = {
  "earnedOn": "Ottenuto il {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Negozio", "shopCardPacks": "Mazzi", "shopBackgrounds": "Sfondi", "shopTables": "Tavoli", "shopHints": "Suggerimenti",
+ "watchAdCoins": "Guarda un annuncio: +{coins} monete",
  "buy": "Compra", "owned": "Posseduto", "equip": "Usa", "equipped": "In uso",
  "purchaseTitle": "Comprare {item}?",
  "purchaseBody": "Costa {price} monete. Saldo dopo l'acquisto: {after}.",

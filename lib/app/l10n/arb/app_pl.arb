@@ -159,6 +159,7 @@
   "shopBackgrounds": "Tła",
   "shopTables": "Stoły",
   "shopHints": "Podpowiedzi",
+  "watchAdCoins": "Obejrzyj reklamę: +{coins} monet",
   "buy": "Kup",
   "owned": "Posiadane",
   "equip": "Użyj",

@@ -159,6 +159,7 @@
   "shopBackgrounds": "Fundos",
   "shopTables": "Mesas",
   "shopHints": "Dicas",
+  "watchAdCoins": "Ver anúncio: +{coins} moedas",
   "buy": "Comprar",
   "owned": "Adquirido",
   "equip": "Usar",

@@ -557,6 +557,11 @@ class AppLocalizationsRo extends AppLocalizations {
   String get shopHints => 'Indicii';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Vezi o reclamă: +$coins monede';
+  }
+
+  @override
   String get buy => 'Cumpără';
 
   @override

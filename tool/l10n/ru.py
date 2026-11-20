@@ -89,6 +89,7 @@ RU = {
  "earnedOn": "Получено {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Магазин", "shopCardPacks": "Колоды", "shopBackgrounds": "Фоны", "shopTables": "Столы", "shopHints": "Подсказки",
+ "watchAdCoins": "Реклама: +{coins} монет",
  "buy": "Купить", "owned": "Куплено", "equip": "Выбрать", "equipped": "Выбрано",
  "purchaseTitle": "Купить «{item}»?",
  "purchaseBody": "Цена: {price} монет. Баланс после покупки: {after}.",

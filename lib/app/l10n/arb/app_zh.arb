@@ -159,6 +159,7 @@
   "shopBackgrounds": "背景",
   "shopTables": "牌桌",
   "shopHints": "提示",
+  "watchAdCoins": "看广告：+{coins} 金币",
   "buy": "购买",
   "owned": "已拥有",
   "equip": "使用",

@@ -89,6 +89,7 @@ PL = {
  "earnedOn": "Zdobyto {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Sklep", "shopCardPacks": "Talie", "shopBackgrounds": "Tła", "shopTables": "Stoły", "shopHints": "Podpowiedzi",
+ "watchAdCoins": "Obejrzyj reklamę: +{coins} monet",
  "buy": "Kup", "owned": "Posiadane", "equip": "Użyj", "equipped": "W użyciu",
  "purchaseTitle": "Kupić „{item}”?",
  "purchaseBody": "Koszt: {price} monet. Saldo po zakupie: {after}.",

@@ -89,6 +89,7 @@ JA = {
  "earnedOn": "{date} に獲得",
  "rewardCoins": "+{coins}",
  "shopTitle": "ショップ", "shopCardPacks": "カードセット", "shopBackgrounds": "背景", "shopTables": "テーブル", "shopHints": "ヒント",
+ "watchAdCoins": "広告を見る：+{coins} コイン",
  "buy": "購入", "owned": "所持済み", "equip": "使用する", "equipped": "使用中",
  "purchaseTitle": "{item}を購入しますか？",
  "purchaseBody": "価格は {price} コインです。購入後の残高：{after}",

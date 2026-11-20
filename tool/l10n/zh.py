@@ -89,6 +89,7 @@ ZH = {
  "earnedOn": "{date} 获得",
  "rewardCoins": "+{coins}",
  "shopTitle": "商店", "shopCardPacks": "卡牌套装", "shopBackgrounds": "背景", "shopTables": "牌桌", "shopHints": "提示",
+ "watchAdCoins": "看广告：+{coins} 金币",
  "buy": "购买", "owned": "已拥有", "equip": "使用", "equipped": "使用中",
  "purchaseTitle": "购买「{item}」？",
  "purchaseBody": "价格为 {price} 金币。购买后余额：{after}。",

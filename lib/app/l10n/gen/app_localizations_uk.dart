@@ -567,6 +567,11 @@ class AppLocalizationsUk extends AppLocalizations {
   String get shopHints => 'Підказки';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Реклама: +$coins монет';
+  }
+
+  @override
   String get buy => 'Купити';
 
   @override

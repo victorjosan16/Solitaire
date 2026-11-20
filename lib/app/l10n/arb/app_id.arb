@@ -159,6 +159,7 @@
   "shopBackgrounds": "Latar",
   "shopTables": "Meja",
   "shopHints": "Petunjuk",
+  "watchAdCoins": "Tonton iklan: +{coins} koin",
   "buy": "Beli",
   "owned": "Dimiliki",
   "equip": "Pakai",

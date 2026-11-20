@@ -89,6 +89,7 @@ PT = {
  "earnedOn": "Obtida em {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Loja", "shopCardPacks": "Baralhos", "shopBackgrounds": "Fundos", "shopTables": "Mesas", "shopHints": "Dicas",
+ "watchAdCoins": "Ver anúncio: +{coins} moedas",
  "buy": "Comprar", "owned": "Adquirido", "equip": "Usar", "equipped": "Em uso",
  "purchaseTitle": "Comprar {item}?",
  "purchaseBody": "Custa {price} moedas. Saldo após a compra: {after}.",

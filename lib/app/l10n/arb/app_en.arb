@@ -341,6 +341,14 @@
   "shopBackgrounds": "Backgrounds",
   "shopTables": "Tables",
   "shopHints": "Hints",
+  "watchAdCoins": "Watch ad: +{coins} coins",
+  "@watchAdCoins": {
+    "placeholders": {
+      "coins": {
+        "type": "int"
+      }
+    }
+  },
   "buy": "Buy",
   "owned": "Owned",
   "equip": "Equip",

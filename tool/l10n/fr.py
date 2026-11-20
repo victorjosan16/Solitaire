@@ -89,6 +89,7 @@ FR = {
  "earnedOn": "Obtenu le {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Boutique", "shopCardPacks": "Jeux de cartes", "shopBackgrounds": "Fonds", "shopTables": "Tables", "shopHints": "Indices",
+ "watchAdCoins": "Regarder une pub : +{coins} pièces",
  "buy": "Acheter", "owned": "Possédé", "equip": "Utiliser", "equipped": "Utilisé",
  "purchaseTitle": "Acheter {item} ?",
  "purchaseBody": "Coût : {price} pièces. Solde après l'achat : {after}.",

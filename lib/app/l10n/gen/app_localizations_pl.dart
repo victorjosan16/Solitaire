@@ -566,6 +566,11 @@ class AppLocalizationsPl extends AppLocalizations {
   String get shopHints => 'Podpowiedzi';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Obejrzyj reklamę: +$coins monet';
+  }
+
+  @override
   String get buy => 'Kup';
 
   @override

@@ -551,6 +551,11 @@ class AppLocalizationsVi extends AppLocalizations {
   String get shopHints => 'Gợi ý';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Xem quảng cáo: +$coins xu';
+  }
+
+  @override
   String get buy => 'Mua';
 
   @override

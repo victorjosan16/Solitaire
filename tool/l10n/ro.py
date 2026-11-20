@@ -89,6 +89,7 @@ RO = {
  "earnedOn": "Obținută pe {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Magazin", "shopCardPacks": "Pachete de cărți", "shopBackgrounds": "Fundaluri", "shopTables": "Mese", "shopHints": "Indicii",
+ "watchAdCoins": "Vezi o reclamă: +{coins} monede",
  "buy": "Cumpără", "owned": "Deținut", "equip": "Folosește", "equipped": "În uz",
  "purchaseTitle": "Cumperi {item}?",
  "purchaseBody": "Costă {price} monede. Sold după cumpărare: {after}.",

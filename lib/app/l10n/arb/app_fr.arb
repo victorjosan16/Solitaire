@@ -159,6 +159,7 @@
   "shopBackgrounds": "Fonds",
   "shopTables": "Tables",
   "shopHints": "Indices",
+  "watchAdCoins": "Regarder une pub : +{coins} pièces",
   "buy": "Acheter",
   "owned": "Possédé",
   "equip": "Utiliser",

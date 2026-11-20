@@ -104,6 +104,21 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
                 onChanged: (i) => setState(() => _tab = i),
               ),
             ),
+            if (ref.read(adServiceProvider).rewardedAvailable)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(
+                  NovaSpace.lg,
+                  NovaSpace.md,
+                  NovaSpace.lg,
+                  0,
+                ),
+                child: PanelButton(
+                  label: l.watchAdCoins(ProfileData.rewardedAdCoins),
+                  icon: Icons.ondemand_video_rounded,
+                  height: 46,
+                  onPressed: _busy ? null : _watchAdForCoins,
+                ),
+              ),
             Expanded(
               child: _tab == 3
                   ? _hintsTab(profile)
@@ -129,6 +144,28 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _watchAdForCoins() async {
+    final l = context.l10n;
+    setState(() => _busy = true);
+    final r = await ref.read(profileProvider.notifier).watchAdForCoins();
+    if (!mounted) return;
+    setState(() => _busy = false);
+    switch (r) {
+      case RewardEarned():
+        showNovaSnack(
+          context,
+          l.coinsEarned(ProfileData.rewardedAdCoins),
+          icon: Icons.savings_rounded,
+        );
+      case RewardSkipped():
+        showNovaSnack(context, l.adNotCompleted);
+      case RewardUnavailable(:final reason):
+        reason == AdUnavailableReason.offline
+            ? await showOfflineDialog(context)
+            : await showAdUnavailableDialog(context);
+    }
   }
 
   Widget _grid(ProfileData profile, CosmeticKind kind) {

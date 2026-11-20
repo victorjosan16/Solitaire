@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/ads/ad_service.dart';
 import '../../../core/providers.dart';
+import '../../../core/services/audio_service.dart';
 import '../../../shared/models/profile.dart';
 import '../../customization/domain/cosmetics.dart';
 import '../data/profile_repository.dart';
@@ -54,6 +56,19 @@ class ProfileController extends Notifier<ProfileData> {
     if (identical(next, state)) return false;
     await _commit(next);
     return true;
+  }
+
+  /// Opt-in rewarded ad for [ProfileData.rewardedAdCoins] coins. Coins are
+  /// granted only on the SDK's earned-reward callback, once per event.
+  Future<RewardOutcome> watchAdForCoins() async {
+    final outcome = await ref
+        .read(adServiceProvider)
+        .showRewarded(RewardPlacement.coins);
+    if (outcome is RewardEarned) {
+      await _commit(state.grantAdCoins(outcome.rewardEventId));
+      ref.read(audioServiceProvider).play(Sfx.coins);
+    }
+    return outcome;
   }
 
   Future<void> consumeHint() => _commit(state.consumeHint());

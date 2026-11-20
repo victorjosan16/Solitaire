@@ -89,6 +89,7 @@ TR = {
  "earnedOn": "{date} tarihinde kazanıldı",
  "rewardCoins": "+{coins}",
  "shopTitle": "Mağaza", "shopCardPacks": "Kart setleri", "shopBackgrounds": "Arka planlar", "shopTables": "Masalar", "shopHints": "İpuçları",
+ "watchAdCoins": "Reklam izle: +{coins} jeton",
  "buy": "Satın al", "owned": "Sahipsin", "equip": "Kullan", "equipped": "Kullanımda",
  "purchaseTitle": "{item} satın alınsın mı?",
  "purchaseBody": "Fiyatı {price} jeton. Satın aldıktan sonraki bakiye: {after}.",

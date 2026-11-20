@@ -545,6 +545,11 @@ class AppLocalizationsZh extends AppLocalizations {
   String get shopHints => '提示';
 
   @override
+  String watchAdCoins(int coins) {
+    return '看广告：+$coins 金币';
+  }
+
+  @override
   String get buy => '购买';
 
   @override

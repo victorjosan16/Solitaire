@@ -89,6 +89,7 @@ DE = {
  "earnedOn": "Erhalten am {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Shop", "shopCardPacks": "Kartensets", "shopBackgrounds": "Hintergründe", "shopTables": "Tische", "shopHints": "Tipps",
+ "watchAdCoins": "Werbung ansehen: +{coins} Münzen",
  "buy": "Kaufen", "owned": "Im Besitz", "equip": "Verwenden", "equipped": "Aktiv",
  "purchaseTitle": "{item} kaufen?",
  "purchaseBody": "Kostet {price} Münzen. Guthaben danach: {after}.",

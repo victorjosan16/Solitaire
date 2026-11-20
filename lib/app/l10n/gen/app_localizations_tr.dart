@@ -553,6 +553,11 @@ class AppLocalizationsTr extends AppLocalizations {
   String get shopHints => 'İpuçları';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Reklam izle: +$coins jeton';
+  }
+
+  @override
   String get buy => 'Satın al';
 
   @override

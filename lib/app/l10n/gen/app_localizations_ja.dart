@@ -546,6 +546,11 @@ class AppLocalizationsJa extends AppLocalizations {
   String get shopHints => 'ヒント';
 
   @override
+  String watchAdCoins(int coins) {
+    return '広告を見る：+$coins コイン';
+  }
+
+  @override
   String get buy => '購入';
 
   @override

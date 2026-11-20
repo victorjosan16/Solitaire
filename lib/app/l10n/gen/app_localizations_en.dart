@@ -553,6 +553,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shopHints => 'Hints';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Watch ad: +$coins coins';
+  }
+
+  @override
   String get buy => 'Buy';
 
   @override

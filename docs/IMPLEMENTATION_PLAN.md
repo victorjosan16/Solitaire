@@ -66,7 +66,7 @@ Risks
 - [ ] Real-money IAP (intentionally out of scope: coins only; Restore purchases explains this)
 
 ## Milestone 7 — Release readiness ✅ / partial
-- [x] 204 automated tests (unit, widget, integration-style, golden)
+- [x] 212 automated tests (unit, widget, integration-style, golden)
 - [x] GitHub Actions: l10n sync, format, analyze, tests, goldens (non-blocking), Android debug APK
 - [x] README, ARCHITECTURE, GAME_RULES, TEST_PLAN + manual QA checklist
 - [x] Original launcher icon, navy native launch background (Android)

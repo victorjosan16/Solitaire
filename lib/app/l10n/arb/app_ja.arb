@@ -159,6 +159,7 @@
   "shopBackgrounds": "背景",
   "shopTables": "テーブル",
   "shopHints": "ヒント",
+  "watchAdCoins": "広告を見る：+{coins} コイン",
   "buy": "購入",
   "owned": "所持済み",
   "equip": "使用する",

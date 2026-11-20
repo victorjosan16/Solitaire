@@ -89,6 +89,7 @@ ID = {
  "earnedOn": "Diperoleh {date}",
  "rewardCoins": "+{coins}",
  "shopTitle": "Toko", "shopCardPacks": "Set kartu", "shopBackgrounds": "Latar", "shopTables": "Meja", "shopHints": "Petunjuk",
+ "watchAdCoins": "Tonton iklan: +{coins} koin",
  "buy": "Beli", "owned": "Dimiliki", "equip": "Pakai", "equipped": "Dipakai",
  "purchaseTitle": "Beli {item}?",
  "purchaseBody": "Harganya {price} koin. Saldo setelah pembelian: {after}.",

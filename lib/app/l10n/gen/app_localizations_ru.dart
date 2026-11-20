@@ -568,6 +568,11 @@ class AppLocalizationsRu extends AppLocalizations {
   String get shopHints => 'Подсказки';
 
   @override
+  String watchAdCoins(int coins) {
+    return 'Реклама: +$coins монет';
+  }
+
+  @override
   String get buy => 'Купить';
 
   @override

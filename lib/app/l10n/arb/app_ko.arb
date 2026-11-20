@@ -159,6 +159,7 @@
   "shopBackgrounds": "배경",
   "shopTables": "테이블",
   "shopHints": "힌트",
+  "watchAdCoins": "광고 보기: +{coins} 코인",
   "buy": "구매",
   "owned": "보유 중",
   "equip": "사용",

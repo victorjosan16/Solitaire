@@ -96,6 +96,7 @@ recycles and undo reset them. Cosmetic only.
 | Daily challenge (on its date) | 150 |
 | Achievements | 50 – 1 000 each |
 | Rewarded ad on victory (opt-in) | doubles that win's coins, once |
+| Rewarded ad in the Shop (opt-in, no daily cap) | +25 per completed ad |
 
 Speed bonus rules: games are designed to last up to 10 minutes of active play (pauses and
 background time are not counted). The bonus is paid only on the **first attempt** of a deal (not
