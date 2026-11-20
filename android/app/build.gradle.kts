@@ -1,11 +1,31 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Release signing (upload key). Never committed:
+//   * locally: android/key.properties (gitignored), see docs/RELEASE.md
+//   * CI: environment variables ANDROID_KEYSTORE_PATH, ANDROID_KEYSTORE_PASSWORD,
+//         ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD (from GitHub secrets)
+val keystoreProperties = Properties().apply {
+    val f = rootProject.file("key.properties")
+    if (f.exists()) load(FileInputStream(f))
+}
+fun signingValue(prop: String, env: String): String? =
+    (keystoreProperties.getProperty(prop) ?: System.getenv(env))?.takeIf { it.isNotBlank() }
+
+val releaseStoreFile = signingValue("storeFile", "ANDROID_KEYSTORE_PATH")
+val hasReleaseSigning = releaseStoreFile != null &&
+    signingValue("storePassword", "ANDROID_KEYSTORE_PASSWORD") != null &&
+    signingValue("keyAlias", "ANDROID_KEY_ALIAS") != null &&
+    signingValue("keyPassword", "ANDROID_KEY_PASSWORD") != null
+
 android {
-    namespace = "com.solitairenova.solitaire_nova"
+    namespace = "com.solitairenova.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -15,32 +35,42 @@ android {
     }
 
     defaultConfig {
-        // PROVISIONAL application id: replace before the first store upload.
-        applicationId = "com.solitairenova.solitaire_nova"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        // Final Google Play package name (cannot change after first upload).
+        applicationId = "com.solitairenova.app"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
-        // Uses the version code from pubspec.yaml. When using split APKs, 1000 * ABI_VERSION
-        // is added automatically by Flutter. (https://developer.android.com/studio/build/configure-apk-splits#configure-APK-versions)
-        // You can force using the value of versionCode by specifying the `-P force-version-code-ignoring-abi=true`
-        // flag during build.
+        // versionCode/versionName come from pubspec.yaml or
+        // `flutter build --build-number/--build-name` (CI uses the run number).
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         // Google's documented SAMPLE AdMob app id unless a real one is passed:
-        //   ./gradlew -PADMOB_APP_ID_ANDROID=ca-app-pub-xxx~yyy  (or gradle.properties, not committed)
+        //   -PADMOB_APP_ID_ANDROID=ca-app-pub-xxx~yyy  (CI passes it from repo variables)
         manifestPlaceholders["admobAppId"] =
             (project.findProperty("ADMOB_APP_ID_ANDROID") as String?)
                 ?: "ca-app-pub-3940256099942544~3347511713"
     }
 
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                storeFile = file(releaseStoreFile!!)
+                storePassword = signingValue("storePassword", "ANDROID_KEYSTORE_PASSWORD")
+                keyAlias = signingValue("keyAlias", "ANDROID_KEY_ALIAS")
+                keyPassword = signingValue("keyPassword", "ANDROID_KEY_PASSWORD")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // Release signing: provide android/key.properties (gitignored) and
-            // wire a signingConfig here before publishing. Until then release
-            // builds are signed with the debug key so `flutter run --release`
-            // works locally; such builds must never be uploaded to a store.
-            signingConfig = signingConfigs.getByName("debug")
+            // With an upload key configured the build is store-ready; without
+            // one it falls back to the debug key so local `flutter run
+            // --release` still works (such builds are rejected by Play).
+            signingConfig = if (hasReleaseSigning) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }

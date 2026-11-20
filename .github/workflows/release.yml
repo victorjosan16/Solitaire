@@ -1,0 +1,118 @@
+name: Release (Google Play)
+
+# Builds a signed Android App Bundle with PRODUCTION ad ids and uploads it to
+# Google Play. Run it from GitHub → Actions → "Release (Google Play)" → Run.
+# Setup (secrets & variables) is described in docs/RELEASE.md.
+on:
+  workflow_dispatch:
+    inputs:
+      track:
+        description: 'Play track'
+        type: choice
+        options: [internal, alpha, beta, production]
+        default: internal
+      status:
+        description: 'Release status (use draft while the app has never been published)'
+        type: choice
+        options: [draft, completed]
+        default: draft
+
+permissions:
+  contents: write
+
+env:
+  FLUTTER_VERSION: '3.50.1'
+  PACKAGE_NAME: com.solitairenova.app
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          cache: true
+      - run: flutter pub get
+      - name: Tests must pass before a release
+        run: flutter test --exclude-tags golden
+
+      - name: Check configuration
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ADMOB_APP: ${{ vars.ADMOB_APP_ID_ANDROID }}
+          ADMOB_REWARDED: ${{ vars.ADMOB_REWARDED_ANDROID }}
+          ADMOB_INTERSTITIAL: ${{ vars.ADMOB_INTERSTITIAL_ANDROID }}
+          ADMOB_BANNER: ${{ vars.ADMOB_BANNER_ANDROID }}
+          PRIVACY: ${{ vars.PRIVACY_POLICY_URL }}
+        run: |
+          missing=0
+          [ -z "$KEYSTORE" ] && { echo "::error::Secret ANDROID_KEYSTORE_BASE64 is missing (upload key)."; missing=1; }
+          [ -z "$PRIVACY" ] && { echo "::error::Variable PRIVACY_POLICY_URL is missing (required by Google Play for apps with ads)."; missing=1; }
+          if [ -z "$ADMOB_APP" ] || [ -z "$ADMOB_REWARDED" ] || [ -z "$ADMOB_INTERSTITIAL" ] || [ -z "$ADMOB_BANNER" ]; then
+            echo "::error::AdMob variables missing: ADMOB_APP_ID_ANDROID, ADMOB_REWARDED_ANDROID, ADMOB_INTERSTITIAL_ANDROID, ADMOB_BANNER_ANDROID. A release without them would ship with ads disabled."
+            missing=1
+          fi
+          exit $missing
+
+      - name: Restore upload keystore
+        env:
+          KEYSTORE: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+        run: echo "$KEYSTORE" | base64 --decode > "$RUNNER_TEMP/upload.jks"
+
+      - name: Build signed App Bundle
+        env:
+          ANDROID_KEYSTORE_PATH: ${{ runner.temp }}/upload.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          # Gradle project property used for the AdMob APPLICATION_ID meta-data.
+          ORG_GRADLE_PROJECT_ADMOB_APP_ID_ANDROID: ${{ vars.ADMOB_APP_ID_ANDROID }}
+        run: |
+          VERSION_NAME=$(grep '^version:' pubspec.yaml | sed 's/version: *//; s/+.*//')
+          flutter build appbundle --release \
+            --build-name="$VERSION_NAME" \
+            --build-number="${{ github.run_number }}" \
+            --obfuscate --split-debug-info=build/symbols \
+            --dart-define=ADMOB_REWARDED_ANDROID=${{ vars.ADMOB_REWARDED_ANDROID }} \
+            --dart-define=ADMOB_INTERSTITIAL_ANDROID=${{ vars.ADMOB_INTERSTITIAL_ANDROID }} \
+            --dart-define=ADMOB_BANNER_ANDROID=${{ vars.ADMOB_BANNER_ANDROID }} \
+            --dart-define=PRIVACY_POLICY_URL=${{ vars.PRIVACY_POLICY_URL }} \
+            --dart-define=APP_VERSION="$VERSION_NAME"
+          echo "VERSION_NAME=$VERSION_NAME" >> "$GITHUB_ENV"
+          cp build/app/outputs/bundle/release/app-release.aab "solitaire-nova-$VERSION_NAME-${{ github.run_number }}.aab"
+          rm -f "$RUNNER_TEMP/upload.jks"
+
+      - name: Keep the bundle (draft GitHub release, not public)
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION_NAME }}-${{ github.run_number }}
+          target_commitish: ${{ github.sha }}
+          name: Solitaire Nova ${{ env.VERSION_NAME }} (${{ github.run_number }})
+          draft: true
+          files: solitaire-nova-${{ env.VERSION_NAME }}-${{ github.run_number }}.aab
+
+      - name: Upload to Google Play
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        if: env.PLAY_JSON != ''
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+          packageName: ${{ env.PACKAGE_NAME }}
+          releaseFiles: solitaire-nova-${{ env.VERSION_NAME }}-${{ github.run_number }}.aab
+          track: ${{ inputs.track }}
+          status: ${{ inputs.status }}
+          whatsNewDirectory: distribution/whatsnew
+
+      - name: No Play credentials yet
+        env:
+          PLAY_JSON: ${{ secrets.PLAY_SERVICE_ACCOUNT_JSON }}
+        if: env.PLAY_JSON == ''
+        run: echo "::notice::PLAY_SERVICE_ACCOUNT_JSON not set. Download the .aab from the draft release and upload it manually in Play Console (required for the very first upload anyway)."

@@ -69,6 +69,8 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter build apk --debug
+      - name: Release build compiles (R8 / shrinking), debug-signed
+        run: flutter build appbundle --release
       - name: Rename APK
         run: cp build/app/outputs/flutter-apk/app-debug.apk solitaire-nova-debug-${{ github.run_number }}.apk
       - name: Upload artifact

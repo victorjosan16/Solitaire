@@ -120,7 +120,8 @@ bundled Cinzel/Cormorant fonts cover Latin and Cyrillic. Traditional-Chinese dev
 Simplified Chinese. Arabic/RTL and Hindi/Thai are not included yet.
 
 ## Release checklist
-- [ ] Choose final application id / bundle id (currently provisional `com.solitairenova.solitaire_nova`).
+- [x] Final application id / bundle id: `com.solitairenova.app`.
+- [ ] Follow **[docs/RELEASE.md](docs/RELEASE.md)** (AdMob ids, upload key, GitHub secrets, Play Console, privacy policy).
 - [ ] Release signing (`android/key.properties`, iOS provisioning) — never commit keys.
 - [ ] Production AdMob app + unit ids via build config; verify test ads in debug.
 - [ ] Privacy policy URL (`--dart-define=PRIVACY_POLICY_URL=…`), store data-safety forms.
@@ -135,6 +136,8 @@ Simplified Chinese. Arabic/RTL and Hindi/Thai are not included yet.
 - [Architecture](docs/ARCHITECTURE.md)
 - [Game rules, scoring, economy](docs/GAME_RULES.md)
 - [Test plan & manual QA](docs/TEST_PLAN.md)
+- [Google Play release & AdMob setup (RO)](docs/RELEASE.md)
+- Privacy policy page: `docs/privacy/index.html` (GitHub Pages)
 
 ## Asset licensing
 - Fonts: Cinzel, Cormorant Garamond — SIL OFL 1.1 (`assets/fonts/OFL.txt`); Roboto/Material

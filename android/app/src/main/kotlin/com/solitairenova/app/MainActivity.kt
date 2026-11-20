@@ -1,4 +1,4 @@
-package com.solitairenova.solitaire_nova
+package com.solitairenova.app
 
 import io.flutter.embedding.android.FlutterActivity
 
