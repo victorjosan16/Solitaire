@@ -39,7 +39,7 @@ class AppConfig {
 
   static const privacyPolicyUrl = String.fromEnvironment(
     'PRIVACY_POLICY_URL',
-    defaultValue: 'https://victorjosan16.github.io/Solitaire/privacy/',
+    defaultValue: 'https://victorjosan16.github.io/privacy/',
   );
 
   // ------------------------------------------- Google's public test units
