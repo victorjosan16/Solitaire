@@ -46,7 +46,7 @@ jobs:
       - name: Check configuration
         env:
           PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
-          PRIVACY_URL: https://victorjosan16.github.io/Solitaire/privacy/
+          PRIVACY_URL: https://victorjosan16.github.io/privacy/
         run: |
           [ -z "$PW" ] && { echo "::error::Secret ANDROID_KEYSTORE_PASSWORD is missing. See docs/RELEASE.md"; exit 1; }
           grep -q "4151706326405945" lib/core/config/app_config.dart || { echo "::error::Production AdMob ids missing in app_config.dart"; exit 1; }

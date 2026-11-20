@@ -47,12 +47,13 @@ Opțional, mai târziu: `PLAY_SERVICE_ACCOUNT_JSON` (Pasul 7, upload automat).
 `keytool -genkey -v -keystore solitaire-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload`
 și s-o pui în secretul `ANDROID_KEYSTORE_BASE64` (base64); atunci fluxul o folosește pe aceea.
 
-## Pasul 4 — Politica de confidențialitate (obligatorie pentru aplicații cu reclame)
-1. În `docs/privacy/index.html` înlocuiește `[CONTACT EMAIL]` cu adresa de contact pe care vrei s-o afișezi public.
-   Adresa paginii e deja setată în aplicație: `https://victorjosan16.github.io/Solitaire/privacy/`.
-2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → branch-ul principal → folder **/docs** → Save.
-   (GitHub Pages gratuit necesită repo public; altfel găzduiește pagina oriunde și pune URL-ul în variabilă.)
-3. Verifică: `https://victorjosan16.github.io/Solitaire/privacy/`.
+## Pasul 4 — Politica de confidențialitate ✅
+Găzduită gratuit în repo-ul public **victorjosan16/victorjosan16.github.io** (codul jocului rămâne privat):
+* <https://victorjosan16.github.io/privacy/> — politica de confidențialitate (contact: animatix95@gmail.com)
+* <https://victorjosan16.github.io/app-ads.txt> — vânzători autorizați AdMob
+* <https://victorjosan16.github.io/> — pagina aplicației (poate fi pusă ca „Site web” în Play Console)
+
+Sursa textului rămâne `docs/privacy/index.html` din acest repo; la modificări, copiaz-o și în repo-ul site-ului.
 
 ## Pasul 5 — Aplicația în Play Console
 1. **Create app**: nume *Solitaire Nova*, limba implicită English (United States) sau Română, **Game**, **Free**.
@@ -94,10 +95,9 @@ Conturile Play Console **personale** create după noiembrie 2023 trebuie să fac
    permisiuni pentru aplicație: *Release to testing tracks* (și *Release to production* dacă vrei).
 4. Pune conținutul JSON în secretul `PLAY_SERVICE_ACCOUNT_JSON`. De acum fluxul urcă singur versiunile.
 
-## Opțional — app-ads.txt
-AdMob recomandă fișierul `app-ads.txt` pe site-ul de dezvoltator declarat în Play Console
-(de ex. `https://victorjosan16.github.io/app-ads.txt` dintr-un repo `victorjosan16.github.io`), cu linia afișată în
-AdMob → Apps → app-ads.txt. Fără el reclamele merg, dar unii cumpărători de reclame plătesc mai puțin.
+## app-ads.txt ✅
+Publicat la <https://victorjosan16.github.io/app-ads.txt>. În Play Console, la **Store settings → Store listing contact
+details → Website**, pune `https://victorjosan16.github.io` — AdMob verifică fișierul de acolo (poate dura până la 24 h).
 
 ## iOS (mai târziu)
 Bundle id iOS este tot `com.solitairenova.app`. Pentru App Store e nevoie de Mac + Xcode, cont Apple Developer,
