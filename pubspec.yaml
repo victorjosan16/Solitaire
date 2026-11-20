@@ -1,5 +1,5 @@
 name: solitaire_nova
-description: "A new Flutter project."
+description: "Solitaire Nova — premium classic Klondike Solitaire."
 publish_to: 'none'
 version: 0.1.0+1
 
@@ -7,6 +7,8 @@ environment:
   sdk: ^3.14.0
 
 dependencies:
+  audioplayers: ^6.8.1
+  cupertino_ui: ^1.1.7
   flame: ^1.38.2
   flutter:
     sdk: flutter
@@ -27,3 +29,17 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true
+  assets:
+    - assets/audio/
+  fonts:
+    - family: Cinzel
+      fonts:
+        - asset: assets/fonts/Cinzel-Bold.ttf
+          weight: 700
+    - family: Cormorant
+      fonts:
+        - asset: assets/fonts/CormorantGaramond-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/CormorantGaramond-Bold.ttf
+          weight: 700
