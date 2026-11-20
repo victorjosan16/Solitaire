@@ -1,0 +1,75 @@
+name: Create upload key (run once)
+
+# Generates the Google Play UPLOAD key on GitHub's runner — no computer needed.
+# The key is encrypted (AES-256, PBKDF2) with the secret ANDROID_KEYSTORE_PASSWORD
+# and stored as an asset of a DRAFT release named "upload-key" (drafts are
+# visible only to people with write access). The plain key never appears in
+# logs and is deleted from the runner. Refuses to run if a key already exists.
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type CREATE to generate the upload key'
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  create:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirmation
+        if: inputs.confirm != 'CREATE'
+        run: |
+          echo "::error::Type CREATE in the confirm box to run this workflow."
+          exit 1
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Refuse to overwrite an existing key
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/releases?per_page=100" --jq '.[].tag_name' | grep -qx 'upload-key'; then
+            echo "::error::An upload key already exists (draft release 'upload-key'). Never create a second one."
+            exit 1
+          fi
+
+      - name: Check the password secret
+        env:
+          PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          if [ ${#PW} -lt 16 ]; then
+            echo "::error::Secret ANDROID_KEYSTORE_PASSWORD is missing or shorter than 16 characters."
+            exit 1
+          fi
+
+      - name: Generate and encrypt the key
+        env:
+          PW: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+        run: |
+          set -e
+          KS="$RUNNER_TEMP/upload.jks"
+          keytool -genkeypair -noprompt -keystore "$KS" -storetype PKCS12 \
+            -keyalg RSA -keysize 2048 -validity 10000 -alias upload \
+            -storepass:env PW -keypass:env PW \
+            -dname "CN=Solitaire Nova, O=Solitaire Nova, C=RO" >/dev/null 2>&1
+          openssl enc -aes-256-cbc -pbkdf2 -iter 600000 -salt \
+            -in "$KS" -out upload-key.jks.enc -pass env:PW
+          # Public certificate fingerprint (safe to show; useful for Play support).
+          keytool -list -v -keystore "$KS" -storepass:env PW -alias upload | grep -E 'SHA256:' || true
+          shred -u "$KS" 2>/dev/null || rm -f "$KS"
+
+      - name: Store the encrypted key in a draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create upload-key upload-key.jks.enc \
+            --repo "${{ github.repository }}" --draft \
+            --title "Upload key (encrypted) - DO NOT DELETE" \
+            --notes "Encrypted Google Play upload key for com.solitairenova.app. Decrypt only with the ANDROID_KEYSTORE_PASSWORD secret. Deleting this draft makes releases impossible until Google resets the upload key."
+          rm -f upload-key.jks.enc

@@ -13,44 +13,39 @@ Ce face codul deja:
 
 ---
 
-## Pasul 1 — AdMob ✅ (făcut)
+## Pasul 1 — AdMob ✅ (făcut, inclusiv mesajul GDPR)
 | | ID |
 |---|---|
 | App ID (Android) | `ca-app-pub-4151706326405945~7945466753` |
 | Banner | `ca-app-pub-4151706326405945/4002352310` |
 | Rewarded | `ca-app-pub-4151706326405945/8647128151` |
 
-De făcut în AdMob:
-* **Confidențialitate și mesaje → Reglementări europene (GDPR) → Creați un mesaj** → aplicația Solitaire Nova,
-  limbile engleză + română → **Publicați**. Fără el, utilizatorii din UE nu văd reclame.
+* Mesajul GDPR (Reglementări europene) este publicat ✅
 * După publicarea pe Google Play: App settings → **Link to app store**.
 * Nu da clic pe propriile reclame reale (poate duce la suspendarea contului).
 
-## Pasul 2 — Cheia de upload (o singură dată, pe calculatorul tău)
-Ai nevoie de Java (vine cu Android Studio). Rulează:
-```bash
-keytool -genkey -v -keystore solitaire-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
-```
-Alege o parolă puternică. **Fă copie de siguranță** a fișierului `.jks` și a parolei (manager de parole).
-Dacă le pierzi, Google îți poate reseta cheia de upload (cu Play App Signing), dar durează.
+## Pasul 2 — Cheia de upload (de pe telefon, fără calculator)
+Cheia o generează GitHub; tu creezi doar o parolă.
 
-Transformă cheia în text pentru GitHub:
-* macOS / Linux: `base64 -i solitaire-upload.jks | tr -d '\n' > upload.b64`
-* Windows (PowerShell): `[Convert]::ToBase64String([IO.File]::ReadAllBytes("solitaire-upload.jks")) > upload.b64`
+1. **Parola**: generează una lungă (minim 16 caractere; recomandat 24+), de exemplu cu managerul de
+   parole Google (în Chrome: câmp de parolă → „Sugerează o parolă puternică”) sau Bitwarden.
+   **Salveaz-o în managerul de parole.** Fără ea nu se mai pot publica actualizări.
+2. GitHub (în Chrome, mod „Site pentru desktop”) → repo → **Settings → Secrets and variables → Actions →
+   New repository secret** → Name: `ANDROID_KEYSTORE_PASSWORD`, Secret: parola → **Add secret**.
+3. **Actions → „Create upload key (run once)” → Run workflow** → în câmpul *confirm* scrie `CREATE` → Run.
+4. În ~1 minut apare în **Releases** un draft „Upload key (encrypted) – DO NOT DELETE”.
+   **Nu-l șterge.** Pentru o copie de siguranță: deschide draftul și descarcă `upload-key.jks.enc` în
+   Google Drive (e criptat; fără parolă nu poate fi folosit).
 
-## Pasul 3 — Secrete și variabile în GitHub
-Repo → **Settings → Secrets and variables → Actions**.
+Fluxul refuză să creeze o a doua cheie dacă există deja una.
 
-**Secrets** (ascunse):
-| Nume | Valoare |
-|---|---|
-| `ANDROID_KEYSTORE_BASE64` | conținutul fișierului `upload.b64` |
-| `ANDROID_KEYSTORE_PASSWORD` | parola keystore-ului |
-| `ANDROID_KEY_ALIAS` | `upload` |
-| `ANDROID_KEY_PASSWORD` | parola cheii (de obicei aceeași) |
-| `PLAY_SERVICE_ACCOUNT_JSON` | (opțional, Pasul 7) conținutul fișierului JSON |
+## Pasul 3 — Secrete în GitHub
+Singurul secret obligatoriu este `ANDROID_KEYSTORE_PASSWORD` (Pasul 2).
+Opțional, mai târziu: `PLAY_SERVICE_ACCOUNT_JSON` (Pasul 7, upload automat).
 
-Nu mai e nevoie de variabile AdMob: ID-urile sunt în cod.
+*Alternativă cu calculator:* poți genera cheia local cu
+`keytool -genkey -v -keystore solitaire-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload`
+și s-o pui în secretul `ANDROID_KEYSTORE_BASE64` (base64); atunci fluxul o folosește pe aceea.
 
 ## Pasul 4 — Politica de confidențialitate (obligatorie pentru aplicații cu reclame)
 1. În `docs/privacy/index.html` înlocuiește `[CONTACT EMAIL]` cu adresa de contact pe care vrei s-o afișezi public.
