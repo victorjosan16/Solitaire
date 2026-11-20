@@ -142,3 +142,12 @@ String formatClock(int ms) {
       s = t.inSeconds.remainder(60);
   return h > 0 ? '$h:${two(m)}:${two(s)}' : '${two(m)}:${two(s)}';
 }
+
+/// Locale-aware upper-casing: Dart's toUpperCase is locale-insensitive, which
+/// is wrong for Turkish dotted/dotless i (i→İ, ı→I).
+String upperFor(BuildContext context, String s) {
+  if (Localizations.localeOf(context).languageCode == 'tr') {
+    s = s.replaceAll('i', 'İ').replaceAll('ı', 'I');
+  }
+  return s.toUpperCase();
+}

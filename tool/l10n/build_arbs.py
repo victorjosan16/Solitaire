@@ -11,7 +11,8 @@ import importlib.util, json, os, re, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', '..', 'lib', 'app', 'l10n', 'arb')
-LANGS = ['en', 'ro', 'ru', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl']
+LANGS = ['en', 'ro', 'ru', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl',
+         'tr', 'id', 'vi', 'ja', 'ko', 'zh']
 
 def load(lang):
     spec = importlib.util.spec_from_file_location(lang, os.path.join(HERE, f'{lang}.py'))

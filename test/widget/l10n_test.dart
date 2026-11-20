@@ -15,7 +15,17 @@ void main() {
       AppLocalizations.supportedLocales.map((l) => l.languageCode).toSet(),
       supportedLanguageCodes.toSet(),
     );
-    expect(resolveLocale(null, const [Locale('ja')]), const Locale('en'));
+    expect(resolveLocale(null, const [Locale('sw')]), const Locale('en'));
+    expect(
+      resolveLocale(null, const [
+        Locale.fromSubtags(
+          languageCode: 'zh',
+          scriptCode: 'Hans',
+          countryCode: 'CN',
+        ),
+      ]),
+      const Locale('zh'),
+    );
     expect(resolveLocale(null, const [Locale('uk', 'UA')]), const Locale('uk'));
     expect(resolveLocale('pl', const [Locale('de')]), const Locale('pl'));
     expect(resolveLocale('xx', const [Locale('de')]), const Locale('de'));

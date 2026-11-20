@@ -1,7 +1,7 @@
 # Solitaire Nova
 
 Premium classic **Klondike Solitaire** for Android and iOS, built with Flutter + Flame.
-Midnight Emerald / Midnight Gold design, 10 languages, fully offline, no gambling.
+Midnight Emerald / Midnight Gold design, 16 languages, fully offline, no gambling.
 
 | | |
 |---|---|
@@ -11,7 +11,7 @@ Midnight Emerald / Midnight Gold design, 10 languages, fully offline, no gamblin
 | Persistence | atomic JSON document store (see [ARCHITECTURE](docs/ARCHITECTURE.md#persistence)) + shared_preferences |
 | Ads | google_mobile_ads 9.2 behind `AdService` (test ads in debug) |
 | Audio | audioplayers 6.8 (original synthesized assets) |
-| Localization | gen-l10n, ARB: en (default), ro, ru, uk, de, fr, es, it, pt, pl |
+| Localization | gen-l10n, 16 ARB catalogs: en (default), ro, ru, uk, de, fr, es, it, pt, pl, tr, id, vi, ja, ko, zh (Simplified) |
 
 Design references: `docs/design/reference_screens.png`, `docs/design/reference_ui_kit.png`.
 The implementation follows them closely but is not a pixel copy; all art (cards,
@@ -108,15 +108,19 @@ Source of truth: `tool/l10n/<lang>.py`. Regenerate ARB files (validates keys and
 ```bash
 python3 tool/l10n/build_arbs.py && flutter gen-l10n
 ```
-All 10 catalogs are complete and hand-written; **native-speaker review is still required
-before release** (see release checklist).
+All 16 catalogs are complete and hand-written; **native-speaker review is still required
+before release** (see release checklist). Japanese, Korean and Chinese glyphs come from the
+device's system fonts (Noto CJK on Android, PingFang/Hiragino/Apple SD Gothic on iOS); the
+bundled Cinzel/Cormorant fonts cover Latin and Cyrillic. Traditional-Chinese devices fall back to
+Simplified Chinese. Arabic/RTL and Hindi/Thai are not included yet.
 
 ## Release checklist
 - [ ] Choose final application id / bundle id (currently provisional `com.solitairenova.solitaire_nova`).
 - [ ] Release signing (`android/key.properties`, iOS provisioning) — never commit keys.
 - [ ] Production AdMob app + unit ids via build config; verify test ads in debug.
 - [ ] Privacy policy URL (`--dart-define=PRIVACY_POLICY_URL=…`), store data-safety forms.
-- [ ] Native-speaker review of all 9 non-English catalogs.
+- [ ] Native-speaker review of all 15 non-English catalogs.
+- [ ] Visual check of ja/ko/zh on real devices (CJK system fonts are not available in CI).
 - [ ] On-device performance pass (mid-range Android, older iPhone): 60 fps drag, no jank on deal.
 - [ ] Manual QA checklist in `docs/TEST_PLAN.md`.
 - [ ] iOS: add a navy LaunchScreen background; run on device.

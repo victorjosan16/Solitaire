@@ -53,7 +53,8 @@ Risks
 - [x] All dialogs listed in the brief (cloud conflict dialog is implemented; triggered once a sync adapter exists)
 
 ## Milestone 5 — Content ✅
-- [x] 10 hand-written locales with plurals; validated by `tool/l10n/build_arbs.py` and CI
+- [x] 16 hand-written locales (en default, ro, ru, uk, de, fr, es, it, pt, pl + tr, id, vi, ja, ko, zh) with plurals; validated by `tool/l10n/build_arbs.py` and CI
+- [ ] CJK visual check on device (no CJK fonts in the CI/dev container)
 - [x] Stats (Total / Draw 1 / Draw 3), 36 achievements, daily calendar, 18 cosmetics
 - [x] Semantics overlay for the board; large text tested
 - [ ] Native-speaker review
@@ -65,7 +66,7 @@ Risks
 - [ ] Real-money IAP (intentionally out of scope: coins only; Restore purchases explains this)
 
 ## Milestone 7 — Release readiness ✅ / partial
-- [x] 174 automated tests (unit, widget, integration-style, golden)
+- [x] 186 automated tests (unit, widget, integration-style, golden)
 - [x] GitHub Actions: l10n sync, format, analyze, tests, goldens (non-blocking), Android debug APK
 - [x] README, ARCHITECTURE, GAME_RULES, TEST_PLAN + manual QA checklist
 - [x] Original launcher icon, navy native launch background (Android)

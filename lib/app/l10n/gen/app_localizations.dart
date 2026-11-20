@@ -9,12 +9,18 @@ import 'app_localizations_de.dart';
 import 'app_localizations_en.dart';
 import 'app_localizations_es.dart';
 import 'app_localizations_fr.dart';
+import 'app_localizations_id.dart';
 import 'app_localizations_it.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_ko.dart';
 import 'app_localizations_pl.dart';
 import 'app_localizations_pt.dart';
 import 'app_localizations_ro.dart';
 import 'app_localizations_ru.dart';
+import 'app_localizations_tr.dart';
 import 'app_localizations_uk.dart';
+import 'app_localizations_vi.dart';
+import 'app_localizations_zh.dart';
 
 // ignore_for_file: type=lint
 
@@ -106,12 +112,18 @@ abstract class AppLocalizations {
     Locale('en'),
     Locale('es'),
     Locale('fr'),
+    Locale('id'),
     Locale('it'),
+    Locale('ja'),
+    Locale('ko'),
     Locale('pl'),
     Locale('pt'),
     Locale('ro'),
     Locale('ru'),
+    Locale('tr'),
     Locale('uk'),
+    Locale('vi'),
+    Locale('zh'),
   ];
 
   /// No description provided for @appTitle.
@@ -1816,12 +1828,18 @@ class _AppLocalizationsDelegate
     'en',
     'es',
     'fr',
+    'id',
     'it',
+    'ja',
+    'ko',
     'pl',
     'pt',
     'ro',
     'ru',
+    'tr',
     'uk',
+    'vi',
+    'zh',
   ].contains(locale.languageCode);
 
   @override
@@ -1839,8 +1857,14 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsEs();
     case 'fr':
       return AppLocalizationsFr();
+    case 'id':
+      return AppLocalizationsId();
     case 'it':
       return AppLocalizationsIt();
+    case 'ja':
+      return AppLocalizationsJa();
+    case 'ko':
+      return AppLocalizationsKo();
     case 'pl':
       return AppLocalizationsPl();
     case 'pt':
@@ -1849,8 +1873,14 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
       return AppLocalizationsRo();
     case 'ru':
       return AppLocalizationsRu();
+    case 'tr':
+      return AppLocalizationsTr();
     case 'uk':
       return AppLocalizationsUk();
+    case 'vi':
+      return AppLocalizationsVi();
+    case 'zh':
+      return AppLocalizationsZh();
   }
 
   throw FlutterError(

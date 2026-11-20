@@ -1,6 +1,6 @@
 # Test plan
 
-Automated suite: **174 tests** (2026-11-20, Flutter 3.50.1, Linux), all passing.
+Automated suite: **186 tests** (2026-11-20, Flutter 3.50.1, Linux), all passing.
 
 | Folder | Tests | What it covers |
 |---|---|---|
@@ -8,7 +8,7 @@ Automated suite: **174 tests** (2026-11-20, Flutter 3.50.1, Linux), all passing.
 | `test/unit/persistence` | 10 | missing doc, serialized writes, corrupt primary → backup, both corrupt, **interrupted write** (stray tmp), migrations chain, newer-schema refusal, **kill/restart** snapshot restore incl. undo log, structural validation (duplicate card), corrupted game file |
 | `test/unit/profile` | 14 | 30+ unique achievements, **coin idempotency**, same game recorded once, stats/streaks/best/fastest per draw mode, achievements unlock once, **daily reward once & only today**, purchases (insufficient, owned, never negative), hint packs & rewarded hints idempotent, double coins once, levels, JSON round trip with hostile values, daily seeds/window/streaks |
 | `test/unit/application` | 28 | controller: winning/daily deal selection, rule settings applied, draw/undo/illegal drop, persistence + restart, restart same deal, **timer pause / no double count / restore**, win recorded once across **process death**, abandon = one loss, hints & tokens, auto finish, auto-finish cancel consistency, **rewarded ad mock** (skipped/no-fill/earned/duplicate), interstitial policy; layout on 6 screen sizes (worst-case column fits), left-hand mirror, draw-3 fan; clock jumps; cloud conflict policy |
-| `test/widget` | 30 | splash → home offline; navigation to all screens and back; first-run consent once; game start, pause dialog, restart confirmation; new-game confirmation; shop insufficient-coins + purchase; delete-data confirmation; stats empty state; **all 10 locales × text scale 1.0 and 1.3 on a 320 dp phone** over 7 screens (overflow = failure); localized names/plurals for every achievement & cosmetic |
+| `test/widget` | 42 | splash → home offline; navigation to all screens and back; first-run consent once; game start, pause dialog, restart confirmation; new-game confirmation; shop insufficient-coins + purchase; delete-data confirmation; stats empty state; **all 16 locales × text scale 1.0 and 1.3 on a 320 dp phone** over 7 screens (overflow = failure); localized names/plurals for every achievement & cosmetic |
 | `test/integration` | 2 | end-to-end: Home → Classic Game → **tap the stock through the Flame board** → background save → app restart on same storage → Continue resumes exact board → win a verified deal → rewarded "double coins" claimed once → Main menu; daily challenge offline, reward once |
 | `test/golden` | 31 | screenshots of all 10 screens at 390×844, 320×640 and 1180×820 (tablet landscape) + Russian/Ukrainian screens (`tags: golden`) |
 
@@ -40,7 +40,7 @@ Run: `flutter test --exclude-tags golden` (blocking) and `flutter test --tags go
 - [ ] All six table styles and card packs readable; High Contrast table.
 - [ ] Reduced motion (app setting and OS setting): no deal/flip animation, no confetti.
 ### Localization
-- [ ] Switch through all 10 languages; Cyrillic headings; long German/Polish labels; plurals (1, 2, 5, 21).
+- [ ] Switch through all 16 languages; CJK on device; Cyrillic headings; long German/Polish labels; plurals (1, 2, 5, 21).
 - [ ] Device locale unsupported (e.g. Japanese) → English.
 ### Offline & lifecycle
 - [ ] Airplane mode from first install: splash → home → play → daily challenge, no waits/errors.

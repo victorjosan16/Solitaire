@@ -81,16 +81,8 @@ class AppSettings {
 
 /// Supported UI languages, English first (default / fallback).
 const supportedLanguageCodes = [
-  'en',
-  'ro',
-  'ru',
-  'uk',
-  'de',
-  'fr',
-  'es',
-  'it',
-  'pt',
-  'pl',
+  'en', 'ro', 'ru', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl', //
+  'tr', 'id', 'vi', 'ja', 'ko', 'zh',
 ];
 
 /// Endonyms shown in the language picker (not translated on purpose).
@@ -105,4 +97,10 @@ const languageEndonyms = {
   'it': 'Italiano',
   'pt': 'Português',
   'pl': 'Polski',
+  'tr': 'Türkçe',
+  'id': 'Bahasa Indonesia',
+  'vi': 'Tiếng Việt',
+  'ja': '日本語',
+  'ko': '한국어',
+  'zh': '简体中文',
 };

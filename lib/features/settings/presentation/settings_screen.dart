@@ -40,7 +40,7 @@ class SettingsScreen extends ConsumerWidget {
             child: Semantics(
               header: true,
               child: Text(
-                title.toUpperCase(),
+                upperFor(context, title),
                 style: const TextStyle(
                   letterSpacing: 1.2,
                   fontSize: 13,
