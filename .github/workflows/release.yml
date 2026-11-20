@@ -93,6 +93,14 @@ jobs:
             --dart-define=APP_VERSION="$VERSION_NAME"
           echo "VERSION_NAME=$VERSION_NAME" >> "$GITHUB_ENV"
           cp build/app/outputs/bundle/release/app-release.aab "solitaire-nova-$VERSION_NAME-${{ github.run_number }}.aab"
+          # Installable APK, same signing and PRODUCTION ads as the bundle
+          # (64-bit phones). For sideloading before the Play listing is live.
+          flutter build apk --release --split-per-abi \
+            --build-name="$VERSION_NAME" \
+            --build-number="${{ github.run_number }}" \
+            --obfuscate --split-debug-info=build/symbols-apk \
+            --dart-define=APP_VERSION="$VERSION_NAME"
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk "solitaire-nova-$VERSION_NAME-${{ github.run_number }}.apk"
           rm -f "$RUNNER_TEMP/upload.jks"
 
       - name: Keep the bundle (draft GitHub release, not public)
@@ -102,7 +110,9 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: Solitaire Nova ${{ env.VERSION_NAME }} (${{ github.run_number }})
           draft: true
-          files: solitaire-nova-${{ env.VERSION_NAME }}-${{ github.run_number }}.aab
+          files: |
+            solitaire-nova-${{ env.VERSION_NAME }}-${{ github.run_number }}.aab
+            solitaire-nova-${{ env.VERSION_NAME }}-${{ github.run_number }}.apk
 
       - name: Upload to Google Play
         env:
