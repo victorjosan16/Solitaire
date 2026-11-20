@@ -29,8 +29,7 @@
         </activity>
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
-        <!-- AdMob app id comes from the Gradle property ADMOB_APP_ID_ANDROID
-             (defaults to Google's public SAMPLE id, see android/app/build.gradle.kts). -->
+        <!-- AdMob app id: see android/app/build.gradle.kts (admobAppId). -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${admobAppId}"/>

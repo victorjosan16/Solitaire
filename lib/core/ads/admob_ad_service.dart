@@ -33,6 +33,7 @@ class AdMobAdService implements AdService {
   @override
   Future<void> initialize() async {
     if (AppConfig.rewardedUnitId == null &&
+        AppConfig.bannerUnitId == null &&
         AppConfig.interstitialUnitId == null) {
       return;
     }

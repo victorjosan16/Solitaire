@@ -3,28 +3,28 @@
 ID aplicație (definitiv): **`com.solitairenova.app`** — nu se mai poate schimba după prima publicare.
 
 Ce face codul deja:
-* Build-ul de test (debug) folosește reclamele de TEST Google.
-* Build-ul de publicare folosește ID-urile reale AdMob primite din GitHub (variabile), iar dacă lipsesc,
-  fluxul de publicare se oprește cu eroare — nu se poate publica din greșeală fără reclame sau cu reclame de test.
+* Build-ul de test (debug) cere doar reclame de TEST Google — poți apăsa pe ele fără risc.
+* Build-ul de publicare folosește unitățile reale AdMob din `lib/core/config/app_config.dart`
+  (ID-urile AdMob nu sunt secrete; sunt vizibile în orice APK).
+* Reclame folosite: **banner sus** (după 10 mutări) și **reclame cu recompensă** opționale.
+  **Fără reclame între jocuri** (decizie de produs).
 * Semnarea se face cu cheia ta de upload, păstrată ca *secret* în GitHub (niciodată în cod).
 * Fluxul **Actions → "Release (Google Play)"** rulează testele, construiește `.aab` semnat și îl urcă pe Google Play.
 
 ---
 
-## Pasul 1 — AdMob (reclamele reale)
-1. Intră pe <https://admob.google.com> cu același cont Google ca Play Console și finalizează contul
-   (țară, fus orar, date de plată / impozitare).
-2. **Apps → Add app → Android →** „Is the app listed on a supported app store?” → **No** (încă nu e publicată).
-   Nume: *Solitaire Nova*. Notează **App ID** (`ca-app-pub-XXXXXXXXXXXXXXXX~YYYYYYYYYY`).
-3. Creează 3 unități de reclamă (**Ad units → Add ad unit**) și notează ID-urile (`ca-app-pub-…/…`):
-   * **Banner** — „Solitaire banner”
-   * **Interstitial** — „Solitaire between games”
-   * **Rewarded** — „Solitaire rewarded” (recompensa din AdMob poate rămâne 1; aplicația decide ce primești)
-4. **Privacy & messaging → GDPR → Create message**: alege aplicația, limbile (cel puțin engleză + română),
-   publică mesajul. Fără el, utilizatorii din UE nu vor vedea reclame. Opțional: mesajul „US state regulations”.
-5. După ce aplicația apare pe Google Play: AdMob → App settings → **Link to app store**.
+## Pasul 1 — AdMob ✅ (făcut)
+| | ID |
+|---|---|
+| App ID (Android) | `ca-app-pub-4151706326405945~7945466753` |
+| Banner | `ca-app-pub-4151706326405945/4002352310` |
+| Rewarded | `ca-app-pub-4151706326405945/8647128151` |
 
-> Nu da clic pe propriile reclame. Pentru teste pe telefonul tău folosește APK-urile de test (reclame de test).
+De făcut în AdMob:
+* **Confidențialitate și mesaje → Reglementări europene (GDPR) → Creați un mesaj** → aplicația Solitaire Nova,
+  limbile engleză + română → **Publicați**. Fără el, utilizatorii din UE nu văd reclame.
+* După publicarea pe Google Play: App settings → **Link to app store**.
+* Nu da clic pe propriile reclame reale (poate duce la suspendarea contului).
 
 ## Pasul 2 — Cheia de upload (o singură dată, pe calculatorul tău)
 Ai nevoie de Java (vine cu Android Studio). Rulează:
@@ -50,17 +50,11 @@ Repo → **Settings → Secrets and variables → Actions**.
 | `ANDROID_KEY_PASSWORD` | parola cheii (de obicei aceeași) |
 | `PLAY_SERVICE_ACCOUNT_JSON` | (opțional, Pasul 7) conținutul fișierului JSON |
 
-**Variables** (ID-urile AdMob nu sunt secrete):
-| Nume | Exemplu |
-|---|---|
-| `ADMOB_APP_ID_ANDROID` | `ca-app-pub-1234567890123456~1111111111` |
-| `ADMOB_BANNER_ANDROID` | `ca-app-pub-1234567890123456/2222222222` |
-| `ADMOB_INTERSTITIAL_ANDROID` | `ca-app-pub-1234567890123456/3333333333` |
-| `ADMOB_REWARDED_ANDROID` | `ca-app-pub-1234567890123456/4444444444` |
-| `PRIVACY_POLICY_URL` | `https://victorjosan16.github.io/Solitaire/privacy/` |
+Nu mai e nevoie de variabile AdMob: ID-urile sunt în cod.
 
 ## Pasul 4 — Politica de confidențialitate (obligatorie pentru aplicații cu reclame)
 1. În `docs/privacy/index.html` înlocuiește `[CONTACT EMAIL]` cu adresa de contact pe care vrei s-o afișezi public.
+   Adresa paginii e deja setată în aplicație: `https://victorjosan16.github.io/Solitaire/privacy/`.
 2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → branch-ul principal → folder **/docs** → Save.
    (GitHub Pages gratuit necesită repo public; altfel găzduiește pagina oriunde și pune URL-ul în variabilă.)
 3. Verifică: `https://victorjosan16.github.io/Solitaire/privacy/`.

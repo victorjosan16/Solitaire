@@ -43,11 +43,12 @@ android {
         // `flutter build --build-number/--build-name` (CI uses the run number).
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        // Google's documented SAMPLE AdMob app id unless a real one is passed:
-        //   -PADMOB_APP_ID_ANDROID=ca-app-pub-xxx~yyy  (CI passes it from repo variables)
+        // Production AdMob APP id (not a secret; debug builds still request
+        // only Google TEST ad units, see lib/core/config/app_config.dart).
+        // Override: -PADMOB_APP_ID_ANDROID=ca-app-pub-xxx~yyy
         manifestPlaceholders["admobAppId"] =
             (project.findProperty("ADMOB_APP_ID_ANDROID") as String?)
-                ?: "ca-app-pub-3940256099942544~3347511713"
+                ?: "ca-app-pub-4151706326405945~7945466753"
     }
 
     signingConfigs {

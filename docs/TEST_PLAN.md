@@ -53,7 +53,7 @@ Run: `flutter test --exclude-tags golden` (blocking) and `flutter test --tags go
 - [ ] EEA test device: UMP form appears; Settings → Privacy & ad choices reopens it.
 - [ ] Ad no-fill (airplane mode after load): graceful message.
 - [ ] Rewarded ad closed early → no reward; completed → reward once.
-- [ ] Interstitial never on launch, never during play, at most once per ≥2 games and ≥4 minutes.
+- [ ] No interstitials anywhere; banner only on the game screen after 10 moves; rewarded ads opt-in.
 ### Data
 - [ ] Settings → Delete local data asks for confirmation and resets coins/stats/game.
 - [ ] Cloud backup/sign-in show "not configured" in builds without Firebase.

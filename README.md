@@ -76,8 +76,7 @@ Put the iOS AdMob **app** id in `ios/Flutter/AdMob.xcconfig` (gitignored): `GAD_
 
 ## Ads & privacy
 - `AdService` (`lib/core/ads/`) with `AdMobAdService`, `DisabledAdService`, `FakeAdService`.
-- Debug/profile builds use Google's public **test** units. Release builds **disable ads**
-  unless production unit ids are passed via `--dart-define` (never committed).
+- Debug/profile builds use Google's public **test** units; release builds use the production units.
 - Rewarded ads are opt-in only (double victory coins, hint pack); rewards are granted only on
   the SDK's earned-reward callback, keyed by a unique event id.
 - Banner: standard 320×50 at the **top of the game screen only**, loaded after the **10th move**
@@ -85,8 +84,10 @@ Put the iOS AdMob **app** id in `ios/Flutter/AdMob.xcconfig` (gitignored): `GAD_
   undo), removed on victory and absent from menus. Separated from the pause button by padding and a
   gold hairline (AdMob placement policy); inserted only when no card is being dragged.
   Unit ids: `--dart-define=ADMOB_BANNER_ANDROID=… / ADMOB_BANNER_IOS=…`.
-- Interstitials only at natural breaks (leaving the Victory screen), never on launch, capped by
-  `InterstitialPolicy` (≥3 games, ≥4 min cooldown, ≤4/session, 2 min launch grace).
+- **No interstitials** (product decision): the only ads are the top banner and opt-in rewarded ads.
+  `InterstitialPolicy` remains in code (tested) but no interstitial unit is configured.
+- Production Android ids are in `lib/core/config/app_config.dart` (AdMob ids are not secrets);
+  debug builds always request Google test units.
 - Consent: app-owned first-run dialog (analytics + personalized ads, both default **off**) and
   Google UMP (`UmpConsentService`) for regions that legally require it; "Privacy & ad choices"
   in Settings reopens it. Non-personalized requests when personalization is off.
