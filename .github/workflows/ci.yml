@@ -69,8 +69,14 @@ jobs:
           cache: true
       - run: flutter pub get
       - run: flutter build apk --debug
-      - name: Release build compiles (R8 / shrinking), debug-signed
-        run: flutter build appbundle --release
+      - name: Release preview APK (R8, Google TEST ads, debug-signed)
+        # Smooth, small build for testing on a phone before Play is live.
+        # Test ad units on purpose: never click your own live ads.
+        run: |
+          flutter build apk --release --split-per-abi \
+            --dart-define=ADMOB_BANNER_ANDROID=ca-app-pub-3940256099942544/6300978111 \
+            --dart-define=ADMOB_REWARDED_ANDROID=ca-app-pub-3940256099942544/5224354917
+          cp build/app/outputs/flutter-apk/app-arm64-v8a-release.apk solitaire-nova-preview-${{ github.run_number }}.apk
       - name: Rename APK
         run: cp build/app/outputs/flutter-apk/app-debug.apk solitaire-nova-debug-${{ github.run_number }}.apk
       - name: Upload artifact
@@ -89,8 +95,12 @@ jobs:
           target_commitish: ${{ github.sha }}
           name: Solitaire Nova debug build ${{ github.run_number }}
           body: |
-            Debug APK built from ${{ github.ref_name }} @ ${{ github.sha }}.
-            For testing only: Google test ads, debug signing, not for Google Play.
+            Built from ${{ github.ref_name }} @ ${{ github.sha }}. For testing only (Google test ads, debug signing, not for Google Play).
+            * solitaire-nova-preview-*.apk: release mode, fast and small (64-bit phones, almost all from 2017+). Install this one.
+            * solitaire-nova-debug-*.apk: debug mode, slower, for troubleshooting.
+            The Google Play version has a different signature: uninstall these before installing from Play.
           prerelease: true
           make_latest: false
-          files: solitaire-nova-debug-${{ github.run_number }}.apk
+          files: |
+            solitaire-nova-preview-${{ github.run_number }}.apk
+            solitaire-nova-debug-${{ github.run_number }}.apk
