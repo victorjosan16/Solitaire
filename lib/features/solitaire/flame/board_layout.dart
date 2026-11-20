@@ -59,12 +59,15 @@ class BoardLayout {
   }) {
     final usableW = size.width - padding.horizontal;
     final usableH = size.height - padding.vertical;
-    final gap = math.max(3.0, usableW * 0.014);
+    var gap = math.max(3.0, usableW * 0.014);
     var cardW = (usableW - gap * 8) / 7;
-    // Landscape / short screens: keep a full King run (13 face-up + 6
-    // face-down) readable by bounding card height.
-    final maxCardH = usableH / 3.4;
-    if (cardW * aspect > maxCardH) cardW = maxCardH / aspect;
+    // Height bound for the worst column (6 hidden + K..A run) at the minimum
+    // readable overlap: gap + H + 1.6·gap + 6·3 + 12·0.16H + H + gap.
+    final maxCardH = (usableH - 3.6 * gap - 18) / 3.92;
+    if (cardW * aspect > maxCardH) {
+      cardW = maxCardH / aspect;
+      gap = math.min(gap, math.max(3.0, cardW * 0.1));
+    }
     cardW = math.max(cardW, 20);
     final cardH = cardW * aspect;
     final totalW = cardW * 7 + gap * 6;
@@ -84,7 +87,7 @@ class BoardLayout {
     slots[PileRef.stock] = Offset(colX(stockCol), top) & topRow;
     slots[PileRef.waste] = Offset(colX(wasteCol), top) & topRow;
 
-    final tableauTop = top + cardH + gap * 2.2;
+    final tableauTop = top + cardH + gap * 1.6;
     for (var c = 0; c < 7; c++) {
       slots[PileRef.tableau(c)] = Offset(colX(c), tableauTop) & topRow;
     }

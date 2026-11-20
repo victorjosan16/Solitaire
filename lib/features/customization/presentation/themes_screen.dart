@@ -95,8 +95,9 @@ class _ThemesScreenState extends ConsumerState<ThemesScreen> {
                             CosmeticKind.background => 1,
                             CosmeticKind.table => 2,
                           };
-                          if (context.mounted)
+                          if (context.mounted) {
                             context.push('${Routes.shop}?tab=$tab');
+                          }
                         }
                       },
                       child: AnimatedContainer(

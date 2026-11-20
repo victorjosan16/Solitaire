@@ -32,8 +32,9 @@ class AdMobAdService implements AdService {
   @override
   Future<void> initialize() async {
     if (AppConfig.rewardedUnitId == null &&
-        AppConfig.interstitialUnitId == null)
+        AppConfig.interstitialUnitId == null) {
       return;
+    }
     try {
       if (!await consent.canRequestAds()) return;
       await MobileAds.instance.initialize();

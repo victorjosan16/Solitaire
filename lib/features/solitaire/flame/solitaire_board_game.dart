@@ -145,16 +145,18 @@ class SolitaireBoardGame extends FlameGame {
         );
         final delay = order++ * 0.035;
         comp.animateTo(target, z: pl.z, duration: 0.24, delay: delay);
-        if (pl.faceUp)
+        if (pl.faceUp) {
           comp.flip(true, delay: delay + 0.2, duration: flipDuration);
+        }
         continue;
       }
       if (!animate || !_animate) {
         comp.snapTo(target, faceUp: pl.faceUp, z: pl.z);
         continue;
       }
-      if (comp.faceUp != pl.faceUp)
+      if (comp.faceUp != pl.faceUp) {
         comp.flip(pl.faceUp, duration: flipDuration);
+      }
       if ((comp.position - target).length > 0.5) {
         comp.animateTo(target, z: pl.z, duration: moveDuration);
       } else {

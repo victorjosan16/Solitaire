@@ -26,8 +26,9 @@ class UmpConsentService implements ConsentService {
         ConsentRequestParameters(),
         () async {
           await ConsentForm.loadAndShowConsentFormIfRequired((err) {
-            if (err != null)
+            if (err != null) {
               AppLogger.w('consent.form_error', {'code': err.errorCode});
+            }
             if (!done.isCompleted) done.complete();
           });
         },

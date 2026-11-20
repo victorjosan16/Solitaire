@@ -167,9 +167,12 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
                   color: NovaColors.textMuted,
                 ),
                 const SizedBox(width: 6),
-                Text(
-                  l.statsLocalLabel,
-                  style: const TextStyle(color: NovaColors.textMuted),
+                Flexible(
+                  child: Text(
+                    l.statsLocalLabel,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(color: NovaColors.textMuted),
+                  ),
                 ),
               ],
             ),

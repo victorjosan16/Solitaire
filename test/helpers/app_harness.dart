@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solitaire_nova/app/app.dart';
 import 'package:solitaire_nova/app/router/app_router.dart';
@@ -79,7 +78,6 @@ Future<Harness> pumpApp(
   DateTime Function()? clock,
   List<Override> extra = const [],
 }) async {
-  await loadAppFonts();
   tester.view.physicalSize = size * dpr;
   tester.view.devicePixelRatio = dpr;
   addTearDown(tester.view.reset);

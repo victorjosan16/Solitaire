@@ -53,15 +53,17 @@ class _ShopScreenState extends ConsumerState<ShopScreen> {
     try {
       await ref.read(profileProvider.notifier).purchase(item);
       ref.read(audioServiceProvider).play(Sfx.coins);
-      if (mounted)
+      if (mounted) {
         showNovaSnack(
           context,
           l.purchaseDone(name),
           icon: Icons.celebration_rounded,
         );
+      }
     } on InsufficientCoinsError catch (e) {
-      if (mounted)
+      if (mounted) {
         await showInsufficientCoinsDialog(context, e.required - e.balance);
+      }
     } on AlreadyOwnedError {
       // Double tap: already applied, nothing to do.
     } catch (_) {

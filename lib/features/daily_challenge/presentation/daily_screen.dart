@@ -42,8 +42,9 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
         context,
         title: l.newGameTitle,
         body: l.newGameBody,
-      ))
+      )) {
         return;
+      }
     }
     await ref
         .read(gameControllerProvider.notifier)
@@ -281,9 +282,12 @@ class _DailyScreenState extends ConsumerState<DailyScreen> {
                     color: NovaColors.gold,
                   ),
                   const SizedBox(width: 6),
-                  Text(
-                    l.dailyStreak(streak),
-                    style: const TextStyle(color: NovaColors.ivory),
+                  Flexible(
+                    child: Text(
+                      l.dailyStreak(streak),
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: NovaColors.ivory),
+                    ),
                   ),
                 ],
               ),

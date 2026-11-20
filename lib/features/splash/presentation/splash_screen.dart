@@ -38,8 +38,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
             duration: Duration(milliseconds: reduce ? 350 : 1500),
           )
           ..addStatusListener((s) {
-            if (s == AnimationStatus.completed && mounted)
+            if (s == AnimationStatus.completed && mounted) {
               context.go(Routes.home);
+            }
           })
           ..forward();
     ref.read(settingsProvider.notifier).applyAll();

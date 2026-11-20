@@ -362,12 +362,13 @@ class _GameScreenState extends ConsumerState<GameScreen> {
       await ref
           .read(profileProvider.notifier)
           .buyHintPack(DateTime.now().microsecondsSinceEpoch.toString());
-      if (mounted)
+      if (mounted) {
         showNovaSnack(
           context,
           l.hintsOwned(ref.read(profileProvider).hintTokens),
           icon: Icons.lightbulb,
         );
+      }
     } else if (choice == 'ad') {
       final r = await _ctrl.rewardedHints();
       if (!mounted) return;
@@ -542,8 +543,9 @@ class _HudState extends ConsumerState<_Hud> {
   void initState() {
     super.initState();
     _t = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted && ref.read(gameControllerProvider.notifier).clockRunning)
+      if (mounted && ref.read(gameControllerProvider.notifier).clockRunning) {
         setState(() {});
+      }
     });
   }
 
@@ -768,8 +770,9 @@ class _BoardSemantics extends ConsumerWidget {
           label = top == null
               ? l.semWaste
               : '${l.semWaste}: ${cardLabel(l, top)}';
-          if (top != null)
+          if (top != null) {
             onTap = () => ctrl.tapCard(pile, state.waste.length - 1);
+          }
         case PileKind.foundation:
           final f = state.foundations[pile.index];
           label = l.semFoundation(

@@ -75,17 +75,21 @@ String achievementTitle(AppLocalizations l, String id) => switch (id) {
 
 String achievementDescription(AppLocalizations l, AchievementDef a) {
   final id = a.id;
-  if (id == 'first_win' || id.startsWith('wins_'))
+  if (id == 'first_win' || id.startsWith('wins_')) {
     return l.achDescWins(a.target);
+  }
   if (id.startsWith('played_')) return l.achDescPlayed(a.target);
   if (id.startsWith('streak_')) return l.achDescStreak(a.target);
   if (id.startsWith('draw3_')) return l.achDescDraw3(a.target);
-  if (id.startsWith('speed_'))
+  if (id.startsWith('speed_')) {
     return l.achDescSpeed(int.parse(id.substring(6)));
-  if (id.startsWith('moves_'))
+  }
+  if (id.startsWith('moves_')) {
     return l.achDescMoves(int.parse(id.substring(6)));
-  if (id.startsWith('score_'))
+  }
+  if (id.startsWith('score_')) {
     return l.achDescScore(int.parse(id.substring(6)));
+  }
   if (id.startsWith('combo_')) return l.achDescCombo(a.target);
   if (id == 'daily_first' || id.startsWith('daily_total_')) {
     return l.achDescDailyTotal(a.target);

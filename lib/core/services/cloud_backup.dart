@@ -32,8 +32,9 @@ ConflictResolution resolveGameConflict(
   if (remote == null) return ConflictResolution.keepLocal;
   if (local == null) return ConflictResolution.keepRemote;
   if (local.gameId == remote.gameId) {
-    if (remote.finished && !local.finished)
+    if (remote.finished && !local.finished) {
       return ConflictResolution.keepRemote;
+    }
     if (local.finished && !remote.finished) return ConflictResolution.keepLocal;
     return remote.history.length > local.history.length &&
             remote.updatedAt.isAfter(local.updatedAt)
@@ -45,8 +46,9 @@ ConflictResolution resolveGameConflict(
         ? ConflictResolution.keepLocal
         : ConflictResolution.keepRemote;
   }
-  if (remote.finished || !remote.hasProgress)
+  if (remote.finished || !remote.hasProgress) {
     return ConflictResolution.keepLocal;
+  }
   return remote.updatedAt.isAfter(local.updatedAt)
       ? ConflictResolution.askUser
       : ConflictResolution.keepLocal;
