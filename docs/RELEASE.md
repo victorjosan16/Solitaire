@@ -48,7 +48,7 @@ Opțional, mai târziu: `PLAY_SERVICE_ACCOUNT_JSON` (Pasul 7, upload automat).
 și s-o pui în secretul `ANDROID_KEYSTORE_BASE64` (base64); atunci fluxul o folosește pe aceea.
 
 ## Pasul 4 — Politica de confidențialitate (obligatorie pentru aplicații cu reclame)
-1. În `docs/privacy/index.html` înlocuiește `[CONTACT EMAIL]` cu adresa de contact pe care vrei s-o afișezi public.
+1. Adresa de contact din `docs/privacy/index.html`: animatix95@gmail.com ✅
    Adresa paginii e deja setată în aplicație: `https://victorjosan16.github.io/Solitaire/privacy/`.
 2. Repo → **Settings → Pages** → Source: *Deploy from a branch* → branch-ul principal → folder **/docs** → Save.
    (GitHub Pages gratuit necesită repo public; altfel găzduiește pagina oriunde și pune URL-ul în variabilă.)
