@@ -15,41 +15,85 @@ const W = PileRef.waste;
 void main() {
   group('Tap to move', () {
     test('prefers foundation for a single card', () {
-      final s = board(waste: ['AH'], tableau: [
-        [up('2S')], [], [], [], [], [], [],
-      ]);
+      final s = board(
+        waste: ['AH'],
+        tableau: [
+          [up('2S')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(MoveAdvisor.tapMove(s, W, 1), TransferMove(W, F(2)));
     });
 
     test('prefers tableau when foundation preference is off', () {
       final s = board(
         foundations: [fnd('C', 6), [], [], []],
-        tableau: [[up('7C')], [up('8H')], [], [], [], [], []],
+        tableau: [
+          [up('7C')],
+          [up('8H')],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
       );
-      expect(MoveAdvisor.tapMove(s, T(0), 1, preferFoundation: false),
-          TransferMove(T(0), T(1)));
+      expect(
+        MoveAdvisor.tapMove(s, T(0), 1, preferFoundation: false),
+        TransferMove(T(0), T(1)),
+      );
       expect(MoveAdvisor.tapMove(s, T(0), 1), TransferMove(T(0), F(0)));
     });
 
     test('non-empty tableau target before empty column', () {
-      final s = board(waste: ['KH'], tableau: [
-        [], [up('2S')], [], [], [], [], [],
-      ]);
+      final s = board(
+        waste: ['KH'],
+        tableau: [
+          [],
+          [up('2S')],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(MoveAdvisor.tapMove(s, W, 1), TransferMove(W, T(0)));
     });
 
     test('king already at the bottom does not hop between empty columns', () {
-      final s = board(tableau: [
-        [up('KH')], [], [], [], [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [up('KH')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(MoveAdvisor.tapMove(s, T(0), 1), isNull);
     });
 
     test('returns null when nothing is legal', () {
-      final s = board(waste: ['5H'], tableau: [
-        [up('9S')], [up('2C')], [up('3D')], [up('4H')], [up('JD')],
-        [up('QS')], [up('KC')],
-      ]);
+      final s = board(
+        waste: ['5H'],
+        tableau: [
+          [up('9S')],
+          [up('2C')],
+          [up('3D')],
+          [up('4H')],
+          [up('JD')],
+          [up('QS')],
+          [up('KC')],
+        ],
+      );
       expect(MoveAdvisor.tapMove(s, W, 1), isNull);
     });
   });
@@ -68,9 +112,18 @@ void main() {
     });
 
     test('foundation moves come first', () {
-      final s = board(waste: ['7D'], tableau: [
-        [up('8S')], [down('5C'), up('AH')], [], [], [], [], [],
-      ]);
+      final s = board(
+        waste: ['7D'],
+        tableau: [
+          [up('8S')],
+          [down('5C'), up('AH')],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(MoveAdvisor.hint(s), TransferMove(T(1), F(2)));
     });
 
@@ -80,8 +133,13 @@ void main() {
         stock: ['9C', '9S'],
         waste: ['10C'],
         tableau: [
-          [down('AS'), up('2H')], [down('AC'), up('2D')], [up('QH')],
-          [up('QD')], [down('AH'), up('3C')], [down('AD'), up('3S')], [],
+          [down('AS'), up('2H')],
+          [down('AC'), up('2D')],
+          [up('QH')],
+          [up('QD')],
+          [down('AH'), up('3C')],
+          [down('AD'), up('3S')],
+          [],
         ],
         fillStock: true,
       );
@@ -97,8 +155,13 @@ void main() {
         stock: ['9C'],
         waste: ['9S'],
         tableau: [
-          [down('AS'), up('3H')], [down('AC'), up('3D')], [down('AH'), up('QH')],
-          [down('AD'), up('QD')], [up('5C')], [up('5S')], [up('JH')],
+          [down('AS'), up('3H')],
+          [down('AC'), up('3D')],
+          [down('AH'), up('QH')],
+          [down('AD'), up('QD')],
+          [up('5C')],
+          [up('5S')],
+          [up('JH')],
         ],
       );
       // 9C/9S have no red 10 available, nothing to foundations.
@@ -111,7 +174,13 @@ void main() {
         fillStock: false,
         stock: ['AC', '9C'], // 9C on top, AC beneath
         tableau: [
-          [down('AS'), up('3H')], [], [], [], [], [], [],
+          [down('AS'), up('3H')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
         ],
       );
       expect(MoveAdvisor.hint(s), const DrawMove());
@@ -128,8 +197,17 @@ void main() {
         tableau: [
           [up('KC'), up('QC')], // not a valid stack but face up: fine
           [up('KS'), up('QS')].sublist(0, 2),
-          [up('3C'), up('4C'), up('5C'), up('6C'), up('7C'), up('8C'),
-           up('9C'), up('10C'), up('JC')].reversed.toList(),
+          [
+            up('3C'),
+            up('4C'),
+            up('5C'),
+            up('6C'),
+            up('7C'),
+            up('8C'),
+            up('9C'),
+            up('10C'),
+            up('JC'),
+          ].reversed.toList(),
           [], [], [], [],
         ],
       );
@@ -153,9 +231,24 @@ void main() {
         waste: ['AC', '2C', '3C'], // AC buried, no recycles: stuck
         foundations: [[], fnd('D', 13), fnd('H', 13), fnd('S', 13)],
         tableau: [
-          [up('KC'), up('QC'), up('JC'), up('10C'), up('9C'), up('8C'),
-           up('7C'), up('6C'), up('5C'), up('4C')],
-          [], [], [], [], [], [],
+          [
+            up('KC'),
+            up('QC'),
+            up('JC'),
+            up('10C'),
+            up('9C'),
+            up('8C'),
+            up('7C'),
+            up('6C'),
+            up('5C'),
+            up('4C'),
+          ],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
         ],
       );
       expect(MoveAdvisor.autoFinishPlan(s), isNull);

@@ -4,17 +4,18 @@ import 'tokens.dart';
 
 abstract final class AppTheme {
   static ThemeData dark() {
-    final scheme = ColorScheme.fromSeed(
-      seedColor: NovaColors.emerald,
-      brightness: Brightness.dark,
-    ).copyWith(
-      primary: NovaColors.gold,
-      onPrimary: NovaColors.navy,
-      secondary: NovaColors.sage,
-      surface: NovaColors.emeraldDeep,
-      onSurface: NovaColors.ivory,
-      error: NovaColors.danger,
-    );
+    final scheme =
+        ColorScheme.fromSeed(
+          seedColor: NovaColors.emerald,
+          brightness: Brightness.dark,
+        ).copyWith(
+          primary: NovaColors.gold,
+          onPrimary: NovaColors.navy,
+          secondary: NovaColors.sage,
+          surface: NovaColors.emeraldDeep,
+          onSurface: NovaColors.ivory,
+          error: NovaColors.danger,
+        );
     final base = ThemeData(
       useMaterial3: true,
       colorScheme: scheme,

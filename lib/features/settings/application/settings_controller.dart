@@ -19,11 +19,13 @@ class SettingsController extends Notifier<AppSettings> {
   }
 
   void _applySideEffects() {
-    ref.read(audioServiceProvider).configure(
-      sound: state.sound,
-      music: state.music,
-      haptics: state.haptics,
-    );
+    ref
+        .read(audioServiceProvider)
+        .configure(
+          sound: state.sound,
+          music: state.music,
+          haptics: state.haptics,
+        );
     ref.read(analyticsProvider).setEnabled(state.analyticsEnabled);
   }
 

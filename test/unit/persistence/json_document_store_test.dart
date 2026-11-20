@@ -82,7 +82,8 @@ void main() {
   test('interrupted write (stray tmp) leaves last good data intact', () async {
     await store.save(spec, {'v': 1});
     // Simulate a crash mid-write: half-written tmp, primary untouched.
-    File('${dir.path}/doc.json.tmp').writeAsStringSync('{"schemaVersion":1,"da');
+    File('${dir.path}/doc.json.tmp')
+        .writeAsStringSync('{"schemaVersion":1,"da');
     final r = await JsonDocumentStore(dir).load(spec);
     expect(r.data, {'v': 1});
     // Next save overwrites the stray tmp cleanly.
@@ -91,10 +92,12 @@ void main() {
   });
 
   test('migrations upgrade old documents in order', () async {
-    File('${dir.path}/doc.json').writeAsStringSync(jsonEncode({
-      'schemaVersion': 1,
-      'data': {'a': 1},
-    }));
+    File('${dir.path}/doc.json').writeAsStringSync(
+      jsonEncode({
+        'schemaVersion': 1,
+        'data': {'a': 1},
+      }),
+    );
     final v3 = DocumentSpec(
       name: 'doc',
       version: 3,
@@ -108,10 +111,12 @@ void main() {
   });
 
   test('documents from a newer schema are not misread', () async {
-    File('${dir.path}/doc.json').writeAsStringSync(jsonEncode({
-      'schemaVersion': 9,
-      'data': {'a': 1},
-    }));
+    File('${dir.path}/doc.json').writeAsStringSync(
+      jsonEncode({
+        'schemaVersion': 9,
+        'data': {'a': 1},
+      }),
+    );
     final r = await store.load(spec);
     expect(r.data, isNull);
   });

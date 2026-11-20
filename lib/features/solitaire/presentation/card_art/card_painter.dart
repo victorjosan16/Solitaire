@@ -46,8 +46,7 @@ class CardPainter {
     required bool faceUp,
     required CardStyle style,
   }) {
-    final key =
-        '${style.id}|${faceUp ? card.id : 'back'}|${_sizeKey(size)}';
+    final key = '${style.id}|${faceUp ? card.id : 'back'}|${_sizeKey(size)}';
     final pic = _cached(key, size, (c) {
       if (faceUp) {
         _paintFace(c, size, card, style);
@@ -61,10 +60,8 @@ class CardPainter {
     canvas.restore();
   }
 
-  static RRect _rrect(Size s) => RRect.fromRectAndRadius(
-    Offset.zero & s,
-    Radius.circular(s.width * 0.09),
-  );
+  static RRect _rrect(Size s) =>
+      RRect.fromRectAndRadius(Offset.zero & s, Radius.circular(s.width * 0.09));
 
   static void _paintFace(Canvas c, Size s, PlayingCard card, CardStyle st) {
     final rr = _rrect(s);
@@ -72,11 +69,10 @@ class CardPainter {
     c.drawRRect(
       rr,
       Paint()
-        ..shader = ui.Gradient.linear(
-          rect.topCenter,
-          rect.bottomCenter,
-          [st.face, st.faceGradientEnd ?? st.face],
-        ),
+        ..shader = ui.Gradient.linear(rect.topCenter, rect.bottomCenter, [
+          st.face,
+          st.faceGradientEnd ?? st.face,
+        ]),
     );
     c.drawRRect(
       rr.deflate(0.5),
@@ -101,6 +97,9 @@ class CardPainter {
     // Index: big rank top-left, small suit top-right. Both live in the top
     // ~28% so they stay readable when cards overlap in the tableau.
     final rankStyle = TextStyle(
+      // Roboto on Android; iOS falls back to the system font. Both are
+      // crisp at small sizes, which matters more than ornament here.
+      fontFamily: 'Roboto',
       color: color,
       fontSize: w * (card.rank == 10 ? 0.36 : 0.40),
       fontWeight: FontWeight.w800,
@@ -178,11 +177,10 @@ class CardPainter {
     c.drawRRect(
       rr,
       Paint()
-        ..shader = ui.Gradient.radial(
-          rect.center,
-          s.longestSide * 0.7,
-          [st.backBase, st.backAccent],
-        ),
+        ..shader = ui.Gradient.radial(rect.center, s.longestSide * 0.7, [
+          st.backBase,
+          st.backAccent,
+        ]),
     );
     final w = s.width;
     final inner = rr.deflate(w * 0.07);
@@ -257,7 +255,10 @@ class CardPainter {
     bool recycle = false,
     bool highlight = false,
   }) {
-    final rr = RRect.fromRectAndRadius(rect, Radius.circular(rect.width * 0.09));
+    final rr = RRect.fromRectAndRadius(
+      rect,
+      Radius.circular(rect.width * 0.09),
+    );
     canvas.drawRRect(rr, Paint()..color = table.slot.withValues(alpha: 0.75));
     canvas.drawRRect(
       rr.deflate(0.5),
@@ -291,8 +292,9 @@ class CardPainter {
         false,
         p,
       );
-      final tip = rect.center + Offset(r * math.cos(-math.pi * 0.35),
-          r * math.sin(-math.pi * 0.35));
+      final tip =
+          rect.center +
+          Offset(r * math.cos(-math.pi * 0.35), r * math.sin(-math.pi * 0.35));
       canvas.drawLine(tip, tip + Offset(-r * 0.5, -r * 0.05), p);
       canvas.drawLine(tip, tip + Offset(r * 0.05, r * 0.5), p);
     }
@@ -324,9 +326,11 @@ class CardPainter {
     final p = Paint()..color = const Color(0x0DFFFFFF);
     final cell = math.max(36.0, size.shortestSide / 9);
     for (var y = 0.0; y < size.height + cell; y += cell) {
-      for (var x = ((y / cell).round().isEven ? 0.0 : cell / 2);
-          x < size.width + cell;
-          x += cell) {
+      for (
+        var x = ((y / cell).round().isEven ? 0.0 : cell / 2);
+        x < size.width + cell;
+        x += cell
+      ) {
         final d = cell * 0.12;
         canvas.drawPath(
           Path()

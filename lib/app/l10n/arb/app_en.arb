@@ -94,11 +94,11 @@
   "semFoundation": "{suit} foundation, {count} cards",
   "@semFoundation": {
     "placeholders": {
-      "count": {
-        "type": "int"
-      },
       "suit": {
         "type": "String"
+      },
+      "count": {
+        "type": "int"
       }
     }
   },
@@ -335,10 +335,10 @@
   "purchaseBody": "This costs {price} coins. Balance after purchase: {after}.",
   "@purchaseBody": {
     "placeholders": {
-      "after": {
+      "price": {
         "type": "int"
       },
-      "price": {
+      "after": {
         "type": "int"
       }
     }

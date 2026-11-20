@@ -13,8 +13,11 @@ import 'ad_service.dart';
 /// LevelPlay or AdMob mediation is added later it must replace, not run in
 /// parallel with, this service.
 class AdMobAdService implements AdService {
-  AdMobAdService({required this.consent, required this.personalized, InterstitialPolicy? policy})
-    : policy = policy ?? InterstitialPolicy();
+  AdMobAdService({
+    required this.consent,
+    required this.personalized,
+    InterstitialPolicy? policy,
+  }) : policy = policy ?? InterstitialPolicy();
 
   final ConsentService consent;
   final bool Function() personalized;
@@ -28,7 +31,9 @@ class AdMobAdService implements AdService {
 
   @override
   Future<void> initialize() async {
-    if (AppConfig.rewardedUnitId == null && AppConfig.interstitialUnitId == null) return;
+    if (AppConfig.rewardedUnitId == null &&
+        AppConfig.interstitialUnitId == null)
+      return;
     try {
       if (!await consent.canRequestAds()) return;
       await MobileAds.instance.initialize();
@@ -48,7 +53,8 @@ class AdMobAdService implements AdService {
       request: _request,
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) => _rewarded = ad,
-        onAdFailedToLoad: (e) => AppLogger.i('ads.rewarded_no_fill', {'code': e.code}),
+        onAdFailedToLoad: (e) =>
+            AppLogger.i('ads.rewarded_no_fill', {'code': e.code}),
       ),
     );
   }
@@ -61,20 +67,24 @@ class AdMobAdService implements AdService {
       request: _request,
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) => _interstitial = ad,
-        onAdFailedToLoad: (e) => AppLogger.i('ads.interstitial_no_fill', {'code': e.code}),
+        onAdFailedToLoad: (e) =>
+            AppLogger.i('ads.interstitial_no_fill', {'code': e.code}),
       ),
     );
   }
 
   @override
-  bool get rewardedAvailable => _initialized && AppConfig.rewardedUnitId != null;
+  bool get rewardedAvailable =>
+      _initialized && AppConfig.rewardedUnitId != null;
 
   @override
   Future<RewardOutcome> showRewarded(RewardPlacement placement) async {
     if (!_initialized) {
       final canAsk = await consent.canRequestAds();
       return RewardUnavailable(
-        canAsk ? AdUnavailableReason.disabled : AdUnavailableReason.consentDenied,
+        canAsk
+            ? AdUnavailableReason.disabled
+            : AdUnavailableReason.consentDenied,
       );
     }
     final ad = _rewarded;
@@ -90,7 +100,9 @@ class AdMobAdService implements AdService {
         a.dispose();
         _loadRewarded();
         if (!done.isCompleted) {
-          done.complete(earnedId != null ? RewardEarned(earnedId!) : const RewardSkipped());
+          done.complete(
+            earnedId != null ? RewardEarned(earnedId!) : const RewardSkipped(),
+          );
         }
       },
       onAdFailedToShowFullScreenContent: (a, e) {
@@ -104,7 +116,8 @@ class AdMobAdService implements AdService {
     await ad.show(
       onUserEarnedReward: (_, _) {
         // Unique per completed view: the idempotency key for the grant.
-        earnedId = '${placement.name}-${DateTime.now().microsecondsSinceEpoch}-${_rng.nextInt(1 << 32)}';
+        earnedId =
+            '${placement.name}-${DateTime.now().microsecondsSinceEpoch}-${_rng.nextInt(1 << 32)}';
       },
     );
     return done.future;

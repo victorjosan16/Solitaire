@@ -41,8 +41,7 @@ void main() {
     test('regression: seed 1 order is frozen forever', () {
       // If this fails, the PRNG changed and every saved/daily deal would
       // silently change. Never update this expectation casually.
-      expect(Deck.shuffled(1).take(6).map((c) => c.id).toList(),
-          _seed1Prefix);
+      expect(Deck.shuffled(1).take(6).map((c) => c.id).toList(), _seed1Prefix);
     });
 
     test('PRNG distribution is roughly uniform', () {

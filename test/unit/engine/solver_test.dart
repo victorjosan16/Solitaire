@@ -7,7 +7,8 @@ void main() {
   test('solver solutions replay legally to a win', () {
     var solved = 0;
     for (var seed = 1; seed <= 40; seed++) {
-      final r = KlondikeSolver(maxNodes: 50000).solveSeed(seed, GameConfig.draw1);
+      final r = KlondikeSolver(maxNodes: 50000)
+          .solveSeed(seed, GameConfig.draw1);
       if (!r.solved) continue;
       solved++;
       var s = KlondikeEngine.dealSeed(seed, GameConfig.draw1);

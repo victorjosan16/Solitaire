@@ -87,7 +87,10 @@ class _Flourish extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Transform.scale(
     scaleX: flip ? -1 : 1,
-    child: CustomPaint(size: Size(width, width * 0.3), painter: _FlourishPainter()),
+    child: CustomPaint(
+      size: Size(width, width * 0.3),
+      painter: _FlourishPainter(),
+    ),
   );
 }
 
@@ -104,10 +107,21 @@ class _FlourishPainter extends CustomPainter {
     canvas.drawPath(
       Path()
         ..moveTo(s.width * 0.7, y)
-        ..cubicTo(s.width * 0.85, y - s.height * 0.6, s.width, y, s.width * 0.85, y + s.height * 0.3),
+        ..cubicTo(
+          s.width * 0.85,
+          y - s.height * 0.6,
+          s.width,
+          y,
+          s.width * 0.85,
+          y + s.height * 0.3,
+        ),
       p,
     );
-    canvas.drawCircle(Offset(s.width * 0.12, y), 2, p..style = PaintingStyle.fill);
+    canvas.drawCircle(
+      Offset(s.width * 0.12, y),
+      2,
+      p..style = PaintingStyle.fill,
+    );
   }
 
   @override
@@ -152,7 +166,8 @@ class CrownPainter extends CustomPainter {
       canvas.drawCircle(
         Offset(w * (0.3 + i * 0.2), h * 0.89),
         w * 0.025,
-        Paint()..color = i == 1 ? const Color(0xFF2FA37F) : const Color(0xFFB3262B),
+        Paint()
+          ..color = i == 1 ? const Color(0xFF2FA37F) : const Color(0xFFB3262B),
       );
     }
   }
@@ -176,7 +191,11 @@ class LaurelPainter extends CustomPainter {
         canvas.translate(cx, cy);
         canvas.rotate(side * (a - math.pi / 2));
         canvas.drawOval(
-          Rect.fromCenter(center: Offset.zero, width: s.width * 0.05, height: s.width * 0.12),
+          Rect.fromCenter(
+            center: Offset.zero,
+            width: s.width * 0.05,
+            height: s.width * 0.12,
+          ),
           p,
         );
         canvas.restore();

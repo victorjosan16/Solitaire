@@ -159,7 +159,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get semWaste => 'Waste pile';
 
   @override
-  String semFoundation(int count, String suit) {
+  String semFoundation(String suit, int count) {
     return '$suit foundation, $count cards';
   }
 
@@ -545,7 +545,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String purchaseBody(int after, int price) {
+  String purchaseBody(int price, int after) {
     return 'This costs $price coins. Balance after purchase: $after.';
   }
 

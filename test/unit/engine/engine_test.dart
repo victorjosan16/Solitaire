@@ -61,8 +61,8 @@ void main() {
 
     test('rejects incomplete decks', () {
       expect(
-        () => KlondikeEngine.deal(Deck.ordered()..removeLast(),
-            GameConfig.draw1),
+        () =>
+            KlondikeEngine.deal(Deck.ordered()..removeLast(), GameConfig.draw1),
         throwsArgumentError,
       );
     });
@@ -70,25 +70,49 @@ void main() {
 
   group('Tableau rules', () {
     test('descending alternating colour is legal', () {
-      final s = board(tableau: [
-        [up('8S')], [up('7H')], [up('7C')], [], [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [up('8S')],
+          [up('7H')],
+          [up('7C')],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(err(s, TransferMove(T(1), T(0))), isNull); // 7H on 8S
       expect(err(s, TransferMove(T(2), T(0))), MoveError.illegalTarget);
     });
 
     test('wrong rank is illegal', () {
-      final s = board(tableau: [
-        [up('8S')], [up('6H')], [up('9H')], [], [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [up('8S')],
+          [up('6H')],
+          [up('9H')],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(err(s, TransferMove(T(1), T(0))), MoveError.illegalTarget);
       expect(err(s, TransferMove(T(2), T(0))), MoveError.illegalTarget);
     });
 
     test('only kings move to an empty column', () {
-      final s = board(tableau: [
-        [up('KH')], [up('QS')], [down('2C'), up('KC')], [], [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [up('KH')],
+          [up('QS')],
+          [down('2C'), up('KC')],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(err(s, TransferMove(T(1), T(3))), MoveError.illegalTarget);
       expect(err(s, TransferMove(T(0), T(3))), isNull);
       final after = apply(s, TransferMove(T(2), T(3)));
@@ -97,9 +121,17 @@ void main() {
     });
 
     test('king-headed sequence to empty column', () {
-      final s = board(tableau: [
-        [down('2C'), up('KH'), up('QS'), up('JH')], [], [], [], [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [down('2C'), up('KH'), up('QS'), up('JH')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(err(s, TransferMove(T(0), T(1), 3)), isNull);
       expect(err(s, TransferMove(T(0), T(1), 2)), MoveError.illegalTarget);
       final a = apply(s, TransferMove(T(0), T(1), 3));
@@ -107,13 +139,15 @@ void main() {
     });
 
     test('multi-card sequence must be valid and face up', () {
-      final s = board(tableau: [
-        [down('2C'), up('9H'), up('8S'), up('7D')],
-        [up('10C')],
-        [up('10S'), up('9D'), up('8D')], // broken sequence
-        [up('9C')],
-        [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [down('2C'), up('9H'), up('8S'), up('7D')],
+          [up('10C')],
+          [up('10S'), up('9D'), up('8D')], // broken sequence
+          [up('9C')],
+          [], [], [],
+        ],
+      );
       expect(err(s, TransferMove(T(0), T(1), 3)), isNull);
       expect(err(s, TransferMove(T(0), T(1), 4)), MoveError.faceDownCard);
       expect(err(s, TransferMove(T(2), T(3), 2)), MoveError.notASequence);
@@ -123,9 +157,17 @@ void main() {
     });
 
     test('cannot place on a face-down top card', () {
-      final s = board(tableau: [
-        [down('8S')], [up('7H')], [], [], [], [], [],
-      ]);
+      final s = board(
+        tableau: [
+          [down('8S')],
+          [up('7H')],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(err(s, TransferMove(T(1), T(0))), MoveError.illegalTarget);
     });
   });
@@ -135,14 +177,24 @@ void main() {
       final s = board(waste: ['AH'], tableau: List.generate(7, (_) => []));
       final h = Suit.hearts.index;
       expect(err(s, TransferMove(W, F(h))), isNull);
-      expect(err(s, TransferMove(W, F(Suit.spades.index))),
-          MoveError.illegalTarget);
+      expect(
+        err(s, TransferMove(W, F(Suit.spades.index))),
+        MoveError.illegalTarget,
+      );
     });
 
     test('ascending same suit', () {
       final s = board(
         foundations: [fnd('C', 4), [], [], []],
-        tableau: [[up('5C')], [up('6C')], [up('5S')], [], [], [], []],
+        tableau: [
+          [up('5C')],
+          [up('6C')],
+          [up('5S')],
+          [],
+          [],
+          [],
+          [],
+        ],
       );
       expect(err(s, TransferMove(T(0), F(0))), isNull);
       expect(err(s, TransferMove(T(1), F(0))), MoveError.illegalTarget);
@@ -152,13 +204,29 @@ void main() {
     test('only one card at a time to a foundation', () {
       final s = board(
         foundations: [fnd('C', 4), [], [], []],
-        tableau: [[up('6H'), up('5C')], [], [], [], [], [], []],
+        tableau: [
+          [up('6H'), up('5C')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
       );
       expect(err(s, TransferMove(T(0), F(0), 2)), MoveError.invalidCount);
     });
 
     test('foundation to tableau is configurable', () {
-      final tab = <List<TableauCard>>[[up('6H')], [], [], [], [], [], []];
+      final tab = <List<TableauCard>>[
+        [up('6H')],
+        [],
+        [],
+        [],
+        [],
+        [],
+        [],
+      ];
       final on = board(foundations: [fnd('C', 5), [], [], []], tableau: tab);
       expect(err(on, TransferMove(F(0), T(0))), isNull);
       final off = board(
@@ -166,15 +234,26 @@ void main() {
         foundations: [fnd('C', 5), [], [], []],
         tableau: tab,
       );
-      expect(err(off, TransferMove(F(0), T(0))),
-          MoveError.foundationToTableauDisabled);
+      expect(
+        err(off, TransferMove(F(0), T(0))),
+        MoveError.foundationToTableauDisabled,
+      );
       expect(err(on, TransferMove(F(0), F(1))), MoveError.illegalTarget);
     });
 
     test('nothing can be moved to stock or waste, nor from stock', () {
-      final s = board(waste: ['5H'], tableau: [
-        [up('6S')], [], [], [], [], [], [],
-      ]);
+      final s = board(
+        waste: ['5H'],
+        tableau: [
+          [up('6S')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       expect(err(s, TransferMove(T(0), W)), MoveError.illegalTarget);
       expect(err(s, TransferMove(T(0), S)), MoveError.illegalTarget);
       expect(err(s, TransferMove(S, T(0))), MoveError.illegalTarget);
@@ -248,9 +327,18 @@ void main() {
     });
 
     test('waste top can be played', () {
-      final s = board(waste: ['7H'], tableau: [
-        [up('8C')], [], [], [], [], [], [],
-      ]);
+      final s = board(
+        waste: ['7H'],
+        tableau: [
+          [up('8C')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
+      );
       final a = apply(s, TransferMove(W, T(0)));
       expect(a.waste, isEmpty);
       expect(a.tableau[0].last.card, c('7H'));
@@ -262,7 +350,15 @@ void main() {
     test('standard points', () {
       final s = board(
         waste: ['7H', 'AC'],
-        tableau: [[up('8C')], [down('3D'), up('AS')], [], [], [], [], []],
+        tableau: [
+          [up('8C')],
+          [down('3D'), up('AS')],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
       );
       var a = apply(s, TransferMove(W, F(0)));
       expect(a.score, Scoring.wasteToFoundation);
@@ -292,8 +388,13 @@ void main() {
     test('time bonus', () {
       expect(Scoring.timeBonus(const Duration(seconds: 10)), 0);
       expect(Scoring.timeBonus(const Duration(seconds: 100)), 7000);
-      expect(Scoring.finalScore(
-          baseScore: 500, elapsed: const Duration(seconds: 700)), 1500);
+      expect(
+        Scoring.finalScore(
+          baseScore: 500,
+          elapsed: const Duration(seconds: 700),
+        ),
+        1500,
+      );
     });
   });
 
@@ -349,7 +450,15 @@ void main() {
     test('win only when all 52 cards are on foundations', () {
       final almost = board(
         foundations: [fnd('C', 13), fnd('D', 13), fnd('H', 13), fnd('S', 12)],
-        tableau: [[up('KS')], [], [], [], [], [], []],
+        tableau: [
+          [up('KS')],
+          [],
+          [],
+          [],
+          [],
+          [],
+          [],
+        ],
         fillStock: false,
       );
       expect(almost.isWon, isFalse);

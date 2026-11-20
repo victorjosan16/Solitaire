@@ -20,11 +20,11 @@ def load(lang):
 
 def placeholders(s):
     # top-level {name} or {name, plural, ...}
-    names, depth, i = set(), 0, 0
+    names, depth = {}, 0
     for m in re.finditer(r'[{}]', s):
         if m.group() == '{':
             if depth == 0:
-                names.add(re.match(r'\{\s*(\w+)', s[m.start():]).group(1))
+                names[re.match(r'\{\s*(\w+)', s[m.start():]).group(1)] = None
             depth += 1
         else:
             depth -= 1
@@ -52,14 +52,14 @@ def main():
         for k in en:
             if k not in data: continue
             v = data[k]
-            if placeholders(v) != placeholders(en[k]):
+            if set(placeholders(v)) != set(placeholders(en[k])):
                 ok = False
                 print(f'{lang}.{k}: placeholder mismatch {placeholders(v)} vs {placeholders(en[k])}')
             arb[k] = v
             if lang == 'en':
                 ph = placeholders(v)
                 if ph:
-                    arb['@' + k] = {'placeholders': {p: {'type': types.get(p, 'String')} for p in sorted(ph)}}
+                    arb['@' + k] = {'placeholders': {p: {'type': types.get(p, 'String')} for p in ph}}
         with open(os.path.join(OUT, f'app_{lang}.arb'), 'w', encoding='utf-8') as f:
             json.dump(arb, f, ensure_ascii=False, indent=2)
             f.write('\n')

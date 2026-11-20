@@ -373,17 +373,22 @@ class NovaTabs extends StatelessWidget {
                     gradient: i == selected ? NovaColors.goldGradient : null,
                     borderRadius: BorderRadius.circular(NovaRadius.pill),
                   ),
-                  child: Text(
-                    labels[i],
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 15,
-                      color: i == selected
-                          ? NovaColors.navy
-                          : NovaColors.textSecondary,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 6),
+                      child: Text(
+                        labels[i],
+                        textAlign: TextAlign.center,
+                        maxLines: 1,
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                          color: i == selected
+                              ? NovaColors.navy
+                              : NovaColors.textSecondary,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -453,10 +458,7 @@ class NovaHeader extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: trailing == null ? 48 : null,
-            child: trailing,
-          ),
+          SizedBox(width: trailing == null ? 48 : null, child: trailing),
         ],
       ),
     );

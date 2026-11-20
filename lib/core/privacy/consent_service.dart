@@ -26,7 +26,8 @@ class UmpConsentService implements ConsentService {
         ConsentRequestParameters(),
         () async {
           await ConsentForm.loadAndShowConsentFormIfRequired((err) {
-            if (err != null) AppLogger.w('consent.form_error', {'code': err.errorCode});
+            if (err != null)
+              AppLogger.w('consent.form_error', {'code': err.errorCode});
             if (!done.isCompleted) done.complete();
           });
         },
@@ -54,7 +55,8 @@ class UmpConsentService implements ConsentService {
   @override
   Future<bool> privacyOptionsRequired() async {
     try {
-      return await ConsentInformation.instance.getPrivacyOptionsRequirementStatus() ==
+      return await ConsentInformation.instance
+              .getPrivacyOptionsRequirementStatus() ==
           PrivacyOptionsRequirementStatus.required;
     } catch (_) {
       return false;

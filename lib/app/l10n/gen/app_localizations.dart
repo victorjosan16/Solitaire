@@ -356,7 +356,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'{suit} foundation, {count} cards'**
-  String semFoundation(int count, String suit);
+  String semFoundation(String suit, int count);
 
   /// No description provided for @semEmptyColumn.
   ///
@@ -1040,7 +1040,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'This costs {price} coins. Balance after purchase: {after}.'**
-  String purchaseBody(int after, int price);
+  String purchaseBody(int price, int after);
 
   /// No description provided for @insufficientTitle.
   ///

@@ -32,6 +32,7 @@ flutter:
   generate: true
   assets:
     - assets/audio/
+    - assets/fonts/OFL.txt
   fonts:
     - family: Cinzel
       fonts:

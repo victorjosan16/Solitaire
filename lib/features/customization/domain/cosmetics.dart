@@ -108,7 +108,11 @@ class EquippedCosmetics {
 
     return EquippedCosmetics(
       cards: pick('cards', defaultCards, CosmeticKind.cards),
-      background: pick('background', defaultBackground, CosmeticKind.background),
+      background: pick(
+        'background',
+        defaultBackground,
+        CosmeticKind.background,
+      ),
       table: pick('table', defaultTable, CosmeticKind.table),
     );
   }

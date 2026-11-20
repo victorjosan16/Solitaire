@@ -61,7 +61,8 @@ class ModeStats {
       currentStreak: streak,
       bestStreak: streak > bestStreak ? streak : bestStreak,
       bestScore: r.won && r.score > bestScore ? r.score : bestScore,
-      fastestWinMs: r.won && (fastestWinMs == null || r.elapsedMs < fastestWinMs!)
+      fastestWinMs:
+          r.won && (fastestWinMs == null || r.elapsedMs < fastestWinMs!)
           ? r.elapsedMs
           : fastestWinMs,
       fewestMovesWin:
@@ -149,7 +150,9 @@ class PlayerStats {
       draw1: r.drawCount == 1 ? draw1.record(r) : draw1,
       draw3: r.drawCount == 3 ? draw3.record(r) : draw3,
       overallStreak: streak,
-      overallBestStreak: streak > overallBestStreak ? streak : overallBestStreak,
+      overallBestStreak: streak > overallBestStreak
+          ? streak
+          : overallBestStreak,
       maxCombo: r.maxCombo > maxCombo ? r.maxCombo : maxCombo,
       winsNoHints: winsNoHints + (r.won && r.hintsUsed == 0 ? 1 : 0),
       winsNoUndo: winsNoUndo + (r.won && r.undosUsed == 0 ? 1 : 0),

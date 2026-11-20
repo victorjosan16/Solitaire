@@ -25,11 +25,15 @@ enum ConflictResolution { keepLocal, keepRemote, askUser }
 /// * Same game id: higher move count / later updatedAt wins automatically.
 /// * Both sides have diverged active progress on different games and the
 ///   remote is newer: ask the user.
-ConflictResolution resolveGameConflict(GameSnapshot? local, GameSnapshot? remote) {
+ConflictResolution resolveGameConflict(
+  GameSnapshot? local,
+  GameSnapshot? remote,
+) {
   if (remote == null) return ConflictResolution.keepLocal;
   if (local == null) return ConflictResolution.keepRemote;
   if (local.gameId == remote.gameId) {
-    if (remote.finished && !local.finished) return ConflictResolution.keepRemote;
+    if (remote.finished && !local.finished)
+      return ConflictResolution.keepRemote;
     if (local.finished && !remote.finished) return ConflictResolution.keepLocal;
     return remote.history.length > local.history.length &&
             remote.updatedAt.isAfter(local.updatedAt)
@@ -37,9 +41,12 @@ ConflictResolution resolveGameConflict(GameSnapshot? local, GameSnapshot? remote
         : ConflictResolution.keepLocal;
   }
   if (!local.hasProgress || local.finished) {
-    return remote.finished ? ConflictResolution.keepLocal : ConflictResolution.keepRemote;
+    return remote.finished
+        ? ConflictResolution.keepLocal
+        : ConflictResolution.keepRemote;
   }
-  if (remote.finished || !remote.hasProgress) return ConflictResolution.keepLocal;
+  if (remote.finished || !remote.hasProgress)
+    return ConflictResolution.keepLocal;
   return remote.updatedAt.isAfter(local.updatedAt)
       ? ConflictResolution.askUser
       : ConflictResolution.keepLocal;

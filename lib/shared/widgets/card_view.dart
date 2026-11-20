@@ -29,7 +29,11 @@ class CardView extends StatelessWidget {
           ? BoxDecoration(
               borderRadius: BorderRadius.circular(width * 0.09),
               boxShadow: const [
-                BoxShadow(color: Color(0x66000000), blurRadius: 8, offset: Offset(1, 3)),
+                BoxShadow(
+                  color: Color(0x66000000),
+                  blurRadius: 8,
+                  offset: Offset(1, 3),
+                ),
               ],
             )
           : null,

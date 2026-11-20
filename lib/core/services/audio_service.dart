@@ -6,7 +6,11 @@ import '../logging/app_logger.dart';
 enum Sfx { place, flip, draw, foundation, invalid, tap, coins, victory }
 
 abstract class AudioService {
-  void configure({required bool sound, required bool music, required bool haptics});
+  void configure({
+    required bool sound,
+    required bool music,
+    required bool haptics,
+  });
   void play(Sfx sfx);
   void haptic(HapticKind kind);
   void dispose();
@@ -18,7 +22,11 @@ enum HapticKind { light, error, success }
 class SilentAudioService implements AudioService {
   final List<Sfx> played = [];
   @override
-  void configure({required bool sound, required bool music, required bool haptics}) {}
+  void configure({
+    required bool sound,
+    required bool music,
+    required bool haptics,
+  }) {}
   @override
   void play(Sfx sfx) => played.add(sfx);
   @override
@@ -47,7 +55,11 @@ class AudioplayersAudioService implements AudioService {
   bool _sound = true, _musicOn = false, _haptics = true;
 
   @override
-  void configure({required bool sound, required bool music, required bool haptics}) {
+  void configure({
+    required bool sound,
+    required bool music,
+    required bool haptics,
+  }) {
     _sound = sound;
     _haptics = haptics;
     if (music != _musicOn) {
@@ -80,9 +92,12 @@ class AudioplayersAudioService implements AudioService {
       player.setPlayerMode(PlayerMode.lowLatency);
       return player;
     });
-    p.stop().then((_) => p.play(AssetSource(_files[sfx]!), volume: 0.7)).catchError(
-      (Object e) => AppLogger.w('audio.sfx_failed', {'sfx': sfx.name}, e),
-    );
+    p
+        .stop()
+        .then((_) => p.play(AssetSource(_files[sfx]!), volume: 0.7))
+        .catchError(
+          (Object e) => AppLogger.w('audio.sfx_failed', {'sfx': sfx.name}, e),
+        );
   }
 
   @override

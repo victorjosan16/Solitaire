@@ -68,8 +68,7 @@ class DailyChallenge {
     var best = 0, run = 0;
     DateTime? prev;
     for (final d in days) {
-      if (prev != null &&
-          DateTime(prev.year, prev.month, prev.day + 1) == d) {
+      if (prev != null && DateTime(prev.year, prev.month, prev.day + 1) == d) {
         run++;
       } else {
         run = 1;

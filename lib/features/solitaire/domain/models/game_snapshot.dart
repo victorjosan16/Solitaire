@@ -51,7 +51,9 @@ class GameSnapshot {
   final bool usedAutoFinish;
   final bool finished;
 
-  List<PlayingCard> get deck => [for (final i in deckOrder) PlayingCard.fromId(i)];
+  List<PlayingCard> get deck => [
+    for (final i in deckOrder) PlayingCard.fromId(i),
+  ];
 
   bool get hasProgress => history.isNotEmpty;
 

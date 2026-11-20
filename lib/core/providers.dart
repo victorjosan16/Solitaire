@@ -24,16 +24,30 @@ final sharedPreferencesProvider = Provider<SharedPreferences>(
 );
 
 /// Data loaded before the first frame (local only, a few milliseconds).
-final initialProfileProvider = Provider<ProfileData>((ref) => const ProfileData());
+final initialProfileProvider = Provider<ProfileData>(
+  (ref) => const ProfileData(),
+);
 final initialGameProvider = Provider<GameSnapshot?>((ref) => null);
 
 final adServiceProvider = Provider<AdService>((ref) => DisabledAdService());
-final consentServiceProvider = Provider<ConsentService>((ref) => NoConsentService());
-final analyticsProvider = Provider<AnalyticsService>((ref) => LocalAnalyticsService());
-final crashReporterProvider = Provider<CrashReporter>((ref) => LogCrashReporter());
-final audioServiceProvider = Provider<AudioService>((ref) => SilentAudioService());
-final cloudBackupProvider = Provider<CloudBackupService>((ref) => UnavailableCloudBackup());
-final remoteConfigProvider = Provider<RemoteConfigService>((ref) => const LocalRemoteConfig());
+final consentServiceProvider = Provider<ConsentService>(
+  (ref) => NoConsentService(),
+);
+final analyticsProvider = Provider<AnalyticsService>(
+  (ref) => LocalAnalyticsService(),
+);
+final crashReporterProvider = Provider<CrashReporter>(
+  (ref) => LogCrashReporter(),
+);
+final audioServiceProvider = Provider<AudioService>(
+  (ref) => SilentAudioService(),
+);
+final cloudBackupProvider = Provider<CloudBackupService>(
+  (ref) => UnavailableCloudBackup(),
+);
+final remoteConfigProvider = Provider<RemoteConfigService>(
+  (ref) => const LocalRemoteConfig(),
+);
 
 /// Injectable wall clock (tests freeze time).
 final clockProvider = Provider<DateTime Function()>((ref) => DateTime.now);

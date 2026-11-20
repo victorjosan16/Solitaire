@@ -81,7 +81,16 @@ class AppSettings {
 
 /// Supported UI languages, English first (default / fallback).
 const supportedLanguageCodes = [
-  'en', 'ro', 'ru', 'uk', 'de', 'fr', 'es', 'it', 'pt', 'pl',
+  'en',
+  'ro',
+  'ru',
+  'uk',
+  'de',
+  'fr',
+  'es',
+  'it',
+  'pt',
+  'pl',
 ];
 
 /// Endonyms shown in the language picker (not translated on purpose).

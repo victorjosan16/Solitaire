@@ -12,13 +12,22 @@ import 'package:flutter/foundation.dart';
 class AppConfig {
   const AppConfig._();
 
-  static const _rewardedAndroid = String.fromEnvironment('ADMOB_REWARDED_ANDROID');
+  static const _rewardedAndroid = String.fromEnvironment(
+    'ADMOB_REWARDED_ANDROID',
+  );
   static const _rewardedIos = String.fromEnvironment('ADMOB_REWARDED_IOS');
-  static const _interstitialAndroid = String.fromEnvironment('ADMOB_INTERSTITIAL_ANDROID');
-  static const _interstitialIos = String.fromEnvironment('ADMOB_INTERSTITIAL_IOS');
+  static const _interstitialAndroid = String.fromEnvironment(
+    'ADMOB_INTERSTITIAL_ANDROID',
+  );
+  static const _interstitialIos = String.fromEnvironment(
+    'ADMOB_INTERSTITIAL_IOS',
+  );
 
   /// Set `--dart-define=ADS_ENABLED=false` to ship an ad-free build.
-  static const adsEnabledFlag = bool.fromEnvironment('ADS_ENABLED', defaultValue: true);
+  static const adsEnabledFlag = bool.fromEnvironment(
+    'ADS_ENABLED',
+    defaultValue: true,
+  );
 
   static const privacyPolicyUrl = String.fromEnvironment(
     'PRIVACY_POLICY_URL',
@@ -28,7 +37,8 @@ class AppConfig {
   // Google's documented public test ad units.
   static const _testRewardedAndroid = 'ca-app-pub-3940256099942544/5224354917';
   static const _testRewardedIos = 'ca-app-pub-3940256099942544/1712485313';
-  static const _testInterstitialAndroid = 'ca-app-pub-3940256099942544/1033173712';
+  static const _testInterstitialAndroid =
+      'ca-app-pub-3940256099942544/1033173712';
   static const _testInterstitialIos = 'ca-app-pub-3940256099942544/4411468910';
 
   static bool get _isIos => defaultTargetPlatform == TargetPlatform.iOS;
@@ -52,5 +62,8 @@ class AppConfig {
     return kReleaseMode ? null : test;
   }
 
-  static const appVersion = String.fromEnvironment('APP_VERSION', defaultValue: '0.1.0');
+  static const appVersion = String.fromEnvironment(
+    'APP_VERSION',
+    defaultValue: '0.1.0',
+  );
 }

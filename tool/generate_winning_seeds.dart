@@ -27,8 +27,10 @@ List<int> find(GameConfig config, int count, int startSeed) {
     if (!s.isWon) throw StateError('replay failed for $seed');
     out.add(seed);
   }
-  stderr.writeln('draw${config.drawCount}: ${out.length}/$tried solved '
-      'in ${sw.elapsed.inSeconds}s');
+  stderr.writeln(
+    'draw${config.drawCount}: ${out.length}/$tried solved '
+    'in ${sw.elapsed.inSeconds}s',
+  );
   return out;
 }
 

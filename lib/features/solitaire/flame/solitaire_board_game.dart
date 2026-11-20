@@ -145,14 +145,16 @@ class SolitaireBoardGame extends FlameGame {
         );
         final delay = order++ * 0.035;
         comp.animateTo(target, z: pl.z, duration: 0.24, delay: delay);
-        if (pl.faceUp) comp.flip(true, delay: delay + 0.2, duration: flipDuration);
+        if (pl.faceUp)
+          comp.flip(true, delay: delay + 0.2, duration: flipDuration);
         continue;
       }
       if (!animate || !_animate) {
         comp.snapTo(target, faceUp: pl.faceUp, z: pl.z);
         continue;
       }
-      if (comp.faceUp != pl.faceUp) comp.flip(pl.faceUp, duration: flipDuration);
+      if (comp.faceUp != pl.faceUp)
+        comp.flip(pl.faceUp, duration: flipDuration);
       if ((comp.position - target).length > 0.5) {
         comp.animateTo(target, z: pl.z, duration: moveDuration);
       } else {
@@ -388,8 +390,15 @@ class CardComponent extends PositionComponent with DragCallbacks {
     scale = Vector2(1, 1);
   }
 
-  void animateTo(Vector2 target, {required int z, required double duration, double delay = 0}) {
-    children.whereType<MoveEffect>().toList().forEach((e) => e.removeFromParent());
+  void animateTo(
+    Vector2 target, {
+    required int z,
+    required double duration,
+    double delay = 0,
+  }) {
+    children.whereType<MoveEffect>().toList().forEach(
+      (e) => e.removeFromParent(),
+    );
     restingZ = z;
     priority = 1000 + z; // fly above resting cards
     add(
@@ -409,7 +418,10 @@ class CardComponent extends PositionComponent with DragCallbacks {
     final half = duration / 2;
     add(
       SequenceEffect([
-        ScaleEffect.to(Vector2(0, 1.04), EffectController(duration: half, startDelay: delay)),
+        ScaleEffect.to(
+          Vector2(0, 1.04),
+          EffectController(duration: half, startDelay: delay),
+        ),
         ScaleEffect.to(
           Vector2(1, 1),
           EffectController(duration: half),
@@ -461,7 +473,9 @@ class CardComponent extends PositionComponent with DragCallbacks {
       rr.shift(ui.Offset(lifted ? 3 : 0.8, lifted ? 6 : 1.4)),
       ui.Paint()
         ..color = const ui.Color(0x55000000)
-        ..maskFilter = lifted ? const ui.MaskFilter.blur(ui.BlurStyle.normal, 5) : null,
+        ..maskFilter = lifted
+            ? const ui.MaskFilter.blur(ui.BlurStyle.normal, 5)
+            : null,
     );
     CardPainter.paintCard(
       canvas,
@@ -472,7 +486,9 @@ class CardComponent extends PositionComponent with DragCallbacks {
       style: _game.visuals.cardStyle,
     );
     if (highlight || _pulse > 0) {
-      final a = highlight ? 1.0 : (0.5 + 0.5 * (_pulse * 6).remainder(2).abs().clamp(0, 1));
+      final a = highlight
+          ? 1.0
+          : (0.5 + 0.5 * (_pulse * 6).remainder(2).abs().clamp(0, 1));
       canvas.drawRRect(
         rr.inflate(1.5),
         ui.Paint()
@@ -490,7 +506,8 @@ class CardComponent extends PositionComponent with DragCallbacks {
   }
 
   @override
-  void onDragUpdate(DragUpdateEvent event) => _game.updateDrag(event.canvasDelta);
+  void onDragUpdate(DragUpdateEvent event) =>
+      _game.updateDrag(event.canvasDelta);
 
   @override
   void onDragEnd(DragEndEvent event) {
@@ -538,8 +555,16 @@ class SlotComponent extends PositionComponent with DragCallbacks {
       final p = ui.Paint()
         ..color = const ui.Color(0x88D6B574)
         ..strokeWidth = 2;
-      canvas.drawLine(ui.Offset(size.x * 0.3, size.y * 0.4), ui.Offset(size.x * 0.7, size.y * 0.6), p);
-      canvas.drawLine(ui.Offset(size.x * 0.7, size.y * 0.4), ui.Offset(size.x * 0.3, size.y * 0.6), p);
+      canvas.drawLine(
+        ui.Offset(size.x * 0.3, size.y * 0.4),
+        ui.Offset(size.x * 0.7, size.y * 0.6),
+        p,
+      );
+      canvas.drawLine(
+        ui.Offset(size.x * 0.7, size.y * 0.4),
+        ui.Offset(size.x * 0.3, size.y * 0.6),
+        p,
+      );
     }
   }
 
@@ -550,7 +575,8 @@ class SlotComponent extends PositionComponent with DragCallbacks {
   }
 
   @override
-  void onDragUpdate(DragUpdateEvent event) => _moved += event.canvasDelta.length;
+  void onDragUpdate(DragUpdateEvent event) =>
+      _moved += event.canvasDelta.length;
 
   @override
   void onDragEnd(DragEndEvent event) {
@@ -560,7 +586,8 @@ class SlotComponent extends PositionComponent with DragCallbacks {
 }
 
 /// Felt table surface.
-class TableComponent extends Component with HasGameReference<SolitaireBoardGame> {
+class TableComponent extends Component
+    with HasGameReference<SolitaireBoardGame> {
   @override
   void render(ui.Canvas canvas) {
     final s = game.size;

@@ -238,18 +238,20 @@ class GameController extends Notifier<GameViewState> {
     final s = state.snapshot;
     if (s == null || s.finished || !s.hasProgress) return;
     _clock.pause();
-    await ref.read(profileProvider.notifier).recordGame(
-      GameResult(
-        gameId: s.gameId,
-        drawCount: s.config.drawCount,
-        won: false,
-        elapsedMs: _clock.elapsedMs,
-        moves: s.state.moves,
-        hintsUsed: s.hintsUsed,
-        undosUsed: s.undosUsed,
-        maxCombo: s.maxCombo,
-      ),
-    );
+    await ref
+        .read(profileProvider.notifier)
+        .recordGame(
+          GameResult(
+            gameId: s.gameId,
+            drawCount: s.config.drawCount,
+            won: false,
+            elapsedMs: _clock.elapsedMs,
+            moves: s.state.moves,
+            hintsUsed: s.hintsUsed,
+            undosUsed: s.undosUsed,
+            maxCombo: s.maxCombo,
+          ),
+        );
   }
 
   /// Replays the exact same initial deal (same game id: results are still
@@ -544,22 +546,24 @@ class GameController extends Notifier<GameViewState> {
     final bonus = Scoring.timeBonus(elapsed);
     final finalScore = s.state.score + bonus;
     final before = ref.read(profileProvider).stats.total.bestScore;
-    final outcome = await ref.read(profileProvider.notifier).recordGame(
-      GameResult(
-        gameId: s.gameId,
-        drawCount: s.config.drawCount,
-        won: true,
-        score: finalScore,
-        elapsedMs: s.elapsedMs,
-        moves: s.state.moves,
-        hintsUsed: s.hintsUsed,
-        undosUsed: s.undosUsed,
-        maxCombo: s.maxCombo,
-        usedAutoFinish: s.usedAutoFinish,
-        winningDeal: s.mode != GameMode.random,
-        dailyDate: s.dailyDate,
-      ),
-    );
+    final outcome = await ref
+        .read(profileProvider.notifier)
+        .recordGame(
+          GameResult(
+            gameId: s.gameId,
+            drawCount: s.config.drawCount,
+            won: true,
+            score: finalScore,
+            elapsedMs: s.elapsedMs,
+            moves: s.state.moves,
+            hintsUsed: s.hintsUsed,
+            undosUsed: s.undosUsed,
+            maxCombo: s.maxCombo,
+            usedAutoFinish: s.usedAutoFinish,
+            winningDeal: s.mode != GameMode.random,
+            dailyDate: s.dailyDate,
+          ),
+        );
     ref.read(adServiceProvider).onGameFinished();
     ref.read(analyticsProvider).logEvent('game_won', {
       'mode': s.mode.name,
@@ -603,10 +607,9 @@ class GameController extends Notifier<GameViewState> {
         .read(adServiceProvider)
         .showRewarded(RewardPlacement.doubleVictoryCoins);
     if (outcome is RewardEarned) {
-      await ref.read(profileProvider.notifier).doubleWinCoins(
-        v.gameId,
-        v.coinsEarned,
-      );
+      await ref
+          .read(profileProvider.notifier)
+          .doubleWinCoins(v.gameId, v.coinsEarned);
       _audio.play(Sfx.coins);
     }
     return outcome;

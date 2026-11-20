@@ -121,12 +121,11 @@ class ScenePainter extends CustomPainter {
     canvas.drawRect(
       rect,
       Paint()
-        ..shader = ui.Gradient.linear(
-          Offset.zero,
-          Offset(0, horizon),
-          p.sky,
-          [0, 0.6, 1],
-        ),
+        ..shader = ui.Gradient.linear(Offset.zero, Offset(0, horizon), p.sky, [
+          0,
+          0.6,
+          1,
+        ]),
     );
     // Sun / moon glow.
     final sun = Offset(w * 0.55, horizon - h * 0.08);
@@ -159,22 +158,35 @@ class ScenePainter extends CustomPainter {
         final y0 = h * (0.12 + band * 0.07);
         path.moveTo(0, y0);
         for (var x = 0.0; x <= w; x += w / 20) {
-          path.lineTo(x, y0 + math.sin(x / w * math.pi * 2.2 + band) * h * 0.05);
+          path.lineTo(
+            x,
+            y0 + math.sin(x / w * math.pi * 2.2 + band) * h * 0.05,
+          );
         }
         canvas.drawPath(
           path,
           Paint()
             ..style = PaintingStyle.stroke
             ..strokeWidth = h * 0.06
-            ..color = (band == 1 ? const Color(0xFF7CF5FF) : p.glow)
-                .withValues(alpha: 0.28)
+            ..color = (band == 1 ? const Color(0xFF7CF5FF) : p.glow).withValues(
+              alpha: 0.28,
+            )
             ..maskFilter = MaskFilter.blur(BlurStyle.normal, h * 0.03),
         );
       }
     }
 
     // Mountains.
-    _ridge(canvas, size, horizon, h * 0.22, p.far, rng, sharp: p.snow, peaks: 5);
+    _ridge(
+      canvas,
+      size,
+      horizon,
+      h * 0.22,
+      p.far,
+      rng,
+      sharp: p.snow,
+      peaks: 5,
+    );
     if (p.snow) _snowCaps(canvas, size, horizon, h * 0.22, rng);
     _ridge(canvas, size, horizon + h * 0.02, h * 0.12, p.near, rng, peaks: 7);
 
@@ -184,17 +196,18 @@ class ScenePainter extends CustomPainter {
       canvas.drawRect(
         Rect.fromLTRB(0, groundTop, w, h),
         Paint()
-          ..shader = ui.Gradient.linear(
-            Offset(0, groundTop),
-            Offset(0, h),
-            [p.water!, p.ground],
-          ),
+          ..shader = ui.Gradient.linear(Offset(0, groundTop), Offset(0, h), [
+            p.water!,
+            p.ground,
+          ]),
       );
       // Glow reflection streaks.
-      final refl = Paint()..color = p.glow.withValues(alpha: 0.22);
-      for (var i = 0; i < 9; i++) {
-        final y = groundTop + i * h * 0.018 + 4;
-        final half = w * (0.12 - i * 0.01);
+      final refl = Paint()
+        ..color = p.glow.withValues(alpha: 0.16)
+        ..maskFilter = MaskFilter.blur(BlurStyle.normal, h * 0.004);
+      for (var i = 0; i < 5; i++) {
+        final y = groundTop + i * h * 0.014 + 3;
+        final half = w * (0.1 - i * 0.016);
         canvas.drawRRect(
           RRect.fromRectAndRadius(
             Rect.fromLTRB(sun.dx - half, y, sun.dx + half, y + 2.5),
@@ -242,8 +255,13 @@ class ScenePainter extends CustomPainter {
         final side = x < w * 0.3 || x > w * 0.7;
         if (!side) continue;
         final th = h * (0.08 + rng.next() * 0.14);
-        _pine(canvas, Offset(x, groundTop + h * 0.03), th, treeColor,
-            round: p.autumn);
+        _pine(
+          canvas,
+          Offset(x, groundTop + h * 0.03),
+          th,
+          treeColor,
+          round: p.autumn,
+        );
       }
     }
 
@@ -264,8 +282,16 @@ class ScenePainter extends CustomPainter {
     );
   }
 
-  void _ridge(Canvas c, Size s, double base, double height, Color color,
-      _Rng rng, {bool sharp = false, int peaks = 6}) {
+  void _ridge(
+    Canvas c,
+    Size s,
+    double base,
+    double height,
+    Color color,
+    _Rng rng, {
+    bool sharp = false,
+    int peaks = 6,
+  }) {
     final path = Path()..moveTo(0, base);
     final step = s.width / peaks;
     for (var i = 0; i <= peaks; i++) {
@@ -275,7 +301,12 @@ class ScenePainter extends CustomPainter {
         path.lineTo(px, py);
         path.lineTo(px + step * 0.5, base - height * 0.25 * rng.next());
       } else {
-        path.quadraticBezierTo(px - step * 0.3, py, px + step * 0.2, base - height * 0.2);
+        path.quadraticBezierTo(
+          px - step * 0.3,
+          py,
+          px + step * 0.2,
+          base - height * 0.2,
+        );
       }
     }
     path
@@ -308,12 +339,27 @@ class ScenePainter extends CustomPainter {
     }
   }
 
-  void _pine(Canvas c, Offset base, double h, Color color, {bool round = false}) {
+  void _pine(
+    Canvas c,
+    Offset base,
+    double h,
+    Color color, {
+    bool round = false,
+  }) {
     final p = Paint()..color = color;
     if (round) {
-      c.drawRect(Rect.fromLTWH(base.dx - h * 0.03, base.dy - h * 0.4, h * 0.06, h * 0.4), p);
-      c.drawOval(Rect.fromCenter(center: base.translate(0, -h * 0.6), width: h * 0.55, height: h * 0.6),
-          Paint()..color = const Color(0xFFB4532A).withValues(alpha: 0.9));
+      c.drawRect(
+        Rect.fromLTWH(base.dx - h * 0.03, base.dy - h * 0.4, h * 0.06, h * 0.4),
+        p,
+      );
+      c.drawOval(
+        Rect.fromCenter(
+          center: base.translate(0, -h * 0.6),
+          width: h * 0.55,
+          height: h * 0.6,
+        ),
+        Paint()..color = const Color(0xFFB4532A).withValues(alpha: 0.9),
+      );
       return;
     }
     final path = Path()..moveTo(base.dx, base.dy - h);
@@ -345,18 +391,35 @@ class ScenePainter extends CustomPainter {
     c.drawPath(
       Path()
         ..moveTo(base.dx, base.dy)
-        ..quadraticBezierTo(base.dx + h * 0.05, base.dy - h * 0.6, top.dx, top.dy),
+        ..quadraticBezierTo(
+          base.dx + h * 0.05,
+          base.dy - h * 0.6,
+          top.dx,
+          top.dy,
+        ),
       trunk,
     );
     final leaf = Paint()..color = color;
     for (var i = 0; i < 7; i++) {
       final a = -math.pi + i * math.pi / 6;
-      final tip = top + Offset(math.cos(a) * h * 0.38, math.sin(a) * h * 0.22 + h * 0.08);
+      final tip =
+          top +
+          Offset(math.cos(a) * h * 0.38, math.sin(a) * h * 0.22 + h * 0.08);
       c.drawPath(
         Path()
           ..moveTo(top.dx, top.dy)
-          ..quadraticBezierTo((top.dx + tip.dx) / 2, top.dy - h * 0.1, tip.dx, tip.dy)
-          ..quadraticBezierTo((top.dx + tip.dx) / 2, top.dy - h * 0.02, top.dx, top.dy + h * 0.02),
+          ..quadraticBezierTo(
+            (top.dx + tip.dx) / 2,
+            top.dy - h * 0.1,
+            tip.dx,
+            tip.dy,
+          )
+          ..quadraticBezierTo(
+            (top.dx + tip.dx) / 2,
+            top.dy - h * 0.02,
+            top.dx,
+            top.dy + h * 0.02,
+          ),
         leaf,
       );
     }

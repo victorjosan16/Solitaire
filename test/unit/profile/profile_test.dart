@@ -6,27 +6,36 @@ import 'package:solitaire_nova/features/daily_challenge/domain/daily_challenge.d
 import 'package:solitaire_nova/features/statistics/domain/player_stats.dart';
 import 'package:solitaire_nova/shared/models/profile.dart';
 
-GameResult win(String id, {int draw = 1, int ms = 400000, int hints = 0,
-    int undos = 0, String? daily, int score = 3000, int moves = 150}) =>
-    GameResult(
-      gameId: id,
-      drawCount: draw,
-      won: true,
-      score: score,
-      elapsedMs: ms,
-      moves: moves,
-      hintsUsed: hints,
-      undosUsed: undos,
-      dailyDate: daily,
-    );
+GameResult win(
+  String id, {
+  int draw = 1,
+  int ms = 400000,
+  int hints = 0,
+  int undos = 0,
+  String? daily,
+  int score = 3000,
+  int moves = 150,
+}) => GameResult(
+  gameId: id,
+  drawCount: draw,
+  won: true,
+  score: score,
+  elapsedMs: ms,
+  moves: moves,
+  hintsUsed: hints,
+  undosUsed: undos,
+  dailyDate: daily,
+);
 
 void main() {
   final now = DateTime(2026, 11, 20, 12);
 
   test('catalog has 30+ unique achievements', () {
     expect(achievementCatalog.length, greaterThanOrEqualTo(30));
-    expect(achievementCatalog.map((a) => a.id).toSet().length,
-        achievementCatalog.length);
+    expect(
+      achievementCatalog.map((a) => a.id).toSet().length,
+      achievementCatalog.length,
+    );
   });
 
   test('coin grants are idempotent', () {
@@ -53,9 +62,18 @@ void main() {
     var p = const ProfileData();
     p = p.recordGame(win('a', ms: 200000, score: 4000), now).$1;
     p = p.recordGame(win('b', draw: 3, ms: 100000, score: 2000), now).$1;
-    p = p.recordGame(const GameResult(
-        gameId: 'c', drawCount: 1, won: false, elapsedMs: 5000, moves: 3),
-        now).$1;
+    p = p
+        .recordGame(
+          const GameResult(
+            gameId: 'c',
+            drawCount: 1,
+            won: false,
+            elapsedMs: 5000,
+            moves: 3,
+          ),
+          now,
+        )
+        .$1;
     expect(p.stats.total.played, 3);
     expect(p.stats.total.won, 2);
     expect(p.stats.draw3.won, 1);
@@ -80,7 +98,9 @@ void main() {
 
   test('daily reward only once and only for today', () {
     final today = DailyChallenge.keyFor(now);
-    final yesterday = DailyChallenge.keyFor(now.subtract(const Duration(days: 1)));
+    final yesterday = DailyChallenge.keyFor(
+      now.subtract(const Duration(days: 1)),
+    );
     var p = const ProfileData();
     final (p1, o1) = p.recordGame(win('d1', daily: today), now);
     expect(o1.dailyRewarded, isTrue);
@@ -114,8 +134,10 @@ void main() {
     expect(p.hintTokens, ProfileData.hintPackSize);
     expect(p.coins, 100 - ProfileData.hintPackPrice);
     p = p.grantRewardedHints('ad1').grantRewardedHints('ad1');
-    expect(p.hintTokens,
-        ProfileData.hintPackSize + ProfileData.rewardedHintCount);
+    expect(
+      p.hintTokens,
+      ProfileData.hintPackSize + ProfileData.rewardedHintCount,
+    );
   });
 
   test('double coins only once per game', () {

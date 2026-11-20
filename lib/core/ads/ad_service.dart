@@ -122,7 +122,10 @@ class DisabledAdService implements AdService {
 
 /// Scriptable fake for tests and UI demos.
 class FakeAdService implements AdService {
-  FakeAdService({this.nextOutcome = const RewardSkipped(), this.available = true});
+  FakeAdService({
+    this.nextOutcome = const RewardSkipped(),
+    this.available = true,
+  });
 
   RewardOutcome nextOutcome;
   bool available;

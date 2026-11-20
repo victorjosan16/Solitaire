@@ -190,8 +190,11 @@ class BoardLayout {
     for (var i = 0; i < col.length - 1; i++) {
       h += col[i].faceUp ? tableauFaceUp[p.index] : tableauFaceDown[p.index];
     }
-    return Rect.fromLTWH(r.left, r.top, r.width, h).inflate(
-      cardSize.width * 0.12,
-    );
+    return Rect.fromLTWH(
+      r.left,
+      r.top,
+      r.width,
+      h,
+    ).inflate(cardSize.width * 0.12);
   }
 }

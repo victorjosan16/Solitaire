@@ -38,9 +38,7 @@ class KlondikeRules {
     PlayingCard card,
     int foundationIndex,
     List<PlayingCard> foundation,
-  ) =>
-      card.suit.index == foundationIndex &&
-      card.rank == foundation.length + 1;
+  ) => card.suit.index == foundationIndex && card.rank == foundation.length + 1;
 
   /// Whether the tableau cards from [start] to the top form a movable run
   /// (all face up, alternating colours, consecutive descending ranks).

@@ -204,7 +204,9 @@ class GameState {
   String toString() {
     final b = StringBuffer()
       ..writeln('Stock(${stock.length}) Waste: ${waste.join(' ')}')
-      ..writeln('Foundations: ${foundations.map((f) => f.isEmpty ? '--' : f.last).join(' ')}');
+      ..writeln(
+        'Foundations: ${foundations.map((f) => f.isEmpty ? '--' : f.last).join(' ')}',
+      );
     for (var i = 0; i < 7; i++) {
       b.writeln('T$i: ${tableau[i].join(' ')}');
     }

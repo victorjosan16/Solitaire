@@ -44,8 +44,7 @@ class MoveAdvisor {
       final m = TransferMove(from, to, count);
       if (!KlondikeEngine.isLegal(s, m)) continue;
       if (s.tableau[c].isNotEmpty) return m;
-      final pointless =
-          from.isTableau && s.tableau[from.index].length == count;
+      final pointless = from.isTableau && s.tableau[from.index].length == count;
       if (!pointless) emptyTarget ??= m;
     }
     return emptyTarget ?? foundationMove;
