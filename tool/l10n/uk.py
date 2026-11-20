@@ -42,6 +42,7 @@ UK = {
  "newGameBody": "Поточну гру буде зараховано як поразку.",
  "victoryTitle": "Перемога!",
  "finalScore": "Підсумковий рахунок", "timeLabel": "Час", "movesLabel": "Ходи", "maxCombo": "Макс. комбо",
+ "speedBonus": "Бонус за швидкість",
  "timeBonus": "Бонус за час", "bestScore": "Найкращий рахунок", "newRecord": "Новий рекорд!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Подвоїти монети · реклама",

@@ -80,8 +80,13 @@ Put the iOS AdMob **app** id in `ios/Flutter/AdMob.xcconfig` (gitignored): `GAD_
   unless production unit ids are passed via `--dart-define` (never committed).
 - Rewarded ads are opt-in only (double victory coins, hint pack); rewards are granted only on
   the SDK's earned-reward callback, keyed by a unique event id.
+- Banner: standard 320×50 at the **top of the game screen only**, loaded after the **10th move**
+  of a game (the deal and opening stay ad-free), kept for the rest of that game (no flicker on
+  undo), removed on victory and absent from menus. Separated from the pause button by padding and a
+  gold hairline (AdMob placement policy); inserted only when no card is being dragged.
+  Unit ids: `--dart-define=ADMOB_BANNER_ANDROID=… / ADMOB_BANNER_IOS=…`.
 - Interstitials only at natural breaks (leaving the Victory screen), never on launch, capped by
-  `InterstitialPolicy` (≥2 games, ≥4 min cooldown, ≤4/session, 2 min launch grace).
+  `InterstitialPolicy` (≥3 games, ≥4 min cooldown, ≤4/session, 2 min launch grace).
 - Consent: app-owned first-run dialog (analytics + personalized ads, both default **off**) and
   Google UMP (`UmpConsentService`) for regions that legally require it; "Privacy & ad choices"
   in Settings reopens it. Non-personalized requests when personalization is off.

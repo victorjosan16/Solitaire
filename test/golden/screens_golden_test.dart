@@ -4,6 +4,7 @@ library;
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_ui/material_ui.dart';
 import 'package:solitaire_nova/app/router/app_router.dart';
+import 'package:solitaire_nova/core/ads/ad_service.dart';
 import 'package:solitaire_nova/features/solitaire/application/game_controller.dart';
 import 'package:solitaire_nova/features/solitaire/domain/engine/move_advisor.dart';
 import 'package:solitaire_nova/features/solitaire/domain/engine/solver.dart';
@@ -198,4 +199,38 @@ void main() {
       );
     });
   }
+
+  testWidgets('small game with top banner', (tester) async {
+    final ads = FakeAdService()..banners = true;
+    final h = await pumpApp(
+      tester,
+      size: const Size(320, 640),
+      route: Routes.home,
+      profile: sampleProfile(now),
+      clock: clock,
+      ads: ads,
+    );
+    final c = h.container.read(gameControllerProvider.notifier);
+    await c.startNewGame(mode: GameMode.winning, drawCount: 1);
+    h.router.push(Routes.game);
+    await settle(tester, const Duration(seconds: 3));
+    for (var i = 0; i < 14; i++) {
+      final b = h.container.read(gameControllerProvider).board!;
+      final m = MoveAdvisor.hint(b);
+      if (m == null) break;
+      switch (m) {
+        case DrawMove():
+        case RecycleMove():
+          await c.tapStock();
+        case TransferMove(:final from, :final to, :final count):
+          await c.drop(from, count, to);
+      }
+      await tester.pump(const Duration(milliseconds: 300));
+    }
+    await settle(tester);
+    await expectLater(
+      find.byType(MaterialApp),
+      matchesGoldenFile('goldens/small_game_banner.png'),
+    );
+  });
 }

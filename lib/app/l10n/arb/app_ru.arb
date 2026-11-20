@@ -78,6 +78,7 @@
   "timeLabel": "Время",
   "movesLabel": "Ходы",
   "maxCombo": "Макс. комбо",
+  "speedBonus": "Бонус за скорость",
   "timeBonus": "Бонус за время",
   "bestScore": "Лучший счёт",
   "newRecord": "Новый рекорд!",

@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 /// Outcome of an opt-in rewarded ad. Rewards are granted ONLY on [earned],
 /// using [rewardEventId] as the idempotency key.
 sealed class RewardOutcome {
@@ -23,6 +25,34 @@ enum AdUnavailableReason { noFill, offline, consentDenied, disabled, error }
 
 enum InterstitialPlacement { afterGameEnd, returnToMenu }
 
+/// A loaded banner ready to be placed in the tree. The owner must call
+/// [dispose] when the banner leaves the screen.
+abstract class BannerSlot {
+  double get height;
+  Widget build();
+  void dispose();
+}
+
+/// When the in-game banner may be visible (pure, unit-tested).
+///
+/// * Never during the first [graceMoves] moves of a game, so the deal and the
+///   opening are ad-free.
+/// * Once shown it stays for the rest of that game (no flicker on undo).
+/// * Hidden as soon as the game is won (victory screen, menus: no banner).
+class BannerPolicy {
+  const BannerPolicy({this.graceMoves = 10});
+  final int graceMoves;
+
+  bool shouldShow({
+    required int movesPlayed,
+    required bool alreadyShownThisGame,
+    required bool gameFinished,
+  }) {
+    if (gameFinished) return false;
+    return alreadyShownThisGame || movesPlayed >= graceMoves;
+  }
+}
+
 enum RewardPlacement { doubleVictoryCoins, hintPack }
 
 /// Ads abstraction. The game never depends on ads to function.
@@ -40,6 +70,12 @@ abstract class AdService {
   /// Informs the policy that a game finished (natural break point).
   void onGameFinished();
 
+  /// Whether banners can be requested at all (configured + consent).
+  bool get bannersAvailable;
+
+  /// Loads a banner for a slot [widthDp] wide; null on no-fill/offline.
+  Future<BannerSlot?> loadBanner(int widthDp);
+
   void dispose();
 }
 
@@ -51,7 +87,7 @@ abstract class AdService {
 /// * At most [maxPerSession] per app session.
 class InterstitialPolicy {
   InterstitialPolicy({
-    this.minGamesBetween = 2,
+    this.minGamesBetween = 3,
     this.cooldown = const Duration(minutes: 4),
     this.maxPerSession = 4,
     this.launchGrace = const Duration(minutes: 2),
@@ -117,6 +153,10 @@ class DisabledAdService implements AdService {
   @override
   void onGameFinished() {}
   @override
+  bool get bannersAvailable => false;
+  @override
+  Future<BannerSlot?> loadBanner(int widthDp) async => null;
+  @override
   void dispose() {}
 }
 
@@ -156,6 +196,38 @@ class FakeAdService implements AdService {
 
   @override
   void onGameFinished() => policy.recordGameFinished();
+
+  /// Banners are off by default in tests; enable to exercise the layout.
+  bool banners = false;
+  int bannersLoaded = 0;
+
+  @override
+  bool get bannersAvailable => banners;
+
+  @override
+  Future<BannerSlot?> loadBanner(int widthDp) async {
+    if (!banners) return null;
+    bannersLoaded++;
+    return _FakeBanner();
+  }
+
+  @override
+  void dispose() {}
+}
+
+class _FakeBanner implements BannerSlot {
+  @override
+  double get height => 50;
+  @override
+  Widget build() => const SizedBox(
+    height: 50,
+    child: ColoredBox(
+      color: Color(0xFF2B2F36),
+      child: Center(
+        child: Text('Test banner', style: TextStyle(color: Color(0xFFB0B6BE))),
+      ),
+    ),
+  );
   @override
   void dispose() {}
 }

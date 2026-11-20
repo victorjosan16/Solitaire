@@ -42,6 +42,7 @@ TR = {
  "newGameBody": "Mevcut oyun kayıp olarak sayılacak.",
  "victoryTitle": "Zafer!",
  "finalScore": "Son puan", "timeLabel": "Süre", "movesLabel": "Hamle", "maxCombo": "En yüksek kombo",
+ "speedBonus": "Hız bonusu",
  "timeBonus": "Süre bonusu", "bestScore": "En iyi puan", "newRecord": "Yeni rekor!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Jetonları ikiye katla · reklam",

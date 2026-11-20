@@ -158,6 +158,11 @@ class _VictoryScreenState extends ConsumerState<VictoryScreen>
                               value: '+${v.timeBonus}',
                             ),
                           StatRow(label: l.maxCombo, value: '${v.maxCombo}x'),
+                          if (v.speedBonus > 0)
+                            StatRow(
+                              label: l.speedBonus,
+                              value: l.rewardCoins(v.speedBonus),
+                            ),
                           StatRow(label: l.bestScore, value: '${v.bestScore}'),
                           if (v.newRecord)
                             Padding(

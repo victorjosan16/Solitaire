@@ -99,6 +99,9 @@ class SolitaireBoardGame extends FlameGame {
 
   bool get _animate => !_visuals.reducedMotion;
 
+  /// True while the player is dragging cards (layout changes are deferred).
+  bool get isDragging => _drag != null;
+
   /// Brings the board in line with [s]. Cards whose position or face changed
   /// animate (unless reduced motion); [deal] plays the opening deal.
   void sync(GameState s, {bool animate = true, bool deal = false}) {

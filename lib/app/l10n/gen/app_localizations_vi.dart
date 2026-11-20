@@ -276,6 +276,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get maxCombo => 'Combo cao nhất';
 
   @override
+  String get speedBonus => 'Thưởng tốc độ';
+
+  @override
   String get timeBonus => 'Thưởng thời gian';
 
   @override

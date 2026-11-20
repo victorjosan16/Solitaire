@@ -43,6 +43,7 @@ EN = {
  "newGameBody": "The current game will be counted as a loss.",
  "victoryTitle": "Victory!",
  "finalScore": "Final score", "timeLabel": "Time", "movesLabel": "Moves", "maxCombo": "Max combo",
+ "speedBonus": "Speed bonus",
  "timeBonus": "Time bonus", "bestScore": "Best score", "newRecord": "New record!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Double coins · watch ad",

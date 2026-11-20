@@ -288,6 +288,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get maxCombo => 'Макс. комбо';
 
   @override
+  String get speedBonus => 'Бонус за швидкість';
+
+  @override
   String get timeBonus => 'Бонус за час';
 
   @override

@@ -278,6 +278,9 @@ class AppLocalizationsId extends AppLocalizations {
   String get maxCombo => 'Kombo maks.';
 
   @override
+  String get speedBonus => 'Bonus kecepatan';
+
+  @override
   String get timeBonus => 'Bonus waktu';
 
   @override

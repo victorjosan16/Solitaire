@@ -78,6 +78,7 @@
   "timeLabel": "시간",
   "movesLabel": "이동",
   "maxCombo": "최대 콤보",
+  "speedBonus": "속도 보너스",
   "timeBonus": "시간 보너스",
   "bestScore": "최고 점수",
   "newRecord": "신기록!",

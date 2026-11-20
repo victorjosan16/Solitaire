@@ -272,6 +272,9 @@ class AppLocalizationsZh extends AppLocalizations {
   String get maxCombo => '最高连击';
 
   @override
+  String get speedBonus => '速度奖励';
+
+  @override
   String get timeBonus => '时间奖励';
 
   @override

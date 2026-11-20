@@ -107,7 +107,11 @@ void main() {
     // A second winning game of the same daily pays no daily reward.
     final (p2, o2) = p1.recordGame(win('d2', daily: today), now);
     expect(o2.dailyRewarded, isFalse);
-    expect(p2.coins - p1.coins, ProfileData.winCoins(win('d2')));
+    expect(
+      p2.coins - p1.coins,
+      ProfileData.winCoins(win('d2')) + ProfileData.speedBonusFor(win('d2')),
+      reason: 'win + speed bonus, but no second daily reward',
+    );
     // Past day: completion recorded, no daily coins.
     final (p3, o3) = p2.recordGame(win('d3', daily: yesterday), now);
     expect(o3.dailyRewarded, isFalse);

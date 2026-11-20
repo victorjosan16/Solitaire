@@ -15,7 +15,11 @@ class RecordOutcome {
     this.newFastest = false,
     this.dailyRewarded = false,
     this.alreadyRecorded = false,
+    this.speedBonus = 0,
   });
+
+  /// Part of [coinsEarned] that came from the speed bonus.
+  final int speedBonus;
 
   final int coinsEarned;
   final int xpEarned;
@@ -140,6 +144,24 @@ class ProfileData {
     return c;
   }
 
+  /// Speed bonus tiers (games are designed to last up to 10 minutes of
+  /// active play). Paid only on a first attempt; once per deal is enforced
+  /// by the ledger key `speed:<draw>:<seed>` in [recordGame].
+  static const speedTiers = <(Duration, int)>[
+    (Duration(minutes: 3), 40),
+    (Duration(minutes: 5), 25),
+    (Duration(minutes: 7), 15),
+    (Duration(minutes: 10), 5),
+  ];
+
+  static int speedBonusFor(GameResult r) {
+    if (!r.won || !r.firstAttempt) return 0;
+    for (final (limit, coins) in speedTiers) {
+      if (r.elapsedMs < limit.inMilliseconds) return coins;
+    }
+    return 0;
+  }
+
   static int winXp(GameResult r) => 100 + r.score ~/ 100;
 
   /// Records a game result once (key `game:<id>`): stats, XP, coins, daily
@@ -157,11 +179,19 @@ class ProfileData {
       updatedAt: now.toUtc(),
     );
     var coinsEarned = 0;
+    var speedBonus = 0;
     var dailyRewarded = false;
     if (r.won) {
       final c = winCoins(r);
       p = p.grantCoins('win:${r.gameId}', c);
       coinsEarned += c;
+      final bonus = speedBonusFor(r);
+      final speedKey = 'speed:${r.drawCount}:${r.seed ?? r.gameId}';
+      if (bonus > 0 && !p.ledger.contains(speedKey)) {
+        p = p.grantCoins(speedKey, bonus);
+        coinsEarned += bonus;
+        speedBonus = bonus;
+      }
       final date = r.dailyDate;
       if (date != null && !p.daily.containsKey(date)) {
         final isToday = date == DailyChallenge.keyFor(now);
@@ -199,6 +229,7 @@ class ProfileData {
             (before.total.fastestWinMs == null ||
                 r.elapsedMs < before.total.fastestWinMs!),
         dailyRewarded: dailyRewarded,
+        speedBonus: speedBonus,
       ),
     );
   }

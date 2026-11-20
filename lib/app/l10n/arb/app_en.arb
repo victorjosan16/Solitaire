@@ -170,6 +170,7 @@
   "timeLabel": "Time",
   "movesLabel": "Moves",
   "maxCombo": "Max combo",
+  "speedBonus": "Speed bonus",
   "timeBonus": "Time bonus",
   "bestScore": "Best score",
   "newRecord": "New record!",

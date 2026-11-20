@@ -79,9 +79,15 @@ recycles and undo reset them. Cosmetic only.
 |---|---|
 | Win (Draw 1 / Draw 3) | 50 / 75 |
 | Win with no hints and no undo | +25 |
+| Speed bonus (active time): < 3 min / < 5 / < 7 / < 10 | +40 / +25 / +15 / +5 |
 | Daily challenge (on its date) | 150 |
 | Achievements | 50 – 1 000 each |
 | Rewarded ad on victory (opt-in) | doubles that win's coins, once |
+
+Speed bonus rules: games are designed to last up to 10 minutes of active play (pauses and
+background time are not counted). The bonus is paid only on the **first attempt** of a deal (not
+after "Restart deal") and **once per deal** (ledger key `speed:<draw>:<seed>`), so replaying a
+known daily or winning deal cannot farm it.
 
 Spending: cosmetics 300 – 1 000, hint pack 3 hints for 60. New players start with 250 coins and
 5 hints. Opt-in rewarded ad: +3 hints. XP: 100 + score/100 per win, 10 per loss; level *L*

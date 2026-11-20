@@ -39,7 +39,11 @@ class AppConfig {
   static const _testRewardedIos = 'ca-app-pub-3940256099942544/1712485313';
   static const _testInterstitialAndroid =
       'ca-app-pub-3940256099942544/1033173712';
+  static const _bannerAndroid = String.fromEnvironment('ADMOB_BANNER_ANDROID');
+  static const _bannerIos = String.fromEnvironment('ADMOB_BANNER_IOS');
   static const _testInterstitialIos = 'ca-app-pub-3940256099942544/4411468910';
+  static const _testBannerAndroid = 'ca-app-pub-3940256099942544/6300978111';
+  static const _testBannerIos = 'ca-app-pub-3940256099942544/2934735716';
 
   static bool get _isIos => defaultTargetPlatform == TargetPlatform.iOS;
 
@@ -51,6 +55,11 @@ class AppConfig {
   static String? get interstitialUnitId => _pick(
     _isIos ? _interstitialIos : _interstitialAndroid,
     _isIos ? _testInterstitialIos : _testInterstitialAndroid,
+  );
+
+  static String? get bannerUnitId => _pick(
+    _isIos ? _bannerIos : _bannerAndroid,
+    _isIos ? _testBannerIos : _testBannerAndroid,
   );
 
   static bool get usingTestAds =>

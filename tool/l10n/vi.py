@@ -42,6 +42,7 @@ VI = {
  "newGameBody": "Ván hiện tại sẽ được tính là thua.",
  "victoryTitle": "Chiến thắng!",
  "finalScore": "Điểm cuối", "timeLabel": "Thời gian", "movesLabel": "Nước đi", "maxCombo": "Combo cao nhất",
+ "speedBonus": "Thưởng tốc độ",
  "timeBonus": "Thưởng thời gian", "bestScore": "Điểm cao nhất", "newRecord": "Kỷ lục mới!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Nhân đôi xu · quảng cáo",

@@ -25,6 +25,7 @@ class GameSnapshot {
     this.maxCombo = 0,
     this.usedAutoFinish = false,
     this.finished = false,
+    this.restarts = 0,
   });
 
   static const int schemaVersion = 1;
@@ -51,6 +52,9 @@ class GameSnapshot {
   final bool usedAutoFinish;
   final bool finished;
 
+  /// Times this deal was restarted (speed bonus only on the first attempt).
+  final int restarts;
+
   List<PlayingCard> get deck => [
     for (final i in deckOrder) PlayingCard.fromId(i),
   ];
@@ -68,6 +72,7 @@ class GameSnapshot {
     int? maxCombo,
     bool? usedAutoFinish,
     bool? finished,
+    int? restarts,
   }) => GameSnapshot(
     gameId: gameId,
     seed: seed,
@@ -86,6 +91,7 @@ class GameSnapshot {
     maxCombo: maxCombo ?? this.maxCombo,
     usedAutoFinish: usedAutoFinish ?? this.usedAutoFinish,
     finished: finished ?? this.finished,
+    restarts: restarts ?? this.restarts,
   );
 
   Map<String, Object?> toJson() => {
@@ -106,6 +112,7 @@ class GameSnapshot {
     'maxCombo': maxCombo,
     'usedAutoFinish': usedAutoFinish,
     'finished': finished,
+    'restarts': restarts,
   };
 
   /// Throws [FormatException] on any structural problem so the store can
@@ -137,6 +144,7 @@ class GameSnapshot {
         maxCombo: json['maxCombo'] as int? ?? 0,
         usedAutoFinish: json['usedAutoFinish'] as bool? ?? false,
         finished: json['finished'] as bool? ?? false,
+        restarts: json['restarts'] as int? ?? 0,
       );
       snap.validate();
       return snap;

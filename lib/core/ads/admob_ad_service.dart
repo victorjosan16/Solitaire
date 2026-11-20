@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/widgets.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../config/app_config.dart';
@@ -154,8 +155,58 @@ class AdMobAdService implements AdService {
   void onGameFinished() => policy.recordGameFinished();
 
   @override
+  bool get bannersAvailable => _initialized && AppConfig.bannerUnitId != null;
+
+  /// Standard 320×50 banner: predictable height, so the board keeps its
+  /// space (large adaptive banners can take up to 15% of the screen).
+  @override
+  Future<BannerSlot?> loadBanner(int widthDp) async {
+    final id = AppConfig.bannerUnitId;
+    if (!_initialized || id == null || widthDp < 320) return null;
+    final done = Completer<BannerSlot?>();
+    final ad = BannerAd(
+      adUnitId: id,
+      size: AdSize.banner,
+      request: _request,
+      listener: BannerAdListener(
+        onAdLoaded: (ad) {
+          if (!done.isCompleted) done.complete(_AdMobBanner(ad as BannerAd));
+        },
+        onAdFailedToLoad: (ad, e) {
+          ad.dispose();
+          AppLogger.i('ads.banner_no_fill', {'code': e.code});
+          if (!done.isCompleted) done.complete(null);
+        },
+      ),
+    );
+    await ad.load();
+    return done.future.timeout(
+      const Duration(seconds: 20),
+      onTimeout: () {
+        ad.dispose();
+        return null;
+      },
+    );
+  }
+
+  @override
   void dispose() {
     _rewarded?.dispose();
     _interstitial?.dispose();
   }
+}
+
+class _AdMobBanner implements BannerSlot {
+  _AdMobBanner(this.ad);
+  final BannerAd ad;
+  @override
+  double get height => ad.size.height.toDouble();
+  @override
+  Widget build() => SizedBox(
+    width: ad.size.width.toDouble(),
+    height: ad.size.height.toDouble(),
+    child: AdWidget(ad: ad),
+  );
+  @override
+  void dispose() => ad.dispose();
 }

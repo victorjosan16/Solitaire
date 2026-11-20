@@ -42,6 +42,7 @@ RO = {
  "newGameBody": "Jocul curent va fi numărat ca pierdut.",
  "victoryTitle": "Victorie!",
  "finalScore": "Scor final", "timeLabel": "Timp", "movesLabel": "Mutări", "maxCombo": "Combo maxim",
+ "speedBonus": "Bonus de viteză",
  "timeBonus": "Bonus de timp", "bestScore": "Cel mai bun scor", "newRecord": "Record nou!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Dublează monedele · reclamă",

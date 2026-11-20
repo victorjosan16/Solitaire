@@ -274,6 +274,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get maxCombo => '최대 콤보';
 
   @override
+  String get speedBonus => '속도 보너스';
+
+  @override
   String get timeBonus => '시간 보너스';
 
   @override

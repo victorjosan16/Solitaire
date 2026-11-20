@@ -24,6 +24,7 @@ import '../domain/rules/klondike_rules.dart';
 import '../flame/board_layout.dart';
 import '../flame/solitaire_board_game.dart';
 import 'card_art/card_styles.dart';
+import 'top_banner.dart';
 
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
@@ -53,6 +54,8 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   late final SolitaireBoardGame _game;
   late final AppLifecycleListener _lifecycle;
   bool _navigatingToVictory = false;
+  static const _bannerPolicy = BannerPolicy();
+  String? _bannerShownForGame;
   int? _combo;
   Timer? _comboTimer;
 
@@ -436,6 +439,20 @@ class _GameScreenState extends ConsumerState<GameScreen> {
         body: SafeArea(
           child: Column(
             children: [
+              Builder(
+                builder: (context) {
+                  final show = _bannerPolicy.shouldShow(
+                    movesPlayed: snap.state.moves,
+                    alreadyShownThisGame: _bannerShownForGame == snap.gameId,
+                    gameFinished: snap.finished,
+                  );
+                  if (show) _bannerShownForGame = snap.gameId;
+                  return TopBanner(
+                    visible: show,
+                    canInsert: () => !_game.isDragging,
+                  );
+                },
+              ),
               _Hud(onPause: _pauseMenu),
               Expanded(
                 child: LayoutBuilder(

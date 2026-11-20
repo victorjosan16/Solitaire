@@ -42,6 +42,7 @@ IT = {
  "newGameBody": "La partita in corso verrà contata come persa.",
  "victoryTitle": "Vittoria!",
  "finalScore": "Punteggio finale", "timeLabel": "Tempo", "movesLabel": "Mosse", "maxCombo": "Combo massima",
+ "speedBonus": "Bonus velocità",
  "timeBonus": "Bonus tempo", "bestScore": "Miglior punteggio", "newRecord": "Nuovo record!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Raddoppia monete · annuncio",

@@ -42,6 +42,7 @@ RU = {
  "newGameBody": "Текущая игра будет засчитана как поражение.",
  "victoryTitle": "Победа!",
  "finalScore": "Итоговый счёт", "timeLabel": "Время", "movesLabel": "Ходы", "maxCombo": "Макс. комбо",
+ "speedBonus": "Бонус за скорость",
  "timeBonus": "Бонус за время", "bestScore": "Лучший счёт", "newRecord": "Новый рекорд!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Удвоить монеты · реклама",

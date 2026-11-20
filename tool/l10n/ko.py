@@ -42,6 +42,7 @@ KO = {
  "newGameBody": "현재 게임은 패배로 기록됩니다.",
  "victoryTitle": "승리!",
  "finalScore": "최종 점수", "timeLabel": "시간", "movesLabel": "이동", "maxCombo": "최대 콤보",
+ "speedBonus": "속도 보너스",
  "timeBonus": "시간 보너스", "bestScore": "최고 점수", "newRecord": "신기록!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "코인 2배 · 광고 보기",

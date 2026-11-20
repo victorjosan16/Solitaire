@@ -56,7 +56,10 @@ class VictoryReport {
     required this.newAchievements,
     required this.achievementCoins,
     required this.dailyRewarded,
+    this.speedBonus = 0,
   });
+
+  final int speedBonus;
 
   final String gameId;
   final GameMode mode;
@@ -279,6 +282,7 @@ class GameController extends Notifier<GameViewState> {
         startedAt: s.startedAt,
         updatedAt: _now,
         dailyDate: s.dailyDate,
+        restarts: s.restarts + 1,
       ),
     );
     await _save();
@@ -566,6 +570,8 @@ class GameController extends Notifier<GameViewState> {
             usedAutoFinish: s.usedAutoFinish,
             winningDeal: s.mode != GameMode.random,
             dailyDate: s.dailyDate,
+            seed: s.seed,
+            firstAttempt: s.restarts == 0,
           ),
         );
     ref.read(adServiceProvider).onGameFinished();
@@ -592,6 +598,7 @@ class GameController extends Notifier<GameViewState> {
         newAchievements: outcome.newAchievements,
         achievementCoins: outcome.achievementCoins,
         dailyRewarded: outcome.dailyRewarded,
+        speedBonus: outcome.alreadyRecorded ? 0 : outcome.speedBonus,
       ),
     );
   }

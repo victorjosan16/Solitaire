@@ -42,6 +42,7 @@ DE = {
  "newGameBody": "Das aktuelle Spiel wird als verloren gewertet.",
  "victoryTitle": "Sieg!",
  "finalScore": "Endpunktzahl", "timeLabel": "Zeit", "movesLabel": "Züge", "maxCombo": "Max. Combo",
+ "speedBonus": "Tempobonus",
  "timeBonus": "Zeitbonus", "bestScore": "Bestwert", "newRecord": "Neuer Rekord!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Münzen verdoppeln · Werbung",

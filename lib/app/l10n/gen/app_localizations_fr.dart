@@ -285,6 +285,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get maxCombo => 'Combo max';
 
   @override
+  String get speedBonus => 'Bonus de rapidité';
+
+  @override
   String get timeBonus => 'Bonus de temps';
 
   @override

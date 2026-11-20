@@ -42,6 +42,7 @@ PL = {
  "newGameBody": "Bieżąca gra zostanie policzona jako przegrana.",
  "victoryTitle": "Zwycięstwo!",
  "finalScore": "Wynik końcowy", "timeLabel": "Czas", "movesLabel": "Ruchy", "maxCombo": "Maks. kombo",
+ "speedBonus": "Premia za szybkość",
  "timeBonus": "Premia za czas", "bestScore": "Najlepszy wynik", "newRecord": "Nowy rekord!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Podwój monety · reklama",

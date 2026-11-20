@@ -293,10 +293,12 @@ void main() {
     final p = InterstitialPolicy(now: () => now);
     p.recordGameFinished();
     p.recordGameFinished();
+    p.recordGameFinished();
     expect(p.canShow(), isFalse, reason: 'launch grace');
     now = now.add(const Duration(minutes: 3));
     expect(p.canShow(), isTrue);
     p.recordShown();
+    p.recordGameFinished();
     p.recordGameFinished();
     p.recordGameFinished();
     expect(p.canShow(), isFalse, reason: 'cooldown');
@@ -304,6 +306,7 @@ void main() {
     expect(p.canShow(), isTrue);
     for (var i = 0; i < 5; i++) {
       p.recordShown();
+      p.recordGameFinished();
       p.recordGameFinished();
       p.recordGameFinished();
       now = now.add(const Duration(minutes: 5));

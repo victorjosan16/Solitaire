@@ -42,6 +42,7 @@ ZH = {
  "newGameBody": "当前游戏将记为失败。",
  "victoryTitle": "胜利！",
  "finalScore": "最终得分", "timeLabel": "时间", "movesLabel": "步数", "maxCombo": "最高连击",
+ "speedBonus": "速度奖励",
  "timeBonus": "时间奖励", "bestScore": "最高分", "newRecord": "新纪录！",
  "coinsEarned": "+{coins}",
  "doubleCoins": "金币翻倍 · 看广告",

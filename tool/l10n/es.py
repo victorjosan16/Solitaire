@@ -42,6 +42,7 @@ ES = {
  "newGameBody": "La partida actual contará como derrota.",
  "victoryTitle": "¡Victoria!",
  "finalScore": "Puntuación final", "timeLabel": "Tiempo", "movesLabel": "Movimientos", "maxCombo": "Combo máx.",
+ "speedBonus": "Bonus de velocidad",
  "timeBonus": "Bonus de tiempo", "bestScore": "Mejor puntuación", "newRecord": "¡Nuevo récord!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Duplicar monedas · anuncio",

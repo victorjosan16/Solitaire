@@ -594,6 +594,12 @@ abstract class AppLocalizations {
   /// **'Max combo'**
   String get maxCombo;
 
+  /// No description provided for @speedBonus.
+  ///
+  /// In en, this message translates to:
+  /// **'Speed bonus'**
+  String get speedBonus;
+
   /// No description provided for @timeBonus.
   ///
   /// In en, this message translates to:

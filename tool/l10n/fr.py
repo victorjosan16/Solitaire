@@ -42,6 +42,7 @@ FR = {
  "newGameBody": "La partie en cours sera comptée comme perdue.",
  "victoryTitle": "Victoire !",
  "finalScore": "Score final", "timeLabel": "Temps", "movesLabel": "Coups", "maxCombo": "Combo max",
+ "speedBonus": "Bonus de rapidité",
  "timeBonus": "Bonus de temps", "bestScore": "Meilleur score", "newRecord": "Nouveau record !",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Doubler les pièces · pub",

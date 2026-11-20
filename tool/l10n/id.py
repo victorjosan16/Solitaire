@@ -42,6 +42,7 @@ ID = {
  "newGameBody": "Permainan saat ini akan dihitung sebagai kekalahan.",
  "victoryTitle": "Menang!",
  "finalScore": "Skor akhir", "timeLabel": "Waktu", "movesLabel": "Langkah", "maxCombo": "Kombo maks.",
+ "speedBonus": "Bonus kecepatan",
  "timeBonus": "Bonus waktu", "bestScore": "Skor terbaik", "newRecord": "Rekor baru!",
  "coinsEarned": "+{coins}",
  "doubleCoins": "Gandakan koin · iklan",

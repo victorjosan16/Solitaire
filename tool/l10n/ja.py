@@ -42,6 +42,7 @@ JA = {
  "newGameBody": "現在のゲームは負けとして記録されます。",
  "victoryTitle": "勝利！",
  "finalScore": "最終スコア", "timeLabel": "時間", "movesLabel": "手数", "maxCombo": "最大コンボ",
+ "speedBonus": "スピードボーナス",
  "timeBonus": "タイムボーナス", "bestScore": "ベストスコア", "newRecord": "新記録！",
  "coinsEarned": "+{coins}",
  "doubleCoins": "コイン2倍・広告を見る",

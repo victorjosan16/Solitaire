@@ -78,6 +78,7 @@
   "timeLabel": "Tempo",
   "movesLabel": "Jogadas",
   "maxCombo": "Combo máximo",
+  "speedBonus": "Bônus de velocidade",
   "timeBonus": "Bônus de tempo",
   "bestScore": "Melhor pontuação",
   "newRecord": "Novo recorde!",

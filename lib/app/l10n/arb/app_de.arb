@@ -78,6 +78,7 @@
   "timeLabel": "Zeit",
   "movesLabel": "Züge",
   "maxCombo": "Max. Combo",
+  "speedBonus": "Tempobonus",
   "timeBonus": "Zeitbonus",
   "bestScore": "Bestwert",
   "newRecord": "Neuer Rekord!",

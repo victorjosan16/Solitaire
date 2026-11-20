@@ -13,9 +13,17 @@ class GameResult {
     this.usedAutoFinish = false,
     this.winningDeal = false,
     this.dailyDate,
+    this.seed,
+    this.firstAttempt = true,
   });
 
   final String gameId;
+
+  /// Deal seed; the speed bonus is paid at most once per deal.
+  final int? seed;
+
+  /// False after "Restart deal" (the player has already seen the cards).
+  final bool firstAttempt;
   final int drawCount;
   final bool won;
   final int score;
