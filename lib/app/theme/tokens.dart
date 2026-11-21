@@ -2,43 +2,48 @@ import 'package:material_ui/material_ui.dart';
 
 /// Midnight Emerald / Midnight Gold design tokens.
 abstract final class NovaColors {
-  static const navy = Color(0xFF101B27);
+  static const navy = Color(0xFF101C29);
   static const navyDeep = Color(0xFF0A121B);
-  static const emerald = Color(0xFF123F39);
-  static const emeraldDeep = Color(0xFF0B2A26);
+  static const emerald = Color(0xFF10443B);
+  static const emeraldDeep = Color(0xFF092B27);
   static const emeraldLight = Color(0xFF1B5A50);
-  static const gold = Color(0xFFD6B574);
+  static const gold = Color(0xFFD5B776);
   static const goldLight = Color(0xFFF1DDA6);
   static const goldDark = Color(0xFF9C7B3E);
-  static const ivory = Color(0xFFF7F4EC);
+  static const ivory = Color(0xFFF6F1E7);
   static const sage = Color(0xFF77958C);
-  static const success = Color(0xFF3FAE62);
+  static const success = Color(0xFF3AA66F);
   static const danger = Color(0xFFC0392B);
   static const cardRed = Color(0xFFC0282D);
   static const cardBlack = Color(0xFF17191C);
 
   /// Text on dark surfaces.
   static const textPrimary = ivory;
-  static const textSecondary = Color(0xFFB9C7C1);
+  static const textSecondary = Color(0xFFB6C6BE);
   static const textMuted = Color(0xFF7F948D);
 
   static const goldGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFFF6E3AE), Color(0xFFDDBB72), Color(0xFFB48C45)],
-    stops: [0, 0.55, 1],
+    colors: [
+      Color(0xFFF7E4AE),
+      Color(0xFFE2BE6E),
+      Color(0xFFC79B4B),
+      Color(0xFFA9803A),
+    ],
+    stops: [0, 0.45, 0.8, 1],
   );
 
   static const panelGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF17483F), Color(0xFF0E322C)],
+    colors: [Color(0xFF15493F), Color(0xFF0C3330)],
   );
 
   static const screenGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF123F39), Color(0xFF0C2B27), Color(0xFF0A1C1E)],
+    colors: [Color(0xFF10443B), Color(0xFF092B27), Color(0xFF0A1D1F)],
     stops: [0, 0.6, 1],
   );
 }

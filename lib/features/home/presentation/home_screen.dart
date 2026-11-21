@@ -100,14 +100,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final canContinue = snap != null && !snap.finished;
     final todayKey = DailyChallenge.keyFor(ref.read(clockProvider)());
     final dailyPending = !profile.daily.containsKey(todayKey);
-    final width = MediaQuery.sizeOf(context).width;
+    final size = MediaQuery.sizeOf(context);
 
     return Scaffold(
-      backgroundColor: NovaColors.navy,
+      backgroundColor: NovaColors.emeraldDeep,
       body: Stack(
         fit: StackFit.expand,
         children: [
-          SceneBackground(sceneId: profile.equipped.background, dim: 0.5),
+          MenuBackground(sceneId: profile.equipped.background, dim: 0.5),
           SafeArea(
             child: Column(
               children: [
@@ -120,11 +120,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                   child: Row(
                     children: [
-                      _LevelBadge(
-                        level: profile.level,
-                        progress: profile.levelProgress,
+                      Flexible(
+                        child: _LevelBadge(
+                          level: profile.level,
+                          progress: profile.levelProgress,
+                        ),
                       ),
-                      const Spacer(),
+                      const SizedBox(width: NovaSpace.sm),
                       CoinBadge(
                         coins: profile.coins,
                         label: l.coinsBalance(profile.coins),
@@ -147,10 +149,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                const SizedBox(height: NovaSpace.lg),
-                                NovaLogo(width: math.min(width * 0.72, 340)),
+                                const SizedBox(height: NovaSpace.sm),
+                                NovaLogo(
+                                  width: [
+                                    size.width * 0.74,
+                                    box.maxHeight * 0.36 * NovaLogo.aspect,
+                                    340.0,
+                                  ].reduce(math.min),
+                                ),
                                 const SizedBox(height: NovaSpace.xl),
-                                const SizedBox(height: NovaSpace.lg),
                                 // One primary action: continue the game in
                                 // progress, or deal a new (always winnable) game.
                                 GoldButton(
@@ -163,7 +170,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 ),
                                 if (canContinue)
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 6),
+                                    padding: const EdgeInsets.only(top: 4),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -183,15 +190,53 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                         ),
                                       ],
                                     ),
-                                  ),
-                                const SizedBox(height: NovaSpace.lg),
+                                  )
+                                else
+                                  const SizedBox(height: NovaSpace.lg),
                                 PanelButton(
                                   label: l.dailyChallenge,
                                   icon: Icons.calendar_month_rounded,
+                                  height: 56,
                                   badge: dailyPending ? const RedDot() : null,
                                   onPressed: () => context.push(Routes.daily),
                                 ),
-                                const SizedBox(height: NovaSpace.xl),
+                                const SizedBox(height: NovaSpace.lg),
+                                const SuitDivider(),
+                                const SizedBox(height: NovaSpace.lg),
+                                IntrinsicHeight(
+                                  child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      Expanded(
+                                        child: NovaTile(
+                                          icon: Icons.emoji_events_rounded,
+                                          label: l.achievements,
+                                          onTap: () =>
+                                              context.push(Routes.achievements),
+                                        ),
+                                      ),
+                                      const SizedBox(width: NovaSpace.md),
+                                      Expanded(
+                                        child: NovaTile(
+                                          icon: Icons.bar_chart_rounded,
+                                          label: l.statistics,
+                                          onTap: () =>
+                                              context.push(Routes.stats),
+                                        ),
+                                      ),
+                                      const SizedBox(width: NovaSpace.md),
+                                      Expanded(
+                                        child: NovaTile(
+                                          icon: Icons.style_rounded,
+                                          label: l.howToPlay,
+                                          onTap: () => showHowToPlay(context),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(height: NovaSpace.lg),
                               ],
                             ),
                           ),
@@ -233,8 +278,11 @@ class _LevelBadge extends StatelessWidget {
             height: 46,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: const Color(0xFF0E2C28),
+              gradient: const RadialGradient(
+                colors: [Color(0xFF1A5A4D), Color(0xFF0A2C27)],
+              ),
               border: Border.all(color: NovaColors.gold, width: 1.5),
+              boxShadow: NovaShadows.soft,
             ),
             child: const Icon(
               Icons.person_rounded,
@@ -243,22 +291,26 @@ class _LevelBadge extends StatelessWidget {
             ),
           ),
           const SizedBox(width: NovaSpace.sm),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                l.levelLabel(level),
-                style: const TextStyle(
-                  fontWeight: FontWeight.w700,
-                  color: NovaColors.ivory,
+          Flexible(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  l.levelLabel(level),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: NovaColors.ivory,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 4),
-              SizedBox(
-                width: 100,
-                child: NovaProgressBar(value: progress, height: 7),
-              ),
-            ],
+                const SizedBox(height: 4),
+                SizedBox(
+                  width: 100,
+                  child: NovaProgressBar(value: progress, height: 7),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -278,7 +330,7 @@ class _BottomNav extends StatelessWidget {
       NovaSpace.md,
       NovaSpace.sm,
     ),
-    padding: const EdgeInsets.symmetric(vertical: 6),
+    padding: const EdgeInsets.all(6),
     decoration: BoxDecoration(
       gradient: NovaColors.panelGradient,
       borderRadius: BorderRadius.circular(NovaRadius.lg),
@@ -295,8 +347,25 @@ class _BottomNav extends StatelessWidget {
               child: InkWell(
                 borderRadius: BorderRadius.circular(NovaRadius.md),
                 onTap: route == null ? null : () => context.push(route),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                  padding: const EdgeInsets.symmetric(vertical: 6),
+                  decoration: route == null
+                      ? BoxDecoration(
+                          borderRadius: BorderRadius.circular(NovaRadius.md),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              NovaColors.gold.withValues(alpha: 0.22),
+                              NovaColors.gold.withValues(alpha: 0.06),
+                            ],
+                          ),
+                          border: Border.all(
+                            color: NovaColors.gold.withValues(alpha: 0.55),
+                          ),
+                        )
+                      : null,
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

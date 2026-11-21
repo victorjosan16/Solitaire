@@ -33,6 +33,7 @@ flutter:
   assets:
     - assets/audio/
     - assets/fonts/OFL.txt
+    - assets/images/
   fonts:
     - family: Cinzel
       fonts:

@@ -5,6 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod/misc.dart' show Override;
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart' show Image, precacheImage;
 import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solitaire_nova/app/app.dart';
@@ -125,4 +126,18 @@ Future<void> settle(
   for (var t = Duration.zero; t < total; t += step) {
     await tester.pump(step);
   }
+  await loadImages(tester);
+}
+
+/// Decodes on-screen asset images for real (they load asynchronously, which
+/// fake test time alone never completes), then repaints.
+Future<void> loadImages(WidgetTester tester) async {
+  final images = find.byType(Image).evaluate().toList();
+  if (images.isEmpty) return;
+  await tester.runAsync(() async {
+    for (final e in images) {
+      await precacheImage((e.widget as Image).image, e);
+    }
+  });
+  await tester.pump();
 }

@@ -31,15 +31,24 @@ class GoldButton extends StatelessWidget {
         gradient: enabled ? NovaColors.goldGradient : null,
         color: enabled ? null : const Color(0xFF5B5543),
         borderRadius: BorderRadius.circular(NovaRadius.pill),
-        border: Border.all(color: const Color(0xFFFFF0C4), width: 1.2),
-        boxShadow: enabled ? NovaShadows.soft : null,
+        border: Border.all(color: const Color(0xFFFFEDB8), width: 1.2),
+        boxShadow: enabled
+            ? const [
+                BoxShadow(
+                  color: Color(0x73000000),
+                  blurRadius: 14,
+                  offset: Offset(0, 6),
+                ),
+                BoxShadow(color: Color(0xFF7A5A22), offset: Offset(0, 2.5)),
+              ]
+            : null,
       ),
       child: Row(
         mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (icon != null) ...[
-            Icon(icon, color: NovaColors.navy, size: 28),
+            Icon(icon, color: const Color(0xFF0B3A30), size: 34),
             const SizedBox(width: NovaSpace.md),
           ],
           Flexible(
@@ -49,9 +58,9 @@ class GoldButton extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
                 fontFamily: NovaFonts.display,
-                fontSize: 24,
+                fontSize: 26,
                 fontWeight: FontWeight.w700,
-                color: NovaColors.navy,
+                color: Color(0xFF1C1608),
               ),
             ),
           ),
@@ -571,4 +580,104 @@ class Medallion extends StatelessWidget {
       color: dimmed ? NovaColors.textMuted : NovaColors.goldLight,
     ),
   );
+}
+
+/// Uniform shortcut tile: gold icon over a localized label.
+class NovaTile extends StatelessWidget {
+  const NovaTile({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.onTap,
+  });
+  final IconData icon;
+  final String label;
+  final VoidCallback? onTap;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    button: true,
+    label: label,
+    excludeSemantics: true,
+    child: _Pressable(
+      onTap: onTap,
+      child: Container(
+        constraints: const BoxConstraints(minHeight: 88),
+        padding: const EdgeInsets.symmetric(
+          horizontal: NovaSpace.xs,
+          vertical: NovaSpace.md,
+        ),
+        decoration: BoxDecoration(
+          gradient: NovaColors.panelGradient,
+          borderRadius: BorderRadius.circular(NovaRadius.md + 2),
+          border: Border.all(color: NovaColors.gold.withValues(alpha: 0.5)),
+          boxShadow: NovaShadows.soft,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(icon, size: 32, color: NovaColors.gold),
+            const SizedBox(height: NovaSpace.xs + 2),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                label,
+                textAlign: TextAlign.center,
+                maxLines: 1,
+                style: const TextStyle(
+                  fontSize: 13,
+                  height: 1.15,
+                  fontWeight: FontWeight.w600,
+                  color: NovaColors.ivory,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
+/// Hairline gold divider with a centred spade, as in the brand reference.
+class SuitDivider extends StatelessWidget {
+  const SuitDivider({super.key});
+  @override
+  Widget build(BuildContext context) {
+    Widget line(bool left) => Expanded(
+      child: Container(
+        height: 1,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              NovaColors.gold.withValues(alpha: left ? 0 : 0.6),
+              NovaColors.gold.withValues(alpha: left ? 0.6 : 0),
+            ],
+          ),
+        ),
+      ),
+    );
+    return ExcludeSemantics(
+      child: Row(
+        children: [
+          line(true),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: NovaSpace.sm),
+            child: Transform.rotate(
+              angle: math.pi / 4,
+              child: Container(
+                width: 8,
+                height: 8,
+                decoration: BoxDecoration(
+                  gradient: NovaColors.goldGradient,
+                  borderRadius: BorderRadius.circular(1.5),
+                ),
+              ),
+            ),
+          ),
+          line(false),
+        ],
+      ),
+    );
+  }
 }

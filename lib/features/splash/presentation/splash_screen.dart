@@ -64,7 +64,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
       body: Stack(
         fit: StackFit.expand,
         children: [
-          SceneBackground(sceneId: profile.equipped.background, dim: 0.45),
+          MenuBackground(sceneId: profile.equipped.background, dim: 0.45),
           SafeArea(
             child: Column(
               children: [

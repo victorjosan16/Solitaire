@@ -86,6 +86,7 @@ void main() {
           clock: clock,
         );
         await tester.pump(const Duration(milliseconds: 900));
+        await loadImages(tester);
         await expectLater(
           find.byType(MaterialApp),
           matchesGoldenFile('goldens/${name}_splash.png'),

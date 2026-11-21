@@ -10,13 +10,39 @@ class NovaLogo extends StatelessWidget {
   const NovaLogo({super.key, this.width = 300});
   final double width;
 
+  /// Illustrated brand crest (aspect ratio of the cropped artwork).
+  static const asset = 'assets/images/logo.png';
+  static const aspect = 443 / 408;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    label: 'Solitaire Nova',
+    header: true,
+    excludeSemantics: true,
+    child: SizedBox(
+      width: width,
+      height: width / aspect,
+      child: Image.asset(
+        asset,
+        fit: BoxFit.contain,
+        filterQuality: FilterQuality.medium,
+        errorBuilder: (_, _, _) => NovaWordmark(width: width),
+      ),
+    ),
+  );
+}
+
+/// Vector wordmark: crown + "SOLITAIRE" + "NOVA". Fallback for the crest.
+/// The brand name is the same in every locale, so it uses Latin-only Cinzel.
+class NovaWordmark extends StatelessWidget {
+  const NovaWordmark({super.key, this.width = 300});
+  final double width;
+
   @override
   Widget build(BuildContext context) {
     final big = width * 0.15;
-    return Semantics(
-      label: 'Solitaire Nova',
-      header: true,
-      excludeSemantics: true,
+    return FittedBox(
+      fit: BoxFit.scaleDown,
       child: SizedBox(
         width: width,
         child: Column(

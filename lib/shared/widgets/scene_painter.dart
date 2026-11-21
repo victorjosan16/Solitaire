@@ -435,3 +435,136 @@ class _Rng {
   final SeededRandom _r;
   double next() => _r.nextUint32() / 4294967296.0;
 }
+
+/// Menu backdrop: the free default background renders as the emerald velvet
+/// room from the brand reference; purchased scenes render as landscapes.
+class MenuBackground extends StatelessWidget {
+  const MenuBackground({super.key, required this.sceneId, this.dim = 0.4});
+  final String sceneId;
+  final double dim;
+
+  static const defaultScene = 'bg.lake';
+
+  @override
+  Widget build(BuildContext context) => sceneId == defaultScene
+      ? const VelvetBackground()
+      : SceneBackground(sceneId: sceneId, dim: dim);
+}
+
+/// Matte emerald velvet with a soft spotlight, faint suit damask and a
+/// vignette. Painted, so it stays crisp at any size.
+class VelvetBackground extends StatelessWidget {
+  const VelvetBackground({super.key});
+  @override
+  Widget build(BuildContext context) => const RepaintBoundary(
+    child: CustomPaint(painter: VelvetPainter(), child: SizedBox.expand()),
+  );
+}
+
+class VelvetPainter extends CustomPainter {
+  const VelvetPainter();
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final w = size.width, h = size.height;
+    final rect = Offset.zero & size;
+    canvas.drawRect(
+      rect,
+      Paint()
+        ..shader = ui.Gradient.linear(
+          Offset.zero,
+          Offset(0, h),
+          const [Color(0xFF0C3631), Color(0xFF092B27), Color(0xFF071F1E)],
+          const [0, 0.55, 1],
+        ),
+    );
+    // Spotlight behind the crest.
+    final spot = Offset(w * 0.5, h * 0.3);
+    final r = math.max(w, h) * 0.62;
+    canvas.drawCircle(
+      spot,
+      r,
+      Paint()
+        ..shader = ui.Gradient.radial(
+          spot,
+          r,
+          const [Color(0x8C1C6455), Color(0x3314473E), Color(0x00092B27)],
+          const [0, 0.45, 1],
+        ),
+    );
+    // Faint diagonal damask of suit pips.
+    final pip = Paint()..color = const Color(0x0DD5B776);
+    final step = math.max(56.0, w / 7);
+    var row = 0;
+    for (var y = -step; y < h + step; y += step * 0.86, row++) {
+      for (var x = (row.isOdd ? step / 2 : 0) - step; x < w + step; x += step) {
+        _pip(canvas, Offset(x, y), step * 0.11, (row + (x ~/ step)) % 4, pip);
+      }
+    }
+    // Vignette.
+    final c = Offset(w / 2, h * 0.45);
+    final vr = math.sqrt(w * w + h * h) * 0.62;
+    canvas.drawRect(
+      rect,
+      Paint()
+        ..shader = ui.Gradient.radial(
+          c,
+          vr,
+          const [Color(0x00000000), Color(0x00000000), Color(0x8C000000)],
+          const [0, 0.55, 1],
+        ),
+    );
+  }
+
+  void _pip(Canvas canvas, Offset c, double s, int suit, Paint p) {
+    switch (suit) {
+      case 0: // diamond
+        canvas.drawPath(
+          Path()
+            ..moveTo(c.dx, c.dy - s)
+            ..lineTo(c.dx + s * 0.72, c.dy)
+            ..lineTo(c.dx, c.dy + s)
+            ..lineTo(c.dx - s * 0.72, c.dy)
+            ..close(),
+          p,
+        );
+      case 1: // club
+        final r = s * 0.42;
+        canvas
+          ..drawCircle(c.translate(0, -s * 0.42), r, p)
+          ..drawCircle(c.translate(-s * 0.45, s * 0.12), r, p)
+          ..drawCircle(c.translate(s * 0.45, s * 0.12), r, p)
+          ..drawRect(Rect.fromLTWH(c.dx - s * 0.1, c.dy, s * 0.2, s), p);
+      case 2: // heart
+        final r = s * 0.48;
+        canvas
+          ..drawCircle(c.translate(-r * 0.95, -s * 0.2), r, p)
+          ..drawCircle(c.translate(r * 0.95, -s * 0.2), r, p)
+          ..drawPath(
+            Path()
+              ..moveTo(c.dx - s * 0.92, c.dy - s * 0.02)
+              ..lineTo(c.dx + s * 0.92, c.dy - s * 0.02)
+              ..lineTo(c.dx, c.dy + s)
+              ..close(),
+            p,
+          );
+      default: // spade
+        final r = s * 0.42;
+        canvas
+          ..drawPath(
+            Path()
+              ..moveTo(c.dx, c.dy - s)
+              ..lineTo(c.dx + s * 0.86, c.dy + s * 0.12)
+              ..lineTo(c.dx - s * 0.86, c.dy + s * 0.12)
+              ..close(),
+            p,
+          )
+          ..drawCircle(c.translate(-r, s * 0.18), r, p)
+          ..drawCircle(c.translate(r, s * 0.18), r, p)
+          ..drawRect(Rect.fromLTWH(c.dx - s * 0.1, c.dy, s * 0.2, s), p);
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+}

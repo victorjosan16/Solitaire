@@ -680,40 +680,66 @@ class _HudState extends ConsumerState<_Hud> {
     final b = st.board;
     final showTimer = ref.watch(settingsProvider.select((s) => s.showTimer));
     final elapsed = ref.read(gameControllerProvider.notifier).elapsedMs;
-    Widget cell(String label, String value) => Expanded(
+    Widget cell(IconData icon, String label, String value) => Expanded(
       child: MergeSemantics(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              label,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
-                fontSize: 13,
-                color: NovaColors.textSecondary,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 3),
+          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+          decoration: BoxDecoration(
+            gradient: NovaColors.panelGradient,
+            borderRadius: BorderRadius.circular(NovaRadius.pill),
+            border: Border.all(color: NovaColors.gold.withValues(alpha: 0.45)),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ExcludeSemantics(
+                child: Icon(icon, size: 20, color: NovaColors.gold),
               ),
-            ),
-            Text(
-              value,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: NovaColors.ivory,
-                fontFeatures: [FontFeature.tabularFigures()],
+              const SizedBox(width: 6),
+              Flexible(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      label,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 11,
+                        height: 1.1,
+                        color: NovaColors.textSecondary,
+                      ),
+                    ),
+                    FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(
+                        value,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 17,
+                          height: 1.15,
+                          fontWeight: FontWeight.w700,
+                          color: NovaColors.ivory,
+                          fontFeatures: [FontFeature.tabularFigures()],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
     return Container(
-      padding: const EdgeInsets.fromLTRB(4, 4, NovaSpace.md, 6),
+      padding: const EdgeInsets.fromLTRB(2, 6, NovaSpace.sm, 6),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Color(0xFF0B231F), Color(0xE60B231F)],
+          colors: [Color(0xFF082522), Color(0xE6082522)],
         ),
       ),
       child: Row(
@@ -723,9 +749,10 @@ class _HudState extends ConsumerState<_Hud> {
             onPressed: widget.onPause,
             icon: const Icon(Icons.pause_circle_outline_rounded, size: 30),
           ),
-          cell(l.hudScore, '${b?.score ?? 0}'),
-          if (showTimer) cell(l.hudTime, formatClock(elapsed)),
-          cell(l.hudMoves, '${b?.moves ?? 0}'),
+          cell(Icons.workspace_premium_rounded, l.hudScore, '${b?.score ?? 0}'),
+          if (showTimer)
+            cell(Icons.schedule_rounded, l.hudTime, formatClock(elapsed)),
+          cell(Icons.swap_horiz_rounded, l.hudMoves, '${b?.moves ?? 0}'),
         ],
       ),
     );
@@ -783,7 +810,7 @@ class _ActionBar extends StatelessWidget {
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Icon(icon, color: NovaColors.ivory, size: 28),
+                      Icon(icon, color: NovaColors.goldLight, size: 28),
                       if (badge != null)
                         Positioned(right: -14, top: -8, child: badge),
                     ],
@@ -814,9 +841,10 @@ class _ActionBar extends StatelessWidget {
       ),
       padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        color: const Color(0xEE0B231F),
+        gradient: NovaColors.panelGradient,
         borderRadius: BorderRadius.circular(NovaRadius.lg),
-        border: Border.all(color: NovaColors.gold.withValues(alpha: 0.45)),
+        border: Border.all(color: NovaColors.gold.withValues(alpha: 0.5)),
+        boxShadow: NovaShadows.soft,
       ),
       child: Row(
         children: [
