@@ -64,6 +64,12 @@ android {
 
     buildTypes {
         release {
+            // Keep rules for reflection-loaded classes (WorkManager/Room via
+            // Google Mobile Ads); see proguard-rules.pro.
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro",
+            )
             // With an upload key configured the build is store-ready; without
             // one it falls back to the debug key so local `flutter run
             // --release` still works (such builds are rejected by Play).
