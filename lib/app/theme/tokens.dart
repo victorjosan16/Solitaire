@@ -26,18 +26,32 @@ abstract final class NovaColors {
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
     colors: [
-      Color(0xFFF7E4AE),
-      Color(0xFFE2BE6E),
-      Color(0xFFC79B4B),
-      Color(0xFFA9803A),
+      Color(0xFFFFF1B8),
+      Color(0xFFF6CF55),
+      Color(0xFFE2A92C),
+      Color(0xFFB27A16),
     ],
-    stops: [0, 0.45, 0.8, 1],
+    stops: [0, 0.42, 0.78, 1],
+  );
+
+  /// Metallic rim used around emerald controls (thick gold frame).
+  static const rimGradient = LinearGradient(
+    begin: Alignment.topLeft,
+    end: Alignment.bottomRight,
+    colors: [
+      Color(0xFFFFF0B0),
+      Color(0xFFE8B83E),
+      Color(0xFF9C6A12),
+      Color(0xFFF4D67A),
+      Color(0xFFB8841F),
+    ],
+    stops: [0, 0.3, 0.55, 0.8, 1],
   );
 
   static const panelGradient = LinearGradient(
     begin: Alignment.topCenter,
     end: Alignment.bottomCenter,
-    colors: [Color(0xFF15493F), Color(0xFF0C3330)],
+    colors: [Color(0xFF14523F), Color(0xFF0A3326)],
   );
 
   static const screenGradient = LinearGradient(

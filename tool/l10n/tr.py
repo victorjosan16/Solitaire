@@ -37,6 +37,8 @@ TR = {
  "actionShuffle": "Karıştır",
  "shuffleTitle": "Kartlar karıştırılsın mı?",
  "shuffleBody": "Temellerdekiler dışındaki tüm kartlar karıştırılıp yeniden dağıtılacak. Bu işlem geri alınamaz. Bu oyunda kalan karıştırma hakkı: {left}.",
+ "shuffleInfo": "Temellerdekiler dışındaki tüm kartlar karıştırılıp yeniden dağıtılacak. Bu işlem geri alınamaz.",
+ "shufflesLeftLabel": "Bu oyunda kalan karıştırma hakkı",
  "shufflePay": "{price} jeton öde",
  "shuffleWatchAd": "Reklam izle",
  "shuffleLimit": "Bu oyunda karıştırma hakkın kalmadı.",

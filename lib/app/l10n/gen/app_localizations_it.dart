@@ -252,6 +252,13 @@ class AppLocalizationsIt extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Tutte le carte, tranne quelle sulle basi, verranno mescolate e ridistribuite. L\'operazione non può essere annullata.';
+
+  @override
+  String get shufflesLeftLabel => 'Mescolate rimaste in questa partita';
+
+  @override
   String shufflePay(int price) {
     return 'Paga $price monete';
   }

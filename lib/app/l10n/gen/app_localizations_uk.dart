@@ -256,6 +256,13 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Усі карти, крім тих, що лежать в основах, буде перемішано й розкладено заново. Цю дію не можна скасувати.';
+
+  @override
+  String get shufflesLeftLabel => 'Залишилося перемішувань у цій грі';
+
+  @override
   String shufflePay(int price) {
     return 'Заплатити $price монет';
   }

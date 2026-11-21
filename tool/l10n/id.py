@@ -37,6 +37,8 @@ ID = {
  "actionShuffle": "Kocok",
  "shuffleTitle": "Kocok kartu?",
  "shuffleBody": "Semua kartu kecuali yang ada di fondasi akan dikocok dan dibagikan ulang. Tindakan ini tidak dapat diurungkan. Sisa kocokan di permainan ini: {left}.",
+ "shuffleInfo": "Semua kartu kecuali yang ada di fondasi akan dikocok dan dibagikan ulang. Tindakan ini tidak dapat diurungkan.",
+ "shufflesLeftLabel": "Sisa kocokan di permainan ini",
  "shufflePay": "Bayar {price} koin",
  "shuffleWatchAd": "Tonton iklan",
  "shuffleLimit": "Tidak ada kocokan tersisa di permainan ini.",

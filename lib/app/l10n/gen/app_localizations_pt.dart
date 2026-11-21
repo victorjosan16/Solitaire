@@ -251,6 +251,13 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Todas as cartas, exceto as das fundações, serão embaralhadas e distribuídas de novo. Não é possível desfazer.';
+
+  @override
+  String get shufflesLeftLabel => 'Embaralhadas restantes neste jogo';
+
+  @override
   String shufflePay(int price) {
     return 'Pagar $price moedas';
   }

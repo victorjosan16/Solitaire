@@ -37,6 +37,8 @@ ES = {
  "actionShuffle": "Barajar",
  "shuffleTitle": "¿Barajar las cartas?",
  "shuffleBody": "Todas las cartas, salvo las de las fundaciones, se barajarán y se repartirán de nuevo. No se puede deshacer. Barajadas restantes en esta partida: {left}.",
+ "shuffleInfo": "Todas las cartas, salvo las de las fundaciones, se barajarán y se repartirán de nuevo. No se puede deshacer.",
+ "shufflesLeftLabel": "Barajadas restantes en esta partida",
  "shufflePay": "Pagar {price} monedas",
  "shuffleWatchAd": "Ver anuncio",
  "shuffleLimit": "No te quedan barajadas en esta partida.",

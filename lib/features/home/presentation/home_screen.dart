@@ -332,81 +332,80 @@ class _BottomNav extends StatelessWidget {
   final List<(IconData, String, String?)> items;
 
   @override
-  Widget build(BuildContext context) => Container(
-    margin: const EdgeInsets.fromLTRB(
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.fromLTRB(
       NovaSpace.md,
       0,
       NovaSpace.md,
       NovaSpace.sm,
     ),
-    padding: const EdgeInsets.all(6),
-    decoration: BoxDecoration(
-      gradient: NovaColors.panelGradient,
-      borderRadius: BorderRadius.circular(NovaRadius.lg),
-      border: Border.all(color: NovaColors.gold.withValues(alpha: 0.5)),
-      boxShadow: NovaShadows.raised,
-    ),
-    child: Row(
-      children: [
-        for (final (icon, label, route) in items)
-          Expanded(
-            child: Semantics(
-              button: true,
-              selected: route == null,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(NovaRadius.md),
-                onTap: route == null ? null : () => context.push(route),
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  padding: const EdgeInsets.symmetric(vertical: 6),
-                  decoration: route == null
-                      ? BoxDecoration(
-                          borderRadius: BorderRadius.circular(NovaRadius.md),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              NovaColors.gold.withValues(alpha: 0.22),
-                              NovaColors.gold.withValues(alpha: 0.06),
-                            ],
-                          ),
-                          border: Border.all(
-                            color: NovaColors.gold.withValues(alpha: 0.55),
-                          ),
-                        )
-                      : null,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        icon,
-                        color: route == null
-                            ? NovaColors.gold
-                            : NovaColors.goldLight.withValues(alpha: 0.85),
-                        size: 26,
-                      ),
-                      const SizedBox(height: 2),
-                      Text(
-                        label,
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 12,
+    child: GoldRim(
+      radius: NovaRadius.lg + 4,
+      width: 2.4,
+      padding: const EdgeInsets.all(5),
+      child: Row(
+        children: [
+          for (final (icon, label, route) in items)
+            Expanded(
+              child: Semantics(
+                button: true,
+                selected: route == null,
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(NovaRadius.md),
+                  onTap: route == null ? null : () => context.push(route),
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    decoration: route == null
+                        ? BoxDecoration(
+                            borderRadius: BorderRadius.circular(NovaRadius.md),
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                NovaColors.gold.withValues(alpha: 0.38),
+                                NovaColors.gold.withValues(alpha: 0.1),
+                              ],
+                            ),
+                            border: Border.all(
+                              color: NovaColors.gold,
+                              width: 1.4,
+                            ),
+                          )
+                        : null,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          icon,
                           color: route == null
                               ? NovaColors.gold
-                              : NovaColors.textSecondary,
-                          fontWeight: route == null
-                              ? FontWeight.w700
-                              : FontWeight.w500,
+                              : NovaColors.goldLight.withValues(alpha: 0.85),
+                          size: 26,
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 2),
+                        Text(
+                          label,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: route == null
+                                ? NovaColors.gold
+                                : NovaColors.textSecondary,
+                            fontWeight: route == null
+                                ? FontWeight.w700
+                                : FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     ),
   );
 }

@@ -2,6 +2,8 @@ import 'package:material_ui/material_ui.dart';
 
 import '../../app/l10n/l10n.dart';
 import '../../app/theme/tokens.dart';
+import 'nova_widgets.dart';
+import 'premium_dialog.dart';
 
 /// Consistent premium dialogs. All return a value instead of navigating, so
 /// callers control flow (and widget tests can drive them).
@@ -11,24 +13,26 @@ Future<bool> showConfirmDialog(
   required String body,
   String? confirmLabel,
   bool destructive = false,
+  IconData icon = Icons.help_outline_rounded,
 }) async {
   final l = context.l10n;
   final r = await showDialog<bool>(
     context: context,
-    builder: (c) => AlertDialog(
-      title: Text(title),
-      content: Text(body),
+    builder: (c) => PremiumDialog(
+      title: title,
+      hero: IconHero(icon: destructive ? Icons.warning_amber_rounded : icon),
+      body: body,
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(c, false),
-          child: Text(l.cancel),
-        ),
-        TextButton(
-          onPressed: () => Navigator.pop(c, true),
-          style: destructive
-              ? TextButton.styleFrom(foregroundColor: const Color(0xFFFF8A80))
-              : null,
-          child: Text(confirmLabel ?? l.confirm),
+        DialogButtonPair(
+          secondary: SilverButton(
+            label: l.cancel,
+            onPressed: () => Navigator.pop(c, false),
+          ),
+          primary: GoldButton(
+            label: confirmLabel ?? l.confirm,
+            fontSize: 21,
+            onPressed: () => Navigator.pop(c, true),
+          ),
         ),
       ],
     ),
@@ -45,14 +49,16 @@ Future<void> showInfoDialog(
   final l = context.l10n;
   return showDialog<void>(
     context: context,
-    builder: (c) => AlertDialog(
-      icon: icon == null
-          ? null
-          : Icon(icon, color: NovaColors.goldLight, size: 36),
-      title: Text(title),
-      content: SingleChildScrollView(child: Text(body)),
+    builder: (c) => PremiumDialog(
+      title: title,
+      hero: icon == null ? null : IconHero(icon: icon),
+      body: body,
       actions: [
-        TextButton(onPressed: () => Navigator.pop(c), child: Text(l.ok)),
+        GoldButton(
+          label: l.ok,
+          fontSize: 22,
+          onPressed: () => Navigator.pop(c),
+        ),
       ],
     ),
   );

@@ -245,6 +245,13 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'All cards except those on the foundations will be shuffled and dealt again. This can\'t be undone.';
+
+  @override
+  String get shufflesLeftLabel => 'Shuffles left in this game';
+
+  @override
   String shufflePay(int price) {
     return 'Pay $price coins';
   }

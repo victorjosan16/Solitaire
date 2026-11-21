@@ -37,6 +37,8 @@ VI = {
  "actionShuffle": "Xáo bài",
  "shuffleTitle": "Xáo lại các lá bài?",
  "shuffleBody": "Mọi lá bài, trừ các lá trên chồng đích, sẽ được xáo và chia lại. Không thể hoàn tác. Số lần xáo còn lại trong ván này: {left}.",
+ "shuffleInfo": "Mọi lá bài, trừ các lá trên chồng đích, sẽ được xáo và chia lại. Không thể hoàn tác.",
+ "shufflesLeftLabel": "Số lần xáo còn lại trong ván này",
  "shufflePay": "Trả {price} xu",
  "shuffleWatchAd": "Xem quảng cáo",
  "shuffleLimit": "Ván này đã hết lượt xáo bài.",

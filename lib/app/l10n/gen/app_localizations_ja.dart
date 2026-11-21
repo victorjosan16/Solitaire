@@ -242,6 +242,12 @@ class AppLocalizationsJa extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo => '組札にあるカード以外のすべてのカードをシャッフルして配り直します。元に戻すことはできません。';
+
+  @override
+  String get shufflesLeftLabel => 'このゲームで残っているシャッフル回数';
+
+  @override
   String shufflePay(int price) {
     return '$price コインで実行';
   }

@@ -253,6 +253,13 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Toutes les cartes, sauf celles des fondations, seront mélangées et redistribuées. Cette action est irréversible.';
+
+  @override
+  String get shufflesLeftLabel => 'Mélanges restants dans cette partie';
+
+  @override
   String shufflePay(int price) {
     return 'Payer $price pièces';
   }

@@ -247,6 +247,13 @@ class AppLocalizationsRo extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Toate cărțile, în afară de cele de pe fundații, vor fi amestecate și împărțite din nou. Acțiunea nu poate fi anulată.';
+
+  @override
+  String get shufflesLeftLabel => 'Amestecări rămase în acest joc';
+
+  @override
   String shufflePay(int price) {
     return 'Plătește $price monede';
   }

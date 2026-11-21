@@ -37,6 +37,8 @@ RO = {
  "actionShuffle": "Amestecă",
  "shuffleTitle": "Amesteci cărțile?",
  "shuffleBody": "Toate cărțile, în afară de cele de pe fundații, vor fi amestecate și împărțite din nou. Acțiunea nu poate fi anulată. Amestecări rămase în acest joc: {left}.",
+ "shuffleInfo": "Toate cărțile, în afară de cele de pe fundații, vor fi amestecate și împărțite din nou. Acțiunea nu poate fi anulată.",
+ "shufflesLeftLabel": "Amestecări rămase în acest joc",
  "shufflePay": "Plătește {price} monede",
  "shuffleWatchAd": "Vezi o reclamă",
  "shuffleLimit": "Nu mai ai amestecări în acest joc.",

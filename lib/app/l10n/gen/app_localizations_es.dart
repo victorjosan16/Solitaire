@@ -252,6 +252,13 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Todas las cartas, salvo las de las fundaciones, se barajarán y se repartirán de nuevo. No se puede deshacer.';
+
+  @override
+  String get shufflesLeftLabel => 'Barajadas restantes en esta partida';
+
+  @override
   String shufflePay(int price) {
     return 'Pagar $price monedas';
   }

@@ -37,6 +37,8 @@ ZH = {
  "actionShuffle": "洗牌",
  "shuffleTitle": "重新洗牌？",
  "shuffleBody": "除收牌区外的所有牌将被打乱并重新发牌。此操作无法撤销。本局剩余洗牌次数：{left}。",
+ "shuffleInfo": "除收牌区外的所有牌将被打乱并重新发牌。此操作无法撤销。",
+ "shufflesLeftLabel": "本局剩余洗牌次数",
  "shufflePay": "支付 {price} 金币",
  "shuffleWatchAd": "看广告",
  "shuffleLimit": "本局已没有洗牌次数。",

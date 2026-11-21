@@ -241,6 +241,12 @@ class AppLocalizationsZh extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo => '除收牌区外的所有牌将被打乱并重新发牌。此操作无法撤销。';
+
+  @override
+  String get shufflesLeftLabel => '本局剩余洗牌次数';
+
+  @override
   String shufflePay(int price) {
     return '支付 $price 金币';
   }

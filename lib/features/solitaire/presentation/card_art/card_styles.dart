@@ -127,9 +127,9 @@ class TableStyle {
 
   static const emerald = TableStyle(
     id: 'table.emerald',
-    center: Color(0xFF17574B),
-    edge: Color(0xFF0A2A25),
-    slot: Color(0xFF0B3530),
+    center: Color(0xFF16603F),
+    edge: Color(0xFF07291C),
+    slot: Color(0xFF0A3A27),
   );
   static const navy = TableStyle(
     id: 'table.navy',

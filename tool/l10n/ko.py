@@ -37,6 +37,8 @@ KO = {
  "actionShuffle": "섞기",
  "shuffleTitle": "카드를 섞을까요?",
  "shuffleBody": "파운데이션에 있는 카드를 제외한 모든 카드를 섞어 다시 배분합니다. 되돌릴 수 없습니다. 이번 게임에서 남은 섞기 횟수: {left}",
+ "shuffleInfo": "파운데이션에 있는 카드를 제외한 모든 카드를 섞어 다시 배분합니다. 되돌릴 수 없습니다.",
+ "shufflesLeftLabel": "이번 게임에서 남은 섞기 횟수",
  "shufflePay": "{price} 코인 지불",
  "shuffleWatchAd": "광고 보기",
  "shuffleLimit": "이번 게임에서는 더 이상 섞을 수 없습니다.",

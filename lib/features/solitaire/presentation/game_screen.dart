@@ -13,6 +13,7 @@ import '../../../core/providers.dart';
 import '../../../shared/models/profile.dart';
 import '../../../shared/widgets/nova_dialogs.dart';
 import '../../../shared/widgets/nova_widgets.dart';
+import '../../../shared/widgets/premium_dialog.dart';
 import '../../settings/application/settings_controller.dart';
 import '../../statistics/application/profile_controller.dart';
 import '../application/game_controller.dart';
@@ -291,28 +292,37 @@ class _GameScreenState extends ConsumerState<GameScreen> {
     final choice = await _withPausedClock(
       () => showDialog<String>(
         context: context,
-        builder: (c) => AlertDialog(
-          icon: const Icon(
-            Icons.shuffle_rounded,
-            color: NovaColors.goldLight,
-            size: 36,
+        builder: (c) => PremiumDialog(
+          title: l.shuffleTitle,
+          hero: const ShuffleHero(),
+          body: l.shuffleInfo,
+          info: InfoPill(
+            icon: Icons.style_rounded,
+            label: l.shufflesLeftLabel,
+            value: '${_ctrl.shufflesLeft}',
           ),
-          title: Text(l.shuffleTitle),
-          content: Text(l.shuffleBody(_ctrl.shufflesLeft)),
-          actionsOverflowDirection: VerticalDirection.down,
           actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(c),
-              child: Text(l.cancel),
-            ),
             if (ads.rewardedAvailable)
-              TextButton(
+              PanelButton(
+                label: l.shuffleWatchAd,
+                icon: Icons.smart_display_rounded,
+                height: 56,
                 onPressed: () => Navigator.pop(c, 'ad'),
-                child: Text(l.shuffleWatchAd),
               ),
-            TextButton(
-              onPressed: () => Navigator.pop(c, 'pay'),
-              child: Text(l.shufflePay(ProfileData.shufflePrice)),
+            DialogButtonPair(
+              secondary: SilverButton(
+                label: l.cancel,
+                height: 58,
+                onPressed: () => Navigator.pop(c),
+              ),
+              primary: GoldButton(
+                label: l.shufflePay(ProfileData.shufflePrice),
+                leading: const CoinStack(size: 32),
+                height: 58,
+                fontSize: 19,
+                maxLines: 2,
+                onPressed: () => Navigator.pop(c, 'pay'),
+              ),
             ),
           ],
         ),
@@ -682,59 +692,58 @@ class _HudState extends ConsumerState<_Hud> {
     final elapsed = ref.read(gameControllerProvider.notifier).elapsedMs;
     Widget cell(IconData icon, String label, String value) => Expanded(
       child: MergeSemantics(
-        child: Container(
-          margin: const EdgeInsets.symmetric(horizontal: 3),
-          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-          decoration: BoxDecoration(
-            gradient: NovaColors.panelGradient,
-            borderRadius: BorderRadius.circular(NovaRadius.pill),
-            border: Border.all(color: NovaColors.gold.withValues(alpha: 0.45)),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ExcludeSemantics(
-                child: Icon(icon, size: 20, color: NovaColors.gold),
-              ),
-              const SizedBox(width: 6),
-              Flexible(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 11,
-                        height: 1.1,
-                        color: NovaColors.textSecondary,
-                      ),
-                    ),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        value,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 3),
+          child: GoldRim(
+            radius: NovaRadius.pill,
+            width: 2,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ExcludeSemantics(
+                  child: Icon(icon, size: 24, color: NovaColors.gold),
+                ),
+                const SizedBox(width: 6),
+                Flexible(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        label,
                         maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          fontSize: 17,
-                          height: 1.15,
-                          fontWeight: FontWeight.w700,
+                          fontSize: 11,
+                          height: 1.1,
                           color: NovaColors.ivory,
-                          fontFeatures: [FontFeature.tabularFigures()],
                         ),
                       ),
-                    ),
-                  ],
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          value,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 17,
+                            height: 1.15,
+                            fontWeight: FontWeight.w700,
+                            color: NovaColors.ivory,
+                            fontFeatures: [FontFeature.tabularFigures()],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
     );
     return Container(
-      padding: const EdgeInsets.fromLTRB(2, 6, NovaSpace.sm, 6),
+      padding: const EdgeInsets.fromLTRB(NovaSpace.sm, 6, NovaSpace.sm, 6),
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -744,11 +753,14 @@ class _HudState extends ConsumerState<_Hud> {
       ),
       child: Row(
         children: [
-          IconButton(
+          RimIconButton(
             tooltip: l.actionPause,
             onPressed: widget.onPause,
-            icon: const Icon(Icons.pause_circle_outline_rounded, size: 30),
+            icon: Icons.pause_rounded,
+            size: 44,
+            circle: true,
           ),
+          const SizedBox(width: 3),
           cell(Icons.workspace_premium_rounded, l.hudScore, '${b?.score ?? 0}'),
           if (showTimer)
             cell(Icons.schedule_rounded, l.hudTime, formatClock(elapsed)),
@@ -810,7 +822,7 @@ class _ActionBar extends StatelessWidget {
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      Icon(icon, color: NovaColors.goldLight, size: 28),
+                      Icon(icon, color: NovaColors.gold, size: 30),
                       if (badge != null)
                         Positioned(right: -14, top: -8, child: badge),
                     ],
@@ -832,72 +844,81 @@ class _ActionBar extends StatelessWidget {
         ),
       ),
     );
-    return Container(
-      margin: const EdgeInsets.fromLTRB(
+    final sep = Container(
+      width: 1,
+      height: 40,
+      color: NovaColors.gold.withValues(alpha: 0.28),
+    );
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(
         NovaSpace.sm,
         4,
         NovaSpace.sm,
         NovaSpace.sm,
       ),
-      padding: const EdgeInsets.symmetric(vertical: 4),
-      decoration: BoxDecoration(
-        gradient: NovaColors.panelGradient,
-        borderRadius: BorderRadius.circular(NovaRadius.lg),
-        border: Border.all(color: NovaColors.gold.withValues(alpha: 0.5)),
-        boxShadow: NovaShadows.soft,
-      ),
-      child: Row(
-        children: [
-          action(Icons.undo_rounded, l.actionUndo, canUndo ? onUndo : null),
-          action(
-            Icons.lightbulb_outline_rounded,
-            l.actionHint,
-            hintsEnabled ? onHint : null,
-            semantics: '${l.actionHint}, ${l.hintsLeft(hintTokens)}',
-            badge: hintsEnabled
-                ? Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 1,
-                    ),
-                    decoration: BoxDecoration(
-                      gradient: NovaColors.goldGradient,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      '$hintTokens',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w800,
-                        color: NovaColors.navy,
+      child: GoldRim(
+        radius: NovaRadius.lg + 4,
+        width: 2.4,
+        padding: const EdgeInsets.symmetric(vertical: 4),
+        child: Row(
+          children: [
+            action(Icons.undo_rounded, l.actionUndo, canUndo ? onUndo : null),
+            sep,
+            action(
+              Icons.lightbulb_outline_rounded,
+              l.actionHint,
+              hintsEnabled ? onHint : null,
+              semantics: '${l.actionHint}, ${l.hintsLeft(hintTokens)}',
+              badge: hintsEnabled
+                  ? Container(
+                      constraints: const BoxConstraints(minWidth: 20),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 5,
+                        vertical: 1,
                       ),
-                    ),
-                  )
-                : null,
-          ),
-          action(
-            Icons.shuffle_rounded,
-            l.actionShuffle,
-            canShuffle ? onShuffle : null,
-            semantics: '${l.actionShuffle}, ${l.shuffleBody(shufflesLeft)}',
-            badge: const Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CoinIcon(size: 14),
-                SizedBox(width: 2),
-                Text(
-                  '${ProfileData.shufflePrice}',
-                  style: TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.w800,
-                    color: NovaColors.goldLight,
-                  ),
-                ),
-              ],
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD32F2F),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.white, width: 1.2),
+                      ),
+                      child: Text(
+                        '$hintTokens',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w800,
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  : null,
             ),
-          ),
-          action(Icons.add_circle_outline_rounded, l.actionNew, onNew),
-        ],
+            sep,
+            action(
+              Icons.shuffle_rounded,
+              l.actionShuffle,
+              canShuffle ? onShuffle : null,
+              semantics: '${l.actionShuffle}, ${l.shuffleBody(shufflesLeft)}',
+              badge: const Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CoinIcon(size: 16),
+                  SizedBox(width: 2),
+                  Text(
+                    '${ProfileData.shufflePrice}',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w800,
+                      color: NovaColors.goldLight,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            sep,
+            action(Icons.add_circle_outline_rounded, l.actionNew, onNew),
+          ],
+        ),
       ),
     );
   }

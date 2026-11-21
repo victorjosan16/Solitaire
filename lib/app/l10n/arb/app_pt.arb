@@ -67,6 +67,8 @@
   "actionShuffle": "Embaralhar",
   "shuffleTitle": "Embaralhar as cartas?",
   "shuffleBody": "Todas as cartas, exceto as das fundações, serão embaralhadas e distribuídas de novo. Não é possível desfazer. Embaralhadas restantes neste jogo: {left}.",
+  "shuffleInfo": "Todas as cartas, exceto as das fundações, serão embaralhadas e distribuídas de novo. Não é possível desfazer.",
+  "shufflesLeftLabel": "Embaralhadas restantes neste jogo",
   "shufflePay": "Pagar {price} moedas",
   "shuffleWatchAd": "Ver anúncio",
   "shuffleLimit": "Não há mais embaralhadas neste jogo.",

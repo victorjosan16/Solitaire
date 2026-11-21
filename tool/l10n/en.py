@@ -38,6 +38,8 @@ EN = {
  "actionShuffle": "Shuffle",
  "shuffleTitle": "Shuffle the cards?",
  "shuffleBody": "All cards except those on the foundations will be shuffled and dealt again. This can't be undone. Shuffles left in this game: {left}.",
+ "shuffleInfo": "All cards except those on the foundations will be shuffled and dealt again. This can't be undone.",
+ "shufflesLeftLabel": "Shuffles left in this game",
  "shufflePay": "Pay {price} coins",
  "shuffleWatchAd": "Watch ad",
  "shuffleLimit": "No shuffles left in this game.",

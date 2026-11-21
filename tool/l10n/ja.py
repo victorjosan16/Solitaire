@@ -37,6 +37,8 @@ JA = {
  "actionShuffle": "シャッフル",
  "shuffleTitle": "カードをシャッフルしますか？",
  "shuffleBody": "組札にあるカード以外のすべてのカードをシャッフルして配り直します。元に戻すことはできません。このゲームで残っているシャッフル回数：{left}",
+ "shuffleInfo": "組札にあるカード以外のすべてのカードをシャッフルして配り直します。元に戻すことはできません。",
+ "shufflesLeftLabel": "このゲームで残っているシャッフル回数",
  "shufflePay": "{price} コインで実行",
  "shuffleWatchAd": "広告を見る",
  "shuffleLimit": "このゲームではもうシャッフルできません。",

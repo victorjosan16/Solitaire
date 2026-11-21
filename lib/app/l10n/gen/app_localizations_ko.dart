@@ -243,6 +243,12 @@ class AppLocalizationsKo extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo => '파운데이션에 있는 카드를 제외한 모든 카드를 섞어 다시 배분합니다. 되돌릴 수 없습니다.';
+
+  @override
+  String get shufflesLeftLabel => '이번 게임에서 남은 섞기 횟수';
+
+  @override
   String shufflePay(int price) {
     return '$price 코인 지불';
   }

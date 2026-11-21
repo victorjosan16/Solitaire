@@ -528,6 +528,18 @@ abstract class AppLocalizations {
   /// **'All cards except those on the foundations will be shuffled and dealt again. This can\'t be undone. Shuffles left in this game: {left}.'**
   String shuffleBody(int left);
 
+  /// No description provided for @shuffleInfo.
+  ///
+  /// In en, this message translates to:
+  /// **'All cards except those on the foundations will be shuffled and dealt again. This can\'t be undone.'**
+  String get shuffleInfo;
+
+  /// No description provided for @shufflesLeftLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffles left in this game'**
+  String get shufflesLeftLabel;
+
   /// No description provided for @shufflePay.
   ///
   /// In en, this message translates to:

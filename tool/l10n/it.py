@@ -37,6 +37,8 @@ IT = {
  "actionShuffle": "Mescola",
  "shuffleTitle": "Mescolare le carte?",
  "shuffleBody": "Tutte le carte, tranne quelle sulle basi, verranno mescolate e ridistribuite. L'operazione non può essere annullata. Mescolate rimaste in questa partita: {left}.",
+ "shuffleInfo": "Tutte le carte, tranne quelle sulle basi, verranno mescolate e ridistribuite. L'operazione non può essere annullata.",
+ "shufflesLeftLabel": "Mescolate rimaste in questa partita",
  "shufflePay": "Paga {price} monete",
  "shuffleWatchAd": "Guarda un annuncio",
  "shuffleLimit": "Non hai più mescolate in questa partita.",

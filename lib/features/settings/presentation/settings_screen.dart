@@ -34,7 +34,7 @@ class SettingsScreen extends ConsumerWidget {
       bool value,
       ValueChanged<bool> onChanged,
     ) => SwitchListTile(
-      secondary: Icon(icon, color: NovaColors.goldLight),
+      secondary: RimIcon(icon),
       title: Text(label, style: const TextStyle(color: NovaColors.ivory)),
       value: value,
       onChanged: onChanged,
@@ -46,7 +46,7 @@ class SettingsScreen extends ConsumerWidget {
       VoidCallback onTap, {
       String? trailing,
     }) => ListTile(
-      leading: Icon(icon, color: NovaColors.goldLight),
+      leading: RimIcon(icon),
       title: Text(label, style: const TextStyle(color: NovaColors.ivory)),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
@@ -69,7 +69,7 @@ class SettingsScreen extends ConsumerWidget {
         child: Column(
           children: [
             for (var i = 0; i < children.length; i++) ...[
-              if (i > 0) const Divider(indent: 56),
+              if (i > 0) const Divider(indent: 72),
               children[i],
             ],
           ],
@@ -111,10 +111,7 @@ class SettingsScreen extends ConsumerWidget {
             ]),
             group([
               ListTile(
-                leading: const Icon(
-                  Icons.style_rounded,
-                  color: NovaColors.goldLight,
-                ),
+                leading: const RimIcon(Icons.style_rounded),
                 title: Text(
                   l.gameModeSetting,
                   style: const TextStyle(color: NovaColors.ivory),
@@ -205,10 +202,7 @@ class SettingsScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: NovaSpace.sm),
                   ListTile(
-                    leading: const Icon(
-                      Icons.policy_outlined,
-                      color: NovaColors.goldLight,
-                    ),
+                    leading: const RimIcon(Icons.policy_outlined),
                     title: Text(
                       l.privacyPolicy,
                       style: const TextStyle(color: NovaColors.ivory),
@@ -222,10 +216,7 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                   ),
                   ListTile(
-                    leading: const Icon(
-                      Icons.ads_click_rounded,
-                      color: NovaColors.goldLight,
-                    ),
+                    leading: const RimIcon(Icons.ads_click_rounded),
                     title: Text(
                       l.privacyChoices,
                       style: const TextStyle(color: NovaColors.ivory),
@@ -245,10 +236,7 @@ class SettingsScreen extends ConsumerWidget {
                     },
                   ),
                   SwitchListTile(
-                    secondary: const Icon(
-                      Icons.ads_click_outlined,
-                      color: NovaColors.goldLight,
-                    ),
+                    secondary: const RimIcon(Icons.ads_click_outlined),
                     title: Text(
                       l.personalizedAds,
                       style: const TextStyle(color: NovaColors.ivory),
@@ -258,10 +246,7 @@ class SettingsScreen extends ConsumerWidget {
                         ctrl.update((x) => x.copyWith(personalizedAds: v)),
                   ),
                   SwitchListTile(
-                    secondary: const Icon(
-                      Icons.analytics_outlined,
-                      color: NovaColors.goldLight,
-                    ),
+                    secondary: const RimIcon(Icons.analytics_outlined),
                     title: Text(
                       l.analyticsSetting,
                       style: const TextStyle(color: NovaColors.ivory),
@@ -305,10 +290,7 @@ class SettingsScreen extends ConsumerWidget {
                     },
                   ),
                   ListTile(
-                    leading: const Icon(
-                      Icons.description_outlined,
-                      color: NovaColors.goldLight,
-                    ),
+                    leading: const RimIcon(Icons.description_outlined),
                     title: Text(
                       l.licenses,
                       style: const TextStyle(color: NovaColors.ivory),

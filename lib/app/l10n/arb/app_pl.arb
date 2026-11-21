@@ -67,6 +67,8 @@
   "actionShuffle": "Tasuj",
   "shuffleTitle": "Potasować karty?",
   "shuffleBody": "Wszystkie karty poza tymi na stosach bazowych zostaną potasowane i rozdane od nowa. Tej operacji nie można cofnąć. Pozostałe tasowania w tej grze: {left}.",
+  "shuffleInfo": "Wszystkie karty poza tymi na stosach bazowych zostaną potasowane i rozdane od nowa. Tej operacji nie można cofnąć.",
+  "shufflesLeftLabel": "Pozostałe tasowania w tej grze",
   "shufflePay": "Zapłać {price} monet",
   "shuffleWatchAd": "Obejrzyj reklamę",
   "shuffleLimit": "W tej grze nie zostały już tasowania.",

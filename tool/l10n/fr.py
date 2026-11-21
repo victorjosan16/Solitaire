@@ -37,6 +37,8 @@ FR = {
  "actionShuffle": "Mélanger",
  "shuffleTitle": "Mélanger les cartes ?",
  "shuffleBody": "Toutes les cartes, sauf celles des fondations, seront mélangées et redistribuées. Cette action est irréversible. Mélanges restants dans cette partie : {left}.",
+ "shuffleInfo": "Toutes les cartes, sauf celles des fondations, seront mélangées et redistribuées. Cette action est irréversible.",
+ "shufflesLeftLabel": "Mélanges restants dans cette partie",
  "shufflePay": "Payer {price} pièces",
  "shuffleWatchAd": "Regarder une pub",
  "shuffleLimit": "Plus aucun mélange disponible dans cette partie.",

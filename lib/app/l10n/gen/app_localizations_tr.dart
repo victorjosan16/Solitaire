@@ -244,6 +244,13 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Temellerdekiler dışındaki tüm kartlar karıştırılıp yeniden dağıtılacak. Bu işlem geri alınamaz.';
+
+  @override
+  String get shufflesLeftLabel => 'Bu oyunda kalan karıştırma hakkı';
+
+  @override
   String shufflePay(int price) {
     return '$price jeton öde';
   }

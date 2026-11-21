@@ -13,6 +13,9 @@ class GoldButton extends StatelessWidget {
     this.icon,
     this.height = 56,
     this.expand = true,
+    this.leading,
+    this.fontSize = 26,
+    this.maxLines = 1,
   });
 
   final String label;
@@ -20,13 +23,18 @@ class GoldButton extends StatelessWidget {
   final IconData? icon;
   final double height;
   final bool expand;
+  final Widget? leading;
+  final double fontSize;
+  final int maxLines;
 
   @override
   Widget build(BuildContext context) {
     final enabled = onPressed != null;
     final child = Container(
       height: height,
-      padding: const EdgeInsets.symmetric(horizontal: NovaSpace.xl),
+      padding: EdgeInsets.symmetric(
+        horizontal: leading != null ? NovaSpace.md : NovaSpace.xl,
+      ),
       decoration: BoxDecoration(
         gradient: enabled ? NovaColors.goldGradient : null,
         color: enabled ? null : const Color(0xFF5B5543),
@@ -47,6 +55,10 @@ class GoldButton extends StatelessWidget {
         mainAxisSize: expand ? MainAxisSize.max : MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          if (leading != null) ...[
+            leading!,
+            const SizedBox(width: NovaSpace.sm),
+          ],
           if (icon != null) ...[
             Icon(icon, color: const Color(0xFF0B3A30), size: 34),
             const SizedBox(width: NovaSpace.md),
@@ -54,13 +66,15 @@ class GoldButton extends StatelessWidget {
           Flexible(
             child: Text(
               label,
-              maxLines: 1,
+              maxLines: maxLines,
+              textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: NovaFonts.display,
-                fontSize: 26,
+                fontSize: fontSize,
+                height: maxLines > 1 ? 1.0 : null,
                 fontWeight: FontWeight.w700,
-                color: Color(0xFF1C1608),
+                color: const Color(0xFF1C1608),
               ),
             ),
           ),
@@ -96,20 +110,15 @@ class PanelButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final content = Container(
-      constraints: BoxConstraints(minHeight: height),
+    final content = GoldRim(
+      radius: NovaRadius.pill,
+      width: 2.4,
+      constraints: BoxConstraints(minHeight: height - 4.8),
       padding: const EdgeInsets.symmetric(horizontal: NovaSpace.lg),
-      decoration: BoxDecoration(
-        gradient: NovaColors.panelGradient,
-        borderRadius: BorderRadius.circular(NovaRadius.pill),
-        border: Border.all(color: NovaColors.gold.withValues(alpha: 0.55)),
-        boxShadow: NovaShadows.soft,
-      ),
       child: Row(
         children: [
           ?leading,
-          if (icon != null)
-            Icon(icon, color: NovaColors.goldLight, size: NovaIconSize.md),
+          if (icon != null) Icon(icon, color: NovaColors.gold, size: 28),
           const SizedBox(width: NovaSpace.md),
           Expanded(
             child: Text(
@@ -124,7 +133,7 @@ class PanelButton extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: NovaSpace.md + NovaIconSize.md),
+          const SizedBox(width: NovaSpace.md + 28),
         ],
       ),
     );
@@ -190,20 +199,17 @@ class NovaPanel extends StatelessWidget {
   final double radius;
 
   @override
-  Widget build(BuildContext context) => Container(
-    padding: padding,
+  Widget build(BuildContext context) => DecoratedBox(
     decoration: BoxDecoration(
-      gradient: NovaColors.panelGradient,
       borderRadius: BorderRadius.circular(radius),
-      border: Border.all(
-        color: NovaColors.gold.withValues(alpha: highlight ? 0.95 : 0.35),
-        width: highlight ? 2 : 1,
-      ),
-      boxShadow: highlight
-          ? [...NovaShadows.soft, ...NovaShadows.goldGlow(0.3)]
-          : NovaShadows.soft,
+      boxShadow: highlight ? NovaShadows.goldGlow(0.35) : null,
     ),
-    child: child,
+    child: GoldRim(
+      radius: radius,
+      width: highlight ? 2.4 : 1.6,
+      padding: padding,
+      child: child,
+    ),
   );
 }
 
@@ -359,13 +365,12 @@ class NovaTabs extends StatelessWidget {
   final ValueChanged<int> onChanged;
 
   @override
-  Widget build(BuildContext context) => Container(
+  Widget build(BuildContext context) => GoldRim(
+    radius: NovaRadius.pill,
+    width: 2,
+    shadow: false,
+    fill: const LinearGradient(colors: [Color(0xFF082A21), Color(0xFF0A3326)]),
     padding: const EdgeInsets.all(3),
-    decoration: BoxDecoration(
-      color: const Color(0xFF0A221F),
-      borderRadius: BorderRadius.circular(NovaRadius.pill),
-      border: Border.all(color: NovaColors.gold.withValues(alpha: 0.35)),
-    ),
     child: Row(
       children: [
         for (var i = 0; i < labels.length; i++)
@@ -394,8 +399,8 @@ class NovaTabs extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                           fontSize: 15,
                           color: i == selected
-                              ? NovaColors.navy
-                              : NovaColors.textSecondary,
+                              ? const Color(0xFF1C1608)
+                              : NovaColors.ivory,
                         ),
                       ),
                     ),
@@ -432,11 +437,11 @@ class NovaHeader extends StatelessWidget {
       child: Row(
         children: [
           if (onBack != null)
-            IconButton(
+            RimIconButton(
               tooltip: back,
               onPressed: onBack,
-              icon: const Icon(Icons.arrow_back_ios_new_rounded),
-              color: NovaColors.goldLight,
+              size: 44,
+              icon: Icons.arrow_back_ios_new_rounded,
             )
           else
             const SizedBox(width: 48),
@@ -601,22 +606,18 @@ class NovaTile extends StatelessWidget {
     excludeSemantics: true,
     child: _Pressable(
       onTap: onTap,
-      child: Container(
-        constraints: const BoxConstraints(minHeight: 88),
+      child: GoldRim(
+        radius: NovaRadius.md + 4,
+        width: 2.4,
+        constraints: const BoxConstraints(minHeight: 84),
         padding: const EdgeInsets.symmetric(
           horizontal: NovaSpace.xs,
           vertical: NovaSpace.md,
         ),
-        decoration: BoxDecoration(
-          gradient: NovaColors.panelGradient,
-          borderRadius: BorderRadius.circular(NovaRadius.md + 2),
-          border: Border.all(color: NovaColors.gold.withValues(alpha: 0.5)),
-          boxShadow: NovaShadows.soft,
-        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 32, color: NovaColors.gold),
+            Icon(icon, size: 36, color: NovaColors.gold),
             const SizedBox(height: NovaSpace.xs + 2),
             FittedBox(
               fit: BoxFit.scaleDown,
@@ -680,4 +681,188 @@ class SuitDivider extends StatelessWidget {
       ),
     );
   }
+}
+
+/// Thick metallic gold frame around an emerald fill — the house style for
+/// secondary controls, tiles, bars and panels.
+class GoldRim extends StatelessWidget {
+  const GoldRim({
+    super.key,
+    required this.child,
+    this.radius = NovaRadius.md + 2,
+    this.width = 2.2,
+    this.fill = NovaColors.panelGradient,
+    this.padding,
+    this.shadow = true,
+    this.constraints,
+  });
+
+  final Widget child;
+  final double radius;
+  final double width;
+  final Gradient fill;
+  final EdgeInsetsGeometry? padding;
+  final bool shadow;
+  final BoxConstraints? constraints;
+
+  @override
+  Widget build(BuildContext context) => Container(
+    padding: EdgeInsets.all(width),
+    decoration: BoxDecoration(
+      gradient: NovaColors.rimGradient,
+      borderRadius: BorderRadius.circular(radius),
+      boxShadow: shadow ? NovaShadows.soft : null,
+    ),
+    child: Container(
+      constraints: constraints,
+      padding: padding,
+      decoration: BoxDecoration(
+        gradient: fill,
+        borderRadius: BorderRadius.circular(math.max(0, radius - width)),
+      ),
+      child: child,
+    ),
+  );
+}
+
+/// Gold icon in a small gold-rimmed emerald square (settings rows, headers).
+class RimIcon extends StatelessWidget {
+  const RimIcon(this.icon, {super.key, this.size = 40});
+  final IconData icon;
+  final double size;
+  @override
+  Widget build(BuildContext context) => ExcludeSemantics(
+    child: SizedBox.square(
+      dimension: size,
+      child: GoldRim(
+        radius: size * 0.3,
+        width: 1.6,
+        shadow: false,
+        child: Center(
+          child: Icon(icon, size: size * 0.55, color: NovaColors.gold),
+        ),
+      ),
+    ),
+  );
+}
+
+/// Round/rounded-square tappable icon button with the gold rim.
+class RimIconButton extends StatelessWidget {
+  const RimIconButton({
+    super.key,
+    required this.icon,
+    required this.onPressed,
+    required this.tooltip,
+    this.size = 46,
+    this.circle = false,
+  });
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final String tooltip;
+  final double size;
+  final bool circle;
+
+  @override
+  Widget build(BuildContext context) => Tooltip(
+    message: tooltip,
+    child: Semantics(
+      button: true,
+      label: tooltip,
+      excludeSemantics: true,
+      child: _Pressable(
+        onTap: onPressed,
+        child: SizedBox.square(
+          dimension: size,
+          child: GoldRim(
+            radius: circle ? size / 2 : size * 0.3,
+            width: 2,
+            child: Center(
+              child: Icon(icon, size: size * 0.56, color: NovaColors.gold),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+/// Light metallic secondary pill (e.g. Cancel next to a gold action).
+class SilverButton extends StatelessWidget {
+  const SilverButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+    this.height = 56,
+  });
+  final String label;
+  final VoidCallback? onPressed;
+  final double height;
+
+  @override
+  Widget build(BuildContext context) => Semantics(
+    button: true,
+    child: _Pressable(
+      onTap: onPressed,
+      child: Container(
+        height: height,
+        padding: const EdgeInsets.symmetric(horizontal: NovaSpace.lg),
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFFAFAFA), Color(0xFFD2D4D6), Color(0xFF9EA2A6)],
+            stops: [0, 0.55, 1],
+          ),
+          borderRadius: BorderRadius.circular(NovaRadius.pill),
+          border: Border.all(color: Colors.white, width: 1.2),
+          boxShadow: const [
+            BoxShadow(
+              color: Color(0x73000000),
+              blurRadius: 12,
+              offset: Offset(0, 5),
+            ),
+            BoxShadow(color: Color(0xFF6E7275), offset: Offset(0, 2.5)),
+          ],
+        ),
+        alignment: Alignment.center,
+        child: FittedBox(
+          fit: BoxFit.scaleDown,
+          child: Text(
+            label,
+            maxLines: 1,
+            style: const TextStyle(
+              fontFamily: NovaFonts.display,
+              fontSize: 22,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFF1E2224),
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
+/// Small stack of gold coins (decorates coin-priced actions).
+class CoinStack extends StatelessWidget {
+  const CoinStack({super.key, this.size = 30});
+  final double size;
+  @override
+  Widget build(BuildContext context) => ExcludeSemantics(
+    child: SizedBox(
+      width: size * 1.25,
+      height: size,
+      child: Stack(
+        children: [
+          Positioned(left: 0, bottom: 0, child: CoinIcon(size: size * 0.72)),
+          Positioned(right: 0, bottom: 0, child: CoinIcon(size: size * 0.72)),
+          Positioned(
+            left: size * 0.26,
+            top: 0,
+            child: CoinIcon(size: size * 0.72),
+          ),
+        ],
+      ),
+    ),
+  );
 }

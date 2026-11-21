@@ -244,6 +244,13 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Mọi lá bài, trừ các lá trên chồng đích, sẽ được xáo và chia lại. Không thể hoàn tác.';
+
+  @override
+  String get shufflesLeftLabel => 'Số lần xáo còn lại trong ván này';
+
+  @override
   String shufflePay(int price) {
     return 'Trả $price xu';
   }

@@ -245,6 +245,13 @@ class AppLocalizationsId extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Semua kartu kecuali yang ada di fondasi akan dikocok dan dibagikan ulang. Tindakan ini tidak dapat diurungkan.';
+
+  @override
+  String get shufflesLeftLabel => 'Sisa kocokan di permainan ini';
+
+  @override
   String shufflePay(int price) {
     return 'Bayar $price koin';
   }

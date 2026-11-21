@@ -256,6 +256,13 @@ class AppLocalizationsPl extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Wszystkie karty poza tymi na stosach bazowych zostaną potasowane i rozdane od nowa. Tej operacji nie można cofnąć.';
+
+  @override
+  String get shufflesLeftLabel => 'Pozostałe tasowania w tej grze';
+
+  @override
   String shufflePay(int price) {
     return 'Zapłać $price monet';
   }

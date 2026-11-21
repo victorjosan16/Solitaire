@@ -252,6 +252,13 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
+  String get shuffleInfo =>
+      'Alle Karten außer denen auf den Ablagen werden gemischt und neu ausgeteilt. Das kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get shufflesLeftLabel => 'Verbleibendes Mischen in diesem Spiel';
+
+  @override
   String shufflePay(int price) {
     return '$price Münzen zahlen';
   }

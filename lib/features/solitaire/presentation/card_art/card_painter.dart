@@ -203,7 +203,7 @@ class CardPainter {
     }
     c.restore();
 
-    // Central medallion: diamond frame with a four-point star.
+    // Central medallion: diamond frame holding a spade emblem.
     final ctr = rect.center;
     final r = w * 0.26;
     final medallion = Path()
@@ -214,19 +214,19 @@ class CardPainter {
       ..close();
     c.drawPath(medallion, Paint()..color = st.backAccent);
     c.drawPath(medallion, orn);
-    final star = Path();
-    for (var i = 0; i < 8; i++) {
-      final a = i * math.pi / 4 - math.pi / 2;
-      final rad = i.isEven ? r * 0.75 : r * 0.22;
-      final pt = Offset(ctr.dx + rad * math.cos(a), ctr.dy + rad * math.sin(a));
-      if (i == 0) {
-        star.moveTo(pt.dx, pt.dy);
-      } else {
-        star.lineTo(pt.dx, pt.dy);
-      }
-    }
-    star.close();
-    c.drawPath(star, Paint()..color = st.backOrnament);
+    final emblem = Rect.fromCenter(
+      center: ctr,
+      width: r * 1.05,
+      height: r * 1.15,
+    );
+    c.drawPath(
+      SuitPaths.path(Suit.spades, emblem),
+      Paint()
+        ..shader = ui.Gradient.linear(emblem.topCenter, emblem.bottomCenter, [
+          Color.lerp(st.backOrnament, const Color(0xFFFFFFFF), 0.35)!,
+          st.backOrnament,
+        ]),
+    );
     if (st.glow) {
       c.drawRRect(
         inner,

@@ -67,6 +67,8 @@
   "actionShuffle": "Mischen",
   "shuffleTitle": "Karten mischen?",
   "shuffleBody": "Alle Karten außer denen auf den Ablagen werden gemischt und neu ausgeteilt. Das kann nicht rückgängig gemacht werden. Verbleibendes Mischen in diesem Spiel: {left}.",
+  "shuffleInfo": "Alle Karten außer denen auf den Ablagen werden gemischt und neu ausgeteilt. Das kann nicht rückgängig gemacht werden.",
+  "shufflesLeftLabel": "Verbleibendes Mischen in diesem Spiel",
   "shufflePay": "{price} Münzen zahlen",
   "shuffleWatchAd": "Werbung ansehen",
   "shuffleLimit": "In diesem Spiel kannst du nicht mehr mischen.",
