@@ -3,7 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="Solitaire Nova"
-        android:name="${applicationName}"
+        android:name=".NovaApplication"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -22,6 +22,16 @@
               android:name="io.flutter.embedding.android.NormalTheme"
               android:resource="@style/NormalTheme"
               />
+        </activity>
+        <!-- Launcher gate in a separate process: shows the last crash report
+             (if any) even when the main process crashes at startup. -->
+        <activity
+            android:name=".GateActivity"
+            android:exported="true"
+            android:process=":gate"
+            android:taskAffinity=""
+            android:theme="@android:style/Theme.DeviceDefault.NoActionBar"
+            android:excludeFromRecents="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
