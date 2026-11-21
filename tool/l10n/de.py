@@ -132,7 +132,7 @@ DE = {
  "rulesTableau": "Baue die sieben Spalten absteigend in wechselnden Farben (Rot auf Schwarz, Schwarz auf Rot). Nur ein König darf eine leere Spalte belegen.",
  "rulesFoundation": "Lege alle Karten nach Farbe vom Ass bis zum König auf die vier Ablagen.",
  "rulesStock": "Tippe auf den Stapel, um 1 oder 3 Karten aufzudecken. Ist er leer, tippe erneut, um den Ablagestapel umzudrehen.",
- "rulesControls": "Tippe auf eine Karte, um sie automatisch zu bewegen, oder ziehe sie. Nimm jeden Zug zurück, hol dir einen Tipp oder lass Auto das Spiel beenden, wenn alle Karten aufgedeckt sind.",
+ "rulesControls": "Tippe auf eine Karte, um sie auf die Ablagen zu schicken, oder ziehe sie auf eine beliebige Spalte. Mache Züge rückgängig, hol dir einen Tipp oder lass Auto das Spiel beenden, wenn alle Karten aufgedeckt sind.",
  "rulesCombo": "Combos zählen aufeinanderfolgende sinnvolle Züge. Sie sind nur zum Spaß und ändern die Regeln nicht.",
  "about": "Über", "version": "Version {version}", "licenses": "Open-Source-Lizenzen",
  "aboutBody": "Ein klassisches Klondike-Solitaire. Kein Glücksspiel, keine Geldpreise.",

@@ -132,7 +132,7 @@ FR = {
  "rulesTableau": "Construisez les sept colonnes en ordre décroissant, en alternant les couleurs (rouge sur noir, noir sur rouge). Seul un Roi peut occuper une colonne vide.",
  "rulesFoundation": "Placez toutes les cartes sur les quatre fondations, par couleur, de l'As au Roi.",
  "rulesStock": "Touchez le talon pour retourner 1 ou 3 cartes. Quand il est vide, touchez-le de nouveau pour retourner la défausse.",
- "rulesControls": "Touchez une carte pour la déplacer automatiquement, ou faites-la glisser. Annulez n'importe quel coup, demandez un indice ou laissez Auto terminer la partie quand toutes les cartes sont révélées.",
+ "rulesControls": "Touchez une carte pour l'envoyer sur les fondations, ou faites-la glisser vers n'importe quelle colonne. Annulez un coup, demandez un indice ou laissez Auto terminer la partie quand toutes les cartes sont découvertes.",
  "rulesCombo": "Les combos comptent les coups utiles consécutifs. Ils sont juste pour le plaisir et ne changent jamais les règles.",
  "about": "À propos", "version": "Version {version}", "licenses": "Licences open source",
  "aboutBody": "Un Solitaire Klondike classique. Pas de jeu d'argent, pas de gains en argent.",

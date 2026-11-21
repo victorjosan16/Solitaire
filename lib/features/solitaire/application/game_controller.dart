@@ -310,7 +310,9 @@ class GameController extends Notifier<GameViewState> {
     }
   }
 
-  /// Tap on card [index] of [pile]: auto-move it (and cards above it).
+  /// Tap on card [index] of [pile]: sends it up to its foundation when that
+  /// is legal. Tableau moves are made by dragging only (a tap never drops a
+  /// card into another column).
   Future<bool> tapCard(PileRef pile, int index) async {
     if (_locked) return false;
     final b = state.snapshot!.state;
@@ -331,6 +333,7 @@ class GameController extends Notifier<GameViewState> {
       pile,
       len - index,
       preferFoundation: _settings.tapToFoundation,
+      foundationOnly: true,
     );
     if (move == null) {
       _invalid(pile);

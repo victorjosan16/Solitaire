@@ -753,7 +753,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Bir kartı otomatik taşımak için dokun ya da sürükle. Her hamleyi geri alabilir, ipucu isteyebilir veya tüm kartlar açıldığında oyunu Otomatik\'e bitirtebilirsin.';
+      'Bir kartı temellere göndermek için ona dokunun veya istediğiniz sütuna sürükleyin. Hamleleri geri alın, ipucu isteyin ya da tüm kartlar açıldığında oyunu Otomatik bitirsin.';
 
   @override
   String get rulesCombo =>

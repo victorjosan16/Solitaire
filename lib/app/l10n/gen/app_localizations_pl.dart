@@ -765,7 +765,7 @@ class AppLocalizationsPl extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Dotknij karty, aby przenieść ją automatycznie, lub przeciągnij ją. Cofaj dowolne ruchy, proś o podpowiedź albo pozwól, by Auto dokończyło grę, gdy wszystkie karty są odkryte.';
+      'Dotknij karty, aby wysłać ją na stos bazowy, albo przeciągnij ją na dowolną kolumnę. Cofaj ruchy, proś o podpowiedź lub pozwól, by Auto dokończyło grę, gdy wszystkie karty są odkryte.';
 
   @override
   String get rulesCombo =>

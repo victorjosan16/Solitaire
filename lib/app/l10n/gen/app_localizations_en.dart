@@ -752,7 +752,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Tap a card to move it automatically, or drag it. Undo any move, ask for a hint, or let Auto finish the game when all cards are revealed.';
+      'Tap a card to send it up to the foundations, or drag it to any column. Undo any move, ask for a hint, or let Auto finish the game when all cards are revealed.';
 
   @override
   String get rulesCombo =>

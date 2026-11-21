@@ -755,7 +755,7 @@ class AppLocalizationsId extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Ketuk kartu untuk memindahkannya otomatis, atau seret. Urungkan langkah apa pun, minta petunjuk, atau biarkan Otomatis menyelesaikan permainan saat semua kartu terbuka.';
+      'Ketuk kartu untuk mengirimnya ke fondasi, atau seret ke kolom mana pun. Urungkan langkah, minta petunjuk, atau biarkan Otomatis menyelesaikan permainan saat semua kartu terbuka.';
 
   @override
   String get rulesCombo =>

@@ -750,7 +750,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Chạm vào lá bài để tự động di chuyển hoặc kéo thả. Bạn có thể hoàn tác mọi nước, xin gợi ý, hoặc để Tự động hoàn thành ván khi mọi lá đã lật.';
+      'Chạm vào một lá bài để đưa nó lên chồng đích, hoặc kéo nó sang bất kỳ cột nào. Hoàn tác nước đi, xin gợi ý hoặc để Tự động hoàn thành ván khi tất cả các lá đã lật.';
 
   @override
   String get rulesCombo =>

@@ -217,7 +217,7 @@
   "rulesTableau": "Costruisci le sette colonne in ordine decrescente alternando i colori (rosso su nero, nero su rosso). Solo un Re può occupare una colonna vuota.",
   "rulesFoundation": "Sposta tutte le carte sulle quattro basi, per seme, dall'Asso al Re.",
   "rulesStock": "Tocca il mazzo per scoprire 1 o 3 carte. Quando è vuoto, toccalo di nuovo per girare gli scarti.",
-  "rulesControls": "Tocca una carta per spostarla automaticamente oppure trascinala. Annulla qualsiasi mossa, chiedi un suggerimento o lascia che Auto completi la partita quando tutte le carte sono scoperte.",
+  "rulesControls": "Tocca una carta per mandarla sulle basi oppure trascinala su qualsiasi colonna. Annulla le mosse, chiedi un suggerimento o lascia che Auto finisca la partita quando tutte le carte sono scoperte.",
   "rulesCombo": "Le combo contano le mosse utili consecutive. Sono solo per divertimento e non cambiano le regole.",
   "about": "Informazioni",
   "version": "Versione {version}",

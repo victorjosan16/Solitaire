@@ -736,7 +736,7 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      '点按卡牌可自动移动，也可以拖动。任何一步都能撤销，也可以使用提示；所有牌翻开后可以让「自动」完成游戏。';
+      '点按一张牌可将其送到收牌区，拖动可将其放到任意一列。可以撤销任何一步、请求提示，或在所有牌翻开后让“自动”完成游戏。';
 
   @override
   String get rulesCombo => '连击统计连续的有效步数，仅为增添乐趣，不会改变规则。';

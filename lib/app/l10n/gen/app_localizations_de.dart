@@ -761,7 +761,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Tippe auf eine Karte, um sie automatisch zu bewegen, oder ziehe sie. Nimm jeden Zug zurück, hol dir einen Tipp oder lass Auto das Spiel beenden, wenn alle Karten aufgedeckt sind.';
+      'Tippe auf eine Karte, um sie auf die Ablagen zu schicken, oder ziehe sie auf eine beliebige Spalte. Mache Züge rückgängig, hol dir einen Tipp oder lass Auto das Spiel beenden, wenn alle Karten aufgedeckt sind.';
 
   @override
   String get rulesCombo =>

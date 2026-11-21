@@ -217,7 +217,7 @@
   "rulesTableau": "Yedi sütunu renkleri değiştirerek azalan sırada diz (siyah üstüne kırmızı, kırmızı üstüne siyah). Boş sütuna yalnızca Papaz konabilir.",
   "rulesFoundation": "Tüm kartları renklerine göre As'tan Papaz'a dört temele taşı.",
   "rulesStock": "1 veya 3 kart açmak için desteye dokun. Deste bitince açık kartları çevirmek için tekrar dokun.",
-  "rulesControls": "Bir kartı otomatik taşımak için dokun ya da sürükle. Her hamleyi geri alabilir, ipucu isteyebilir veya tüm kartlar açıldığında oyunu Otomatik'e bitirtebilirsin.",
+  "rulesControls": "Bir kartı temellere göndermek için ona dokunun veya istediğiniz sütuna sürükleyin. Hamleleri geri alın, ipucu isteyin ya da tüm kartlar açıldığında oyunu Otomatik bitirsin.",
   "rulesCombo": "Kombolar art arda gelen verimli hamleleri sayar. Sadece eğlence içindir, kuralları değiştirmez.",
   "about": "Hakkında",
   "version": "Sürüm {version}",

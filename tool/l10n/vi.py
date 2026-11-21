@@ -132,7 +132,7 @@ VI = {
  "rulesTableau": "Xếp bảy cột theo thứ tự giảm dần, xen kẽ màu (đỏ trên đen, đen trên đỏ). Chỉ lá K mới được đặt vào cột trống.",
  "rulesFoundation": "Đưa tất cả lá bài lên bốn chồng đích theo chất, từ Át đến K.",
  "rulesStock": "Chạm chồng bài để lật 1 hoặc 3 lá. Khi hết, chạm lại để lật lại bài đã rút.",
- "rulesControls": "Chạm vào lá bài để tự động di chuyển hoặc kéo thả. Bạn có thể hoàn tác mọi nước, xin gợi ý, hoặc để Tự động hoàn thành ván khi mọi lá đã lật.",
+ "rulesControls": "Chạm vào một lá bài để đưa nó lên chồng đích, hoặc kéo nó sang bất kỳ cột nào. Hoàn tác nước đi, xin gợi ý hoặc để Tự động hoàn thành ván khi tất cả các lá đã lật.",
  "rulesCombo": "Combo đếm các nước đi hiệu quả liên tiếp. Chỉ để vui và không thay đổi luật chơi.",
  "about": "Giới thiệu", "version": "Phiên bản {version}", "licenses": "Giấy phép mã nguồn mở",
  "aboutBody": "Trò chơi Solitaire Klondike cổ điển. Không cờ bạc, không giải thưởng tiền mặt.",

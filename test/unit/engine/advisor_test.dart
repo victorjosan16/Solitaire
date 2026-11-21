@@ -64,6 +64,16 @@ void main() {
         ],
       );
       expect(MoveAdvisor.tapMove(s, W, 1), TransferMove(W, T(0)));
+      // Game taps are foundation-only: no hop into a column.
+      expect(MoveAdvisor.tapMove(s, W, 1, foundationOnly: true), isNull);
+    });
+
+    test('foundation-only tap still sends a playable card up', () {
+      final s = board(waste: ['AH']);
+      expect(
+        MoveAdvisor.tapMove(s, W, 1, foundationOnly: true),
+        TransferMove(W, F(2)),
+      );
     });
 
     test('king already at the bottom does not hop between empty columns', () {

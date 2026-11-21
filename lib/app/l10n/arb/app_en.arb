@@ -454,7 +454,7 @@
   "rulesTableau": "Build the seven columns down in alternating colours (red on black, black on red). Only a King can fill an empty column.",
   "rulesFoundation": "Move all cards to the four foundations, by suit, from Ace up to King.",
   "rulesStock": "Tap the stock to turn 1 or 3 cards. When it's empty, tap again to turn the waste over.",
-  "rulesControls": "Tap a card to move it automatically, or drag it. Undo any move, ask for a hint, or let Auto finish the game when all cards are revealed.",
+  "rulesControls": "Tap a card to send it up to the foundations, or drag it to any column. Undo any move, ask for a hint, or let Auto finish the game when all cards are revealed.",
   "rulesCombo": "Combos count consecutive productive moves. They are just for fun and never change the rules.",
   "about": "About",
   "version": "Version {version}",

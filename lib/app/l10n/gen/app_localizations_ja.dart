@@ -739,7 +739,7 @@ class AppLocalizationsJa extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'カードをタップすると自動で移動し、ドラッグでも動かせます。どの手も元に戻せ、ヒントも使えます。すべてのカードが表になったら「自動」で仕上げられます。';
+      'カードをタップすると組札へ送られます。好きな列へはドラッグで移動します。手を戻したり、ヒントを見たり、すべてのカードが表になったら「自動」でゲームを終えられます。';
 
   @override
   String get rulesCombo => 'コンボは連続した有効な手を数えます。楽しむためのもので、ルールは変わりません。';

@@ -757,7 +757,7 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Atinge o carte pentru a o muta automat sau trage-o. Poți anula orice mutare, cere un indiciu sau lăsa Auto să termine jocul când toate cărțile sunt descoperite.';
+      'Atinge o carte ca s-o trimiți sus, pe fundații, sau trage-o pe orice coloană. Poți anula orice mutare, poți cere un indiciu sau poți lăsa Auto să termine jocul când toate cărțile sunt descoperite.';
 
   @override
   String get rulesCombo =>

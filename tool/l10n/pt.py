@@ -132,7 +132,7 @@ PT = {
  "rulesTableau": "Monte as sete colunas em ordem decrescente alternando cores (vermelho sobre preto, preto sobre vermelho). Só um Rei pode ocupar uma coluna vazia.",
  "rulesFoundation": "Leve todas as cartas para as quatro fundações, por naipe, do Ás ao Rei.",
  "rulesStock": "Toque no monte para virar 1 ou 3 cartas. Quando ele esvaziar, toque de novo para virar o descarte.",
- "rulesControls": "Toque numa carta para movê-la automaticamente ou arraste-a. Desfaça qualquer jogada, peça uma dica ou deixe o Auto terminar o jogo quando todas as cartas estiverem viradas.",
+ "rulesControls": "Toque numa carta para enviá-la às fundações ou arraste-a para qualquer coluna. Desfaça jogadas, peça uma dica ou deixe o Auto terminar o jogo quando todas as cartas estiverem viradas.",
  "rulesCombo": "Combos contam jogadas úteis seguidas. São só por diversão e nunca mudam as regras.",
  "about": "Sobre", "version": "Versão {version}", "licenses": "Licenças de código aberto",
  "aboutBody": "Um Paciência Klondike clássico. Sem apostas, sem prêmios em dinheiro.",

@@ -1431,7 +1431,7 @@ abstract class AppLocalizations {
   /// No description provided for @rulesControls.
   ///
   /// In en, this message translates to:
-  /// **'Tap a card to move it automatically, or drag it. Undo any move, ask for a hint, or let Auto finish the game when all cards are revealed.'**
+  /// **'Tap a card to send it up to the foundations, or drag it to any column. Undo any move, ask for a hint, or let Auto finish the game when all cards are revealed.'**
   String get rulesControls;
 
   /// No description provided for @rulesCombo.

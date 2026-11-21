@@ -743,7 +743,7 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      '카드를 탭하면 자동으로 이동하고, 드래그해서 옮길 수도 있습니다. 모든 이동은 되돌릴 수 있고, 힌트를 받거나 모든 카드가 공개되면 자동으로 마무리할 수 있습니다.';
+      '카드를 탭하면 파운데이션으로 올라가고, 원하는 열로는 드래그해서 옮깁니다. 이동을 되돌리거나 힌트를 받거나, 모든 카드가 공개되면 \'자동\'으로 게임을 끝낼 수 있습니다.';
 
   @override
   String get rulesCombo => '콤보는 연속으로 이어진 유효한 이동을 셉니다. 재미를 위한 것이며 규칙은 바뀌지 않습니다.';

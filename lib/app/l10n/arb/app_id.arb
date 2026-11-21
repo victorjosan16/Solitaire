@@ -217,7 +217,7 @@
   "rulesTableau": "Susun tujuh kolom secara menurun dengan warna berselang-seling (merah di atas hitam, hitam di atas merah). Hanya Raja yang boleh mengisi kolom kosong.",
   "rulesFoundation": "Pindahkan semua kartu ke empat fondasi menurut jenisnya, dari As sampai Raja.",
   "rulesStock": "Ketuk tumpukan untuk membuka 1 atau 3 kartu. Saat kosong, ketuk lagi untuk membalik kartu buangan.",
-  "rulesControls": "Ketuk kartu untuk memindahkannya otomatis, atau seret. Urungkan langkah apa pun, minta petunjuk, atau biarkan Otomatis menyelesaikan permainan saat semua kartu terbuka.",
+  "rulesControls": "Ketuk kartu untuk mengirimnya ke fondasi, atau seret ke kolom mana pun. Urungkan langkah, minta petunjuk, atau biarkan Otomatis menyelesaikan permainan saat semua kartu terbuka.",
   "rulesCombo": "Kombo menghitung langkah produktif berturut-turut. Hanya untuk keseruan dan tidak mengubah aturan.",
   "about": "Tentang",
   "version": "Versi {version}",

@@ -132,7 +132,7 @@ ES = {
  "rulesTableau": "Construye las siete columnas en orden descendente alternando colores (rojo sobre negro, negro sobre rojo). Solo un Rey puede ocupar una columna vacía.",
  "rulesFoundation": "Lleva todas las cartas a las cuatro fundaciones, por palo, del As al Rey.",
  "rulesStock": "Toca el mazo para descubrir 1 o 3 cartas. Cuando se vacíe, vuelve a tocarlo para dar la vuelta al descarte.",
- "rulesControls": "Toca una carta para moverla automáticamente o arrástrala. Deshaz cualquier movimiento, pide una pista o deja que Auto termine la partida cuando todas las cartas estén descubiertas.",
+ "rulesControls": "Toca una carta para enviarla a las fundaciones o arrástrala a cualquier columna. Deshaz movimientos, pide una pista o deja que Auto termine la partida cuando todas las cartas estén descubiertas.",
  "rulesCombo": "Los combos cuentan movimientos útiles seguidos. Son solo por diversión y nunca cambian las reglas.",
  "about": "Acerca de", "version": "Versión {version}", "licenses": "Licencias de código abierto",
  "aboutBody": "Un Solitario Klondike clásico. Sin apuestas ni premios en dinero.",

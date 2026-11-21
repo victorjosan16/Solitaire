@@ -768,7 +768,7 @@ class AppLocalizationsIt extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Tocca una carta per spostarla automaticamente oppure trascinala. Annulla qualsiasi mossa, chiedi un suggerimento o lascia che Auto completi la partita quando tutte le carte sono scoperte.';
+      'Tocca una carta per mandarla sulle basi oppure trascinala su qualsiasi colonna. Annulla le mosse, chiedi un suggerimento o lascia che Auto finisca la partita quando tutte le carte sono scoperte.';
 
   @override
   String get rulesCombo =>

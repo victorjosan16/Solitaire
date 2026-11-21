@@ -771,7 +771,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get rulesControls =>
-      'Touchez une carte pour la déplacer automatiquement, ou faites-la glisser. Annulez n\'importe quel coup, demandez un indice ou laissez Auto terminer la partie quand toutes les cartes sont révélées.';
+      'Touchez une carte pour l\'envoyer sur les fondations, ou faites-la glisser vers n\'importe quelle colonne. Annulez un coup, demandez un indice ou laissez Auto terminer la partie quand toutes les cartes sont découvertes.';
 
   @override
   String get rulesCombo =>

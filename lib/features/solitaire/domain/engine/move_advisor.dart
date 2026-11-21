@@ -27,6 +27,7 @@ class MoveAdvisor {
     PileRef from,
     int count, {
     bool preferFoundation = true,
+    bool foundationOnly = false,
   }) {
     TransferMove? foundationMove;
     if (count == 1 && !from.isFoundation) {
@@ -36,6 +37,7 @@ class MoveAdvisor {
         if (KlondikeEngine.isLegal(s, m)) foundationMove = m;
       }
     }
+    if (foundationOnly) return foundationMove;
     if (preferFoundation && foundationMove != null) return foundationMove;
 
     TransferMove? emptyTarget;
