@@ -1,7 +1,7 @@
 KO = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "불러오는 중… {percent}%",
- "navHome": "홈", "navStats": "통계", "navShop": "상점", "navSettings": "설정",
+ "navHome": "홈", "navStats": "통계", "navShop": "상점", "navProfile": "프로필", "gameModeSetting": "게임 모드", "navSettings": "설정",
  "back": "뒤로", "ok": "확인", "cancel": "취소", "confirm": "확인", "close": "닫기",
  "levelLabel": "레벨 {level}",
  "coinsBalance": "코인 {coins}개",

@@ -1,8 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:solitaire_nova/app/router/app_router.dart';
-import 'package:solitaire_nova/features/achievements/presentation/achievements_screen.dart';
-import 'package:solitaire_nova/features/customization/presentation/themes_screen.dart';
 import 'package:solitaire_nova/features/daily_challenge/presentation/daily_screen.dart';
 import 'package:solitaire_nova/features/home/presentation/home_screen.dart';
 import 'package:solitaire_nova/features/settings/presentation/settings_screen.dart';
@@ -10,7 +7,7 @@ import 'package:solitaire_nova/features/shop/presentation/shop_screen.dart';
 import 'package:solitaire_nova/features/solitaire/application/game_controller.dart';
 import 'package:solitaire_nova/features/solitaire/presentation/game_screen.dart';
 import 'package:solitaire_nova/features/statistics/application/profile_controller.dart';
-import 'package:solitaire_nova/features/statistics/presentation/stats_screen.dart';
+import 'package:solitaire_nova/features/profile/presentation/profile_screen.dart';
 import 'package:solitaire_nova/shared/models/profile.dart';
 
 import '../helpers/app_harness.dart';
@@ -34,11 +31,12 @@ void main() {
     }
 
     await visit('Daily Challenge', DailyScreen);
-    await visit('Achievements', AchievementsScreen);
-    await visit('Themes', ThemesScreen);
-    await visit('Stats', StatsScreen);
+    await visit('Profile', ProfileScreen);
     await visit('Shop', ShopScreen);
     await visit('Settings', SettingsScreen);
+    // Home is intentionally minimal: no draw-mode / deal-type toggles.
+    expect(find.text('Draw 3'), findsNothing);
+    expect(find.text('Winning deal'), findsNothing);
   });
 
   testWidgets('first launch shows the privacy prompt once', (tester) async {
@@ -59,7 +57,7 @@ void main() {
     tester,
   ) async {
     final h = await pumpApp(tester, route: Routes.home);
-    await tester.tap(find.text('Classic Game'));
+    await tester.tap(find.text('Play'));
     await settle(tester, const Duration(seconds: 3));
     expect(find.byType(GameScreen), findsOneWidget);
     final c = h.container.read(gameControllerProvider.notifier);
@@ -87,8 +85,8 @@ void main() {
     await c.startNewGame();
     await c.tapStock();
     await settle(tester);
-    expect(find.text('Continue'), findsOneWidget);
-    await tester.tap(find.text('Classic Game'));
+    expect(find.text('Play'), findsOneWidget);
+    await tester.tap(find.text('New game'));
     await settle(tester);
     expect(find.text('Start a new game?'), findsOneWidget);
     await tester.tap(find.text('Cancel'));
@@ -123,18 +121,18 @@ void main() {
     expect(p.coins, 100);
   });
 
-  testWidgets('settings: delete data requires confirmation', (tester) async {
+  testWidgets('settings: delete data (privacy sheet) requires confirmation', (
+    tester,
+  ) async {
     final h = await pumpApp(
       tester,
       route: Routes.settings,
       profile: const ProfileData(coins: 999),
     );
-    await tester.scrollUntilVisible(
-      find.text('Delete local data'),
-      300,
-      scrollable: find.byType(Scrollable).first,
-    );
-    await tester.ensureVisible(find.text('Delete local data'));
+    // Settings are minimal: removed options are gone.
+    expect(find.text('Left-handed mode'), findsNothing);
+    expect(find.text('Cloud backup'), findsNothing);
+    await tester.tap(find.text('Privacy'));
     await settle(tester);
     await tester.tap(find.text('Delete local data'));
     await settle(tester);
@@ -150,7 +148,7 @@ void main() {
   });
 
   testWidgets('stats empty state', (tester) async {
-    await pumpApp(tester, route: Routes.stats);
+    await pumpApp(tester, route: Routes.profile);
     expect(
       find.text('Play your first game to see your statistics here.'),
       findsOneWidget,

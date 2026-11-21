@@ -27,6 +27,12 @@ class AppLocalizationsJa extends AppLocalizations {
   String get navShop => 'ショップ';
 
   @override
+  String get navProfile => 'プロフィール';
+
+  @override
+  String get gameModeSetting => 'ゲームモード';
+
+  @override
   String get navSettings => '設定';
 
   @override

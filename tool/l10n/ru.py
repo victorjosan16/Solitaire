@@ -1,7 +1,7 @@
 RU = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Загрузка… {percent}%",
- "navHome": "Главная", "navStats": "Статистика", "navShop": "Магазин", "navSettings": "Настройки",
+ "navHome": "Главная", "navStats": "Статистика", "navShop": "Магазин", "navProfile": "Профиль", "gameModeSetting": "Режим игры", "navSettings": "Настройки",
  "back": "Назад", "ok": "OK", "cancel": "Отмена", "confirm": "Подтвердить", "close": "Закрыть",
  "levelLabel": "Уровень {level}",
  "coinsBalance": "{coins, plural, one{{coins} монета} few{{coins} монеты} many{{coins} монет} other{{coins} монеты}}",

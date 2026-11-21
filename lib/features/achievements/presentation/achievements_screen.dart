@@ -26,7 +26,10 @@ IconData achievementIcon(AchievementIcon i) => switch (i) {
 };
 
 class AchievementsScreen extends ConsumerWidget {
-  const AchievementsScreen({super.key});
+  const AchievementsScreen({super.key, this.embedded = false});
+
+  /// Shown as a tab inside the Profile screen (no own header).
+  final bool embedded;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -48,6 +51,7 @@ class AchievementsScreen extends ConsumerWidget {
         return rb.compareTo(ra);
       });
     return NovaScaffold(
+      embedded: embedded,
       title: l.achievements,
       onBack: () => context.pop(),
       body: MaxWidth(

@@ -27,6 +27,12 @@ class AppLocalizationsPt extends AppLocalizations {
   String get navShop => 'Loja';
 
   @override
+  String get navProfile => 'Perfil';
+
+  @override
+  String get gameModeSetting => 'Modo de jogo';
+
+  @override
   String get navSettings => 'Ajustes';
 
   @override

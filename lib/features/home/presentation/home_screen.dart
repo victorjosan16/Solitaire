@@ -25,8 +25,6 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  bool _winningDeal = false;
-
   @override
   void initState() {
     super.initState();
@@ -97,7 +95,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final l = context.l10n;
     final profile = ref.watch(profileProvider);
-    final settings = ref.watch(settingsProvider);
     final game = ref.watch(gameControllerProvider);
     final snap = game.snapshot;
     final canContinue = snap != null && !snap.finished;
@@ -137,115 +134,68 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 Expanded(
-                  child: SingleChildScrollView(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: NovaSpace.xl,
-                    ),
-                    child: MaxWidth(
-                      maxWidth: 460,
-                      child: Column(
-                        children: [
-                          const SizedBox(height: NovaSpace.lg),
-                          NovaLogo(width: math.min(width * 0.72, 340)),
-                          const SizedBox(height: NovaSpace.xl),
-                          if (canContinue) ...[
-                            GoldButton(
-                              label: l.continueGame,
-                              icon: Icons.play_arrow_rounded,
-                              onPressed: () => context.push(Routes.game),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                top: 6,
-                                bottom: NovaSpace.md,
-                              ),
-                              child: Text(
-                                l.continueSubtitle(
-                                  '${modeLabel(l, snap.mode)} · ${snap.config.drawCount == 3 ? l.drawThree : l.drawOne}',
-                                  snap.state.moves,
-                                  formatClock(snap.elapsedMs),
-                                ),
-                                style: const TextStyle(
-                                  color: NovaColors.textSecondary,
-                                ),
-                              ),
-                            ),
-                          ],
-                          (canContinue
-                              ? PanelButton(
-                                  label: l.playClassic,
-                                  icon: Icons.style_rounded,
-                                  onPressed: () => _play(
-                                    _winningDeal
-                                        ? GameMode.winning
-                                        : GameMode.random,
-                                  ),
-                                )
-                              : GoldButton(
-                                  label: l.playClassic,
+                  child: LayoutBuilder(
+                    builder: (context, box) => SingleChildScrollView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: NovaSpace.xl,
+                      ),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(minHeight: box.maxHeight),
+                        child: Center(
+                          child: MaxWidth(
+                            maxWidth: 460,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                const SizedBox(height: NovaSpace.lg),
+                                NovaLogo(width: math.min(width * 0.72, 340)),
+                                const SizedBox(height: NovaSpace.xl),
+                                const SizedBox(height: NovaSpace.lg),
+                                // One primary action: continue the game in
+                                // progress, or deal a new (always winnable) game.
+                                GoldButton(
+                                  label: l.play,
                                   icon: Icons.play_arrow_rounded,
-                                  onPressed: () => _play(
-                                    _winningDeal
-                                        ? GameMode.winning
-                                        : GameMode.random,
+                                  height: 64,
+                                  onPressed: canContinue
+                                      ? () => context.push(Routes.game)
+                                      : () => _play(GameMode.winning),
+                                ),
+                                if (canContinue)
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 6),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Flexible(
+                                          child: Text(
+                                            '${snap.state.moves} · ${formatClock(snap.elapsedMs)}',
+                                            style: const TextStyle(
+                                              color: NovaColors.textSecondary,
+                                            ),
+                                          ),
+                                        ),
+                                        TextButton(
+                                          onPressed: () =>
+                                              _play(GameMode.winning),
+                                          child: Text(l.newGame),
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                )),
-                          const SizedBox(height: NovaSpace.md),
-                          NovaTabs(
-                            labels: [l.drawOne, l.drawThree],
-                            selected: settings.defaultDrawCount == 3 ? 1 : 0,
-                            onChanged: (i) => ref
-                                .read(settingsProvider.notifier)
-                                .update(
-                                  (s) => s.copyWith(
-                                    defaultDrawCount: i == 1 ? 3 : 1,
-                                  ),
+                                const SizedBox(height: NovaSpace.lg),
+                                PanelButton(
+                                  label: l.dailyChallenge,
+                                  icon: Icons.calendar_month_rounded,
+                                  badge: dailyPending ? const RedDot() : null,
+                                  onPressed: () => context.push(Routes.daily),
                                 ),
+                                const SizedBox(height: NovaSpace.xl),
+                              ],
+                            ),
                           ),
-                          const SizedBox(height: NovaSpace.sm),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: NovaTabs(
-                                  labels: [l.dealRandom, l.dealWinning],
-                                  selected: _winningDeal ? 1 : 0,
-                                  onChanged: (i) =>
-                                      setState(() => _winningDeal = i == 1),
-                                ),
-                              ),
-                              IconButton(
-                                tooltip: l.dealWinning,
-                                onPressed: () => showInfoDialog(
-                                  context,
-                                  title: l.dealWinning,
-                                  body: l.dealWinningInfo,
-                                  icon: Icons.verified_outlined,
-                                ),
-                                icon: const Icon(Icons.info_outline_rounded),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: NovaSpace.lg),
-                          PanelButton(
-                            label: l.dailyChallenge,
-                            icon: Icons.calendar_month_rounded,
-                            badge: dailyPending ? const RedDot() : null,
-                            onPressed: () => context.push(Routes.daily),
-                          ),
-                          const SizedBox(height: NovaSpace.md),
-                          PanelButton(
-                            label: l.achievements,
-                            icon: Icons.emoji_events_rounded,
-                            onPressed: () => context.push(Routes.achievements),
-                          ),
-                          const SizedBox(height: NovaSpace.md),
-                          PanelButton(
-                            label: l.themes,
-                            icon: Icons.palette_rounded,
-                            onPressed: () => context.push(Routes.themes),
-                          ),
-                          const SizedBox(height: NovaSpace.xl),
-                        ],
+                        ),
                       ),
                     ),
                   ),
@@ -253,7 +203,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 _BottomNav(
                   items: [
                     (Icons.home_rounded, l.navHome, null),
-                    (Icons.bar_chart_rounded, l.navStats, Routes.stats),
+                    (Icons.person_rounded, l.navProfile, Routes.profile),
                     (Icons.shopping_cart_rounded, l.navShop, Routes.shop),
                     (Icons.settings_rounded, l.navSettings, Routes.settings),
                   ],

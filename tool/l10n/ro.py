@@ -1,7 +1,7 @@
 RO = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Se încarcă… {percent}%",
- "navHome": "Acasă", "navStats": "Statistici", "navShop": "Magazin", "navSettings": "Setări",
+ "navHome": "Acasă", "navStats": "Statistici", "navShop": "Magazin", "navProfile": "Profil", "gameModeSetting": "Mod de joc", "navSettings": "Setări",
  "back": "Înapoi", "ok": "OK", "cancel": "Anulează", "confirm": "Confirmă", "close": "Închide",
  "levelLabel": "Nivel {level}",
  "coinsBalance": "{coins} monede",

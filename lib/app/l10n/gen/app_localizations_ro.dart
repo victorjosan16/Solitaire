@@ -27,6 +27,12 @@ class AppLocalizationsRo extends AppLocalizations {
   String get navShop => 'Magazin';
 
   @override
+  String get navProfile => 'Profil';
+
+  @override
+  String get gameModeSetting => 'Mod de joc';
+
+  @override
   String get navSettings => 'Setări';
 
   @override

@@ -27,6 +27,12 @@ class AppLocalizationsKo extends AppLocalizations {
   String get navShop => '상점';
 
   @override
+  String get navProfile => '프로필';
+
+  @override
+  String get gameModeSetting => '게임 모드';
+
+  @override
   String get navSettings => '설정';
 
   @override

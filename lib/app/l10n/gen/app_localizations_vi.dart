@@ -27,6 +27,12 @@ class AppLocalizationsVi extends AppLocalizations {
   String get navShop => 'Cửa hàng';
 
   @override
+  String get navProfile => 'Hồ sơ';
+
+  @override
+  String get gameModeSetting => 'Chế độ chơi';
+
+  @override
   String get navSettings => 'Cài đặt';
 
   @override

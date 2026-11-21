@@ -1,7 +1,7 @@
 VI = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Đang tải… {percent}%",
- "navHome": "Trang chủ", "navStats": "Thống kê", "navShop": "Cửa hàng", "navSettings": "Cài đặt",
+ "navHome": "Trang chủ", "navStats": "Thống kê", "navShop": "Cửa hàng", "navProfile": "Hồ sơ", "gameModeSetting": "Chế độ chơi", "navSettings": "Cài đặt",
  "back": "Quay lại", "ok": "OK", "cancel": "Hủy", "confirm": "Xác nhận", "close": "Đóng",
  "levelLabel": "Cấp {level}",
  "coinsBalance": "{coins} xu",

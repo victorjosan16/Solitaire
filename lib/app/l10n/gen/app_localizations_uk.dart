@@ -27,6 +27,12 @@ class AppLocalizationsUk extends AppLocalizations {
   String get navShop => 'Крамниця';
 
   @override
+  String get navProfile => 'Профіль';
+
+  @override
+  String get gameModeSetting => 'Режим гри';
+
+  @override
   String get navSettings => 'Налаштування';
 
   @override

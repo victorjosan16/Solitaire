@@ -475,9 +475,13 @@ class NovaScaffold extends StatelessWidget {
     this.trailing,
     this.background,
     this.bottom,
+    this.embedded = false,
   });
 
   final Widget body;
+
+  /// Render only [body] (used when a screen is a tab inside another screen).
+  final bool embedded;
   final String? title;
   final VoidCallback? onBack;
   final Widget? trailing;
@@ -486,6 +490,7 @@ class NovaScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (embedded) return body;
     return Scaffold(
       backgroundColor: NovaColors.navy,
       body: Stack(

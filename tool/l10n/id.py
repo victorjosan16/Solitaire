@@ -1,7 +1,7 @@
 ID = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Memuat… {percent}%",
- "navHome": "Beranda", "navStats": "Statistik", "navShop": "Toko", "navSettings": "Setelan",
+ "navHome": "Beranda", "navStats": "Statistik", "navShop": "Toko", "navProfile": "Profil", "gameModeSetting": "Mode permainan", "navSettings": "Setelan",
  "back": "Kembali", "ok": "OK", "cancel": "Batal", "confirm": "Konfirmasi", "close": "Tutup",
  "levelLabel": "Level {level}",
  "coinsBalance": "{coins} koin",

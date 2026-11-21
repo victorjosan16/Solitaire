@@ -12,6 +12,8 @@
   "navHome": "Home",
   "navStats": "Stats",
   "navShop": "Shop",
+  "navProfile": "Profile",
+  "gameModeSetting": "Game mode",
   "navSettings": "Settings",
   "back": "Back",
   "ok": "OK",

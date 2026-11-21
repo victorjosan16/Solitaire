@@ -1,7 +1,7 @@
 ES = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Cargando… {percent} %",
- "navHome": "Inicio", "navStats": "Estadísticas", "navShop": "Tienda", "navSettings": "Ajustes",
+ "navHome": "Inicio", "navStats": "Estadísticas", "navShop": "Tienda", "navProfile": "Perfil", "gameModeSetting": "Modo de juego", "navSettings": "Ajustes",
  "back": "Atrás", "ok": "Aceptar", "cancel": "Cancelar", "confirm": "Confirmar", "close": "Cerrar",
  "levelLabel": "Nivel {level}",
  "coinsBalance": "{coins, plural, =1{1 moneda} other{{coins} monedas}}",

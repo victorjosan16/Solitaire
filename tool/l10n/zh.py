@@ -1,7 +1,7 @@
 ZH = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "加载中… {percent}%",
- "navHome": "首页", "navStats": "统计", "navShop": "商店", "navSettings": "设置",
+ "navHome": "首页", "navStats": "统计", "navShop": "商店", "navProfile": "个人资料", "gameModeSetting": "游戏模式", "navSettings": "设置",
  "back": "返回", "ok": "确定", "cancel": "取消", "confirm": "确认", "close": "关闭",
  "levelLabel": "等级 {level}",
  "coinsBalance": "{coins} 金币",

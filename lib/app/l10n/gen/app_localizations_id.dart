@@ -27,6 +27,12 @@ class AppLocalizationsId extends AppLocalizations {
   String get navShop => 'Toko';
 
   @override
+  String get navProfile => 'Profil';
+
+  @override
+  String get gameModeSetting => 'Mode permainan';
+
+  @override
   String get navSettings => 'Setelan';
 
   @override

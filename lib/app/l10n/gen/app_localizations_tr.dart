@@ -27,6 +27,12 @@ class AppLocalizationsTr extends AppLocalizations {
   String get navShop => 'Mağaza';
 
   @override
+  String get navProfile => 'Profil';
+
+  @override
+  String get gameModeSetting => 'Oyun modu';
+
+  @override
   String get navSettings => 'Ayarlar';
 
   @override

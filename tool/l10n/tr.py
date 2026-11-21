@@ -1,7 +1,7 @@
 TR = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Yükleniyor… %{percent}",
- "navHome": "Ana Sayfa", "navStats": "İstatistik", "navShop": "Mağaza", "navSettings": "Ayarlar",
+ "navHome": "Ana Sayfa", "navStats": "İstatistik", "navShop": "Mağaza", "navProfile": "Profil", "gameModeSetting": "Oyun modu", "navSettings": "Ayarlar",
  "back": "Geri", "ok": "Tamam", "cancel": "İptal", "confirm": "Onayla", "close": "Kapat",
  "levelLabel": "Seviye {level}",
  "coinsBalance": "{coins} jeton",

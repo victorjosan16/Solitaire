@@ -1,7 +1,7 @@
 JA = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "読み込み中… {percent}%",
- "navHome": "ホーム", "navStats": "統計", "navShop": "ショップ", "navSettings": "設定",
+ "navHome": "ホーム", "navStats": "統計", "navShop": "ショップ", "navProfile": "プロフィール", "gameModeSetting": "ゲームモード", "navSettings": "設定",
  "back": "戻る", "ok": "OK", "cancel": "キャンセル", "confirm": "確認", "close": "閉じる",
  "levelLabel": "レベル {level}",
  "coinsBalance": "{coins} コイン",

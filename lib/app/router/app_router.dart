@@ -6,6 +6,7 @@ import '../../features/achievements/presentation/achievements_screen.dart';
 import '../../features/customization/presentation/themes_screen.dart';
 import '../../features/daily_challenge/presentation/daily_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
+import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/settings/application/settings_controller.dart';
 import '../../features/settings/presentation/settings_screen.dart';
 import '../../features/shop/presentation/shop_screen.dart';
@@ -25,6 +26,7 @@ abstract final class Routes {
   static const achievements = '/achievements';
   static const shop = '/shop';
   static const settings = '/settings';
+  static const profile = '/profile';
 }
 
 final routerProvider = Provider<GoRouter>((ref) {
@@ -82,6 +84,15 @@ final routerProvider = Provider<GoRouter>((ref) {
         pageBuilder: (c, s) => page(
           s,
           ShopScreen(
+            initialTab: int.tryParse(s.uri.queryParameters['tab'] ?? '') ?? 0,
+          ),
+        ),
+      ),
+      GoRoute(
+        path: Routes.profile,
+        pageBuilder: (c, s) => page(
+          s,
+          ProfileScreen(
             initialTab: int.tryParse(s.uri.queryParameters['tab'] ?? '') ?? 0,
           ),
         ),

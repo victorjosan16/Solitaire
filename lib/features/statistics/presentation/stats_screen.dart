@@ -11,7 +11,10 @@ import '../application/profile_controller.dart';
 import '../domain/player_stats.dart';
 
 class StatsScreen extends ConsumerStatefulWidget {
-  const StatsScreen({super.key});
+  const StatsScreen({super.key, this.embedded = false});
+
+  /// Shown as a tab inside the Profile screen (no own header).
+  final bool embedded;
   @override
   ConsumerState<StatsScreen> createState() => _StatsScreenState();
 }
@@ -42,6 +45,7 @@ class _StatsScreenState extends ConsumerState<StatsScreen> {
     );
     final num = NumberFormat.decimalPattern(locale);
     return NovaScaffold(
+      embedded: widget.embedded,
       title: l.statistics,
       onBack: () => context.pop(),
       body: MaxWidth(

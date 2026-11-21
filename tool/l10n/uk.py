@@ -1,7 +1,7 @@
 UK = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Завантаження… {percent}%",
- "navHome": "Головна", "navStats": "Статистика", "navShop": "Крамниця", "navSettings": "Налаштування",
+ "navHome": "Головна", "navStats": "Статистика", "navShop": "Крамниця", "navProfile": "Профіль", "gameModeSetting": "Режим гри", "navSettings": "Налаштування",
  "back": "Назад", "ok": "OK", "cancel": "Скасувати", "confirm": "Підтвердити", "close": "Закрити",
  "levelLabel": "Рівень {level}",
  "coinsBalance": "{coins, plural, one{{coins} монета} few{{coins} монети} many{{coins} монет} other{{coins} монети}}",

@@ -570,6 +570,21 @@ class _GameScreenState extends ConsumerState<GameScreen> {
                             ),
                           ),
                         ),
+                      if (st.canAutoFinish && !st.autoFinishing)
+                        Positioned(
+                          left: 0,
+                          right: 0,
+                          bottom: NovaSpace.lg,
+                          child: Center(
+                            child: GoldButton(
+                              label: l.actionAuto,
+                              icon: Icons.auto_fix_high_rounded,
+                              height: 50,
+                              expand: false,
+                              onPressed: () => _ctrl.autoFinish(),
+                            ),
+                          ),
+                        ),
                       if (st.autoFinishing)
                         Positioned(
                           left: NovaSpace.lg,
@@ -852,11 +867,6 @@ class _ActionBar extends StatelessWidget {
                 ),
               ],
             ),
-          ),
-          action(
-            Icons.auto_fix_high_rounded,
-            l.actionAuto,
-            canAuto ? onAuto : null,
           ),
           action(Icons.add_circle_outline_rounded, l.actionNew, onNew),
         ],

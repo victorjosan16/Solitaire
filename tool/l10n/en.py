@@ -2,7 +2,7 @@
 EN = {
  "appTitle": "Solitaire Nova",
  "splashLoading": "Loading… {percent}%",
- "navHome": "Home", "navStats": "Stats", "navShop": "Shop", "navSettings": "Settings",
+ "navHome": "Home", "navStats": "Stats", "navShop": "Shop", "navProfile": "Profile", "gameModeSetting": "Game mode", "navSettings": "Settings",
  "back": "Back", "ok": "OK", "cancel": "Cancel", "confirm": "Confirm", "close": "Close",
  "levelLabel": "Level {level}",
  "coinsBalance": "{coins} coins",

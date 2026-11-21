@@ -30,7 +30,7 @@ void main() {
     (tester) async {
       final ads = FakeAdService(nextOutcome: const RewardEarned('smoke-1'));
       var h = await pumpApp(tester, route: Routes.home, ads: ads);
-      await tester.tap(find.text('Classic Game'));
+      await tester.tap(find.text('Play'));
       await settle(tester, const Duration(seconds: 3));
 
       // Tap the stock through the Flame board (real gesture path).
@@ -60,7 +60,7 @@ void main() {
         ads: ads,
         game: await _reload(dir),
       );
-      expect(find.text('Continue'), findsOneWidget);
+      expect(find.text('New game'), findsOneWidget); // game in progress
       expect(h.container.read(gameControllerProvider).snapshot!.gameId, gameId);
       expect(h.container.read(gameControllerProvider).board, afterTap);
 

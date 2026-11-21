@@ -156,6 +156,18 @@ abstract class AppLocalizations {
   /// **'Shop'**
   String get navShop;
 
+  /// No description provided for @navProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get navProfile;
+
+  /// No description provided for @gameModeSetting.
+  ///
+  /// In en, this message translates to:
+  /// **'Game mode'**
+  String get gameModeSetting;
+
   /// No description provided for @navSettings.
   ///
   /// In en, this message translates to:

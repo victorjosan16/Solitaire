@@ -27,6 +27,12 @@ class AppLocalizationsZh extends AppLocalizations {
   String get navShop => '商店';
 
   @override
+  String get navProfile => '个人资料';
+
+  @override
+  String get gameModeSetting => '游戏模式';
+
+  @override
   String get navSettings => '设置';
 
   @override
