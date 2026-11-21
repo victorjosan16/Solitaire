@@ -18,6 +18,14 @@ void main() {
     expect(p.coins, 25 + 20 * 25);
   });
 
+  testWidgets('ads start on every launch, not only the first', (tester) async {
+    // Harness default: the privacy prompt was answered on an earlier launch.
+    final ads = FakeAdService();
+    await pumpApp(tester, route: Routes.home, ads: ads);
+    await settle(tester);
+    expect(ads.initializeCalls, greaterThanOrEqualTo(1));
+  });
+
   testWidgets('Shop: watch ad → +25 coins; skipped → nothing', (tester) async {
     final ads = FakeAdService(nextOutcome: const RewardSkipped());
     final h = await pumpApp(

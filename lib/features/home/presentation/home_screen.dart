@@ -34,7 +34,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   /// App-owned privacy prompt on first launch (never blocks play). If ads
   /// are accepted the platform UMP flow runs where legally required.
   Future<void> _maybeAskConsent() async {
-    if (!mounted || ref.read(settingsProvider).consentAnswered) return;
+    if (!mounted) return;
+    if (ref.read(settingsProvider).consentAnswered) {
+      // Every later launch: refresh platform consent, then start the ad SDK.
+      _startAds();
+      return;
+    }
     final l = context.l10n;
     final accepted = await showDialog<bool>(
       context: context,
@@ -69,7 +74,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             personalizedAds: yes,
           ),
         );
-    // Platform consent (GDPR/UMP) + ad SDK init happen in the background.
+    _startAds();
+  }
+
+  /// Platform consent (GDPR/UMP) + ad SDK init, in the background.
+  void _startAds() {
     final consent = ref.read(consentServiceProvider);
     final ads = ref.read(adServiceProvider);
     consent.gather().then((_) => ads.initialize());

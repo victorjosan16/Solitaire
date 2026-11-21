@@ -30,8 +30,19 @@ class AdMobAdService implements AdService {
 
   AdRequest get _request => AdRequest(nonPersonalizedAds: !personalized());
 
+  Future<void>? _initFuture;
+
+  /// Idempotent: safe to call on every launch and from several screens.
+  /// A failed or consent-blocked attempt can be retried later.
   @override
-  Future<void> initialize() async {
+  Future<void> initialize() {
+    if (_initialized) return Future.value();
+    return _initFuture ??= _initialize().whenComplete(() {
+      if (!_initialized) _initFuture = null;
+    });
+  }
+
+  Future<void> _initialize() async {
     if (AppConfig.rewardedUnitId == null &&
         AppConfig.bannerUnitId == null &&
         AppConfig.interstitialUnitId == null) {

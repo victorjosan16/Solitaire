@@ -171,13 +171,14 @@ class FakeAdService implements AdService {
   bool available;
   int rewardedShown = 0;
   int interstitialsShown = 0;
+  int initializeCalls = 0;
   final InterstitialPolicy policy = InterstitialPolicy(
     launchGrace: Duration.zero,
     cooldown: Duration.zero,
   );
 
   @override
-  Future<void> initialize() async {}
+  Future<void> initialize() async => initializeCalls++;
   @override
   bool get rewardedAvailable => available;
   @override
