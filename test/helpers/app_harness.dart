@@ -10,6 +10,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:solitaire_nova/app/app.dart';
 import 'package:solitaire_nova/app/router/app_router.dart';
+import 'package:solitaire_nova/features/solitaire/presentation/card_art/court_art.dart';
 import 'package:solitaire_nova/core/ads/ad_service.dart';
 import 'package:solitaire_nova/core/database/json_document_store.dart';
 import 'package:solitaire_nova/core/providers.dart';
@@ -103,6 +104,9 @@ Future<Harness> pumpApp(
     ],
   );
   addTearDown(container.dispose);
+  if (!CourtArt.loaded) {
+    await tester.runAsync(() => CourtArt.load(rootBundle));
+  }
   await tester.pumpWidget(
     UncontrolledProviderScope(
       container: container,

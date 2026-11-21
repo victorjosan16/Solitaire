@@ -22,6 +22,7 @@ import 'core/privacy/consent_service.dart';
 import 'core/providers.dart';
 import 'core/services/audio_service.dart';
 import 'features/solitaire/data/game_repository.dart';
+import 'features/solitaire/presentation/card_art/court_art.dart';
 import 'features/statistics/data/profile_repository.dart';
 
 /// Loads local data (no network), wires services and starts the app.
@@ -52,6 +53,11 @@ Future<void> bootstrap() async {
     'resumable': game != null && !game.finished,
   });
 
+  try {
+    await CourtArt.load(rootBundle);
+  } catch (e, st) {
+    AppLogger.e('bootstrap.court_art', const {}, e, st);
+  }
   final analytics = await _initAnalytics();
   final consent = UmpConsentService();
   final container = ProviderContainer(

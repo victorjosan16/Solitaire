@@ -5,6 +5,7 @@ import 'package:flutter/painting.dart';
 
 import '../../domain/models/card.dart';
 import 'card_styles.dart';
+import 'court_art.dart';
 import 'suit_paths.dart';
 
 /// Paints cards with plain `dart:ui` so the Flame board, Flutter previews
@@ -46,7 +47,8 @@ class CardPainter {
     required bool faceUp,
     required CardStyle style,
   }) {
-    final key = '${style.id}|${faceUp ? card.id : 'back'}|${_sizeKey(size)}';
+    final key =
+        '${style.id}|${faceUp ? card.id : 'back'}|${_sizeKey(size)}|${CourtArt.loaded}';
     final pic = _cached(key, size, (c) {
       if (faceUp) {
         _paintFace(c, size, card, style);
@@ -119,6 +121,32 @@ class CardPainter {
     final suitPaint = Paint()..color = color;
     final small = Rect.fromLTWH(w * 0.6, h * 0.06, w * 0.3, w * 0.3);
     c.drawPath(SuitPaths.path(card.suit, small), suitPaint);
+
+    // Court cards: illustrated portrait filling the lower card.
+    final portrait = CourtArt.of(card);
+    if (portrait != null) {
+      final area = Rect.fromLTRB(w * 0.07, h * 0.3, w * 0.93, h * 0.955);
+      final src = Rect.fromLTWH(
+        0,
+        0,
+        portrait.width.toDouble(),
+        portrait.height.toDouble(),
+      );
+      final fitted = applyBoxFit(BoxFit.contain, src.size, area.size);
+      final dst = Alignment.bottomCenter.inscribe(fitted.destination, area);
+      c.save();
+      c.clipRRect(rr.deflate(math.max(1, w * 0.02)));
+      c.drawImageRect(
+        portrait,
+        src,
+        dst,
+        Paint()
+          ..filterQuality = FilterQuality.medium
+          ..isAntiAlias = true,
+      );
+      c.restore();
+      return;
+    }
 
     // Centre: large pip; court cards get a crown-like accent band.
     final big = Rect.fromCenter(
