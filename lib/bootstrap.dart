@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -12,7 +13,9 @@ import 'app/app.dart';
 import 'core/ads/ad_service.dart';
 import 'core/ads/admob_ad_service.dart';
 import 'core/analytics/analytics_service.dart';
+import 'core/analytics/firebase_analytics_service.dart';
 import 'core/config/app_config.dart';
+import 'core/config/firebase_options.dart';
 import 'core/database/json_document_store.dart';
 import 'core/logging/app_logger.dart';
 import 'core/privacy/consent_service.dart';
@@ -22,7 +25,8 @@ import 'features/solitaire/data/game_repository.dart';
 import 'features/statistics/data/profile_repository.dart';
 
 /// Loads local data (no network), wires services and starts the app.
-/// Firebase is intentionally not initialised here; see README "Firebase".
+/// Firebase (Analytics only) is initialised on Android; if that fails the app
+/// keeps the local, offline analytics stub and plays normally.
 Future<void> bootstrap() async {
   WidgetsFlutterBinding.ensureInitialized();
   final crash = LogCrashReporter();
@@ -48,6 +52,7 @@ Future<void> bootstrap() async {
     'resumable': game != null && !game.finished,
   });
 
+  final analytics = await _initAnalytics();
   final consent = UmpConsentService();
   final container = ProviderContainer(
     overrides: [
@@ -57,6 +62,7 @@ Future<void> bootstrap() async {
       initialGameProvider.overrideWithValue(game),
       consentServiceProvider.overrideWithValue(consent),
       crashReporterProvider.overrideWithValue(crash),
+      analyticsProvider.overrideWithValue(analytics),
       audioServiceProvider.overrideWithValue(AudioplayersAudioService()),
       adServiceProvider.overrideWith((ref) {
         if (!AppConfig.adsEnabledFlag ||
@@ -80,4 +86,16 @@ Future<void> bootstrap() async {
       child: const SolitaireNovaApp(),
     ),
   );
+}
+
+Future<AnalyticsService> _initAnalytics() async {
+  if (kIsWeb || !Platform.isAndroid) return LocalAnalyticsService();
+  try {
+    await Firebase.initializeApp(options: NovaFirebaseOptions.android)
+        .timeout(const Duration(seconds: 4));
+    return FirebaseAnalyticsService();
+  } catch (e, st) {
+    AppLogger.e('bootstrap.firebase', const {}, e, st);
+    return LocalAnalyticsService();
+  }
 }

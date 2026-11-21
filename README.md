@@ -94,7 +94,13 @@ Put the iOS AdMob **app** id in `ios/Flutter/AdMob.xcconfig` (gitignored): `GAD_
 - No LevelPlay mediation is configured. If added, it must replace `AdMobAdService`, not run
   in parallel.
 
-## Firebase (optional, not wired in this build)
+## Firebase
+**Wired:** Firebase Analytics on Android (project `games01-7faee`, options in
+`lib/core/config/firebase_options.dart`, no Gradle plugin). Collection is off by default
+(manifest flag) and enabled only with the player's analytics consent. If init fails the
+local stub is used. The remaining services below are still optional.
+
+### Optional services
 The app never requires Firebase. Interfaces with offline implementations exist for
 analytics (`AnalyticsService`), crash reporting (`CrashReporter`), remote config
 (`RemoteConfigService`) and cloud backup (`CloudBackupService`, conflict policy in
